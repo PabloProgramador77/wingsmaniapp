@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Profile USer
+     */
+    public function adminlte_profile_url(){
+        
+        return 'profile/username';
+        
+    }
 }

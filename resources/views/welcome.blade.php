@@ -26,7 +26,7 @@
                         <a class="nav-link text-black fw-bold" href="#">Promociones</a>
                         @if( Route::has('login') )
                             @auth
-                                <a class="btn btn-warning p-2 mx-5" href="{{ route('/home') }}">Ordenar</a>
+                                <a class="btn btn-warning p-2 mx-5" href="{{ route('home') }}">Ordenar</a>
                             @else
                                 <a class="btn btn-warning p-2 mx-5" href="{{ route('login') }}">Entrar</a>
                             @endauth
