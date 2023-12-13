@@ -15,10 +15,11 @@
             <div class="form-group row">
 
                 @foreach($salsas as $salsa)
-                <div class="col-md-4 col-lg-3">
-                    <x-adminlte-input-switch id="salsa{{ $salsa->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->id }}">
-                    </x-adminlte-input-switch>
-                </div>
+
+                    <div class="col-md-4 col-lg-3">
+                        <x-adminlte-input-switch id="salsa{{ $salsa->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->id }}">
+                        </x-adminlte-input-switch>
+                    </div>
                     
                 @endforeach
             </div>

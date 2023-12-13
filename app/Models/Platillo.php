@@ -26,4 +26,10 @@ class Platillo extends Model
         
     }
 
+    public function salsas(){
+
+        return $this->belongsToMany(Salsa::class, 'platillo_has_salsas', 'idPlatillo', 'idSalsa');
+        
+    }
+
 }
