@@ -34,6 +34,9 @@
                                     @if( count($salsas) > 0 )
                                         <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
                                     @endif
+                                    @if( count($preparaciones) > 0 )
+                                        <x-adminlte-button class="preparaciones" id="preparaciones" label="Preparacion(es)" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -54,6 +57,7 @@
     @include('platillo.nuevo')
     @include('platillo.editar')
     @include('platillo.salsas')
+    @include('platillo.preparaciones')
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -68,6 +72,10 @@
 
     @if( count($salsas) > 0 )
         <script src="{{ asset('js/platillo/salsas.js') }}" type="text/javascript"></script>
+    @endif
+
+    @if( count($preparaciones) > 0 )
+        <script src="{{ asset('js/platillo/preparaciones.js') }}" type="text/javascript"></script>
     @endif
 
 @stop

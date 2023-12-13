@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Platillo;
 use App\Models\Categoria;
 use App\Models\Salsa;
+use App\Models\Preparacion;
 use Illuminate\Http\Request;
 use App\Http\Requests\Platillo\Create;
 use App\Http\Requests\Platillo\Read;
@@ -23,8 +24,9 @@ class PlatilloController extends Controller
             $platillos = Platillo::all();
             $categorias = Categoria::all();
             $salsas = Salsa::all();
+            $preparaciones = Preparacion::all();
 
-            return view('platillo.index', compact('platillos', 'categorias', 'salsas'));
+            return view('platillo.index', compact('platillos', 'categorias', 'salsas', 'preparaciones'));
 
         }else{
 

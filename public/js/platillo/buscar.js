@@ -113,4 +113,56 @@ jQuery(document).ready(function(){
 
     });
 
+    $(".preparaciones").on('click', function(e){
+
+        e.preventDefault();
+
+        $.ajax({
+
+            type: 'POST',
+            url: '/platillo/buscar',
+            data:{
+
+                'id' : $(this).attr('data-id'),
+
+            },
+            dataType: 'json',
+            encode: true
+
+        }).done(function(respuesta){
+
+            if( respuesta.exito ){
+
+                $("#nombrePlatilloPrep").val( respuesta.nombre ); 
+                $("#id").val( respuesta.id );
+
+                $("#agregar").attr('disabled', false);
+
+            }else{
+
+                Swal.fire({
+
+                    icon: 'error',
+                    title: respuesta.mensaje,
+                    allowOutsideClick: false,
+                    showConfirmButton: true
+
+                }).then((resultado)=>{
+
+                    if( resultado.isConfirmed ){
+
+                        window.location.href = '/platillos';
+
+                    }
+
+                });
+
+                $("#agregar").attr('disabled', true);
+
+            }
+
+        });
+
+    });
+
 });
