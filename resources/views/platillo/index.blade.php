@@ -32,7 +32,7 @@
                                     <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $platillo->id }}" icon="fas fa-pen"></x-adminlte-button>
                                     <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                     @if( count($salsas) > 0 )
-                                        <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-sync"></x-adminlte-button>
+                                        <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
                                     @endif
                                 </td>
                             </tr>
@@ -53,6 +53,7 @@
 
     @include('platillo.nuevo')
     @include('platillo.editar')
+    @include('platillo.salsas')
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -63,6 +64,10 @@
         <script src="{{ asset('js/platillo/agregar.js') }}" type="text/javascript"></script>
     @else
         <script src="{{ asset('js/platillo/noAgregar.js') }}" type="text/javascript"></script>
+    @endif
+
+    @if( count($salsas) > 0 )
+        <script src="{{ asset('js/platillo/salsas.js') }}" type="text/javascript"></script>
     @endif
 
 @stop
