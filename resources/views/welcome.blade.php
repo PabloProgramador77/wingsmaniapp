@@ -47,7 +47,7 @@
                         <p class="fw-bold fs-3 p-2">Ordena tu comida favorita a domicilio fácil, rápido y seguro en línea.</p>
                         <div class="d-grid d-md-flex justify-content-md-start">
                             <a role="button" class="btn btn-danger p-2 m-2 fw-bold">Ordenar Ahora</a>
-                            <a role="button" class="btn btn-secondary p-2 m-2 fw-bold">Registrarme</a>
+                            <a href="{{ route('register') }}" role="button" class="btn btn-secondary p-2 m-2 fw-bold">Registrarme</a>
                         </div>
                     </div>
                 </div>
