@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         if( auth()->user()->id ){
 
-            $usuarios = User::all();
+            $usuarios = User::role(['Gerente', 'Mesero'])->get();
             $roles = Role::all();
 
             return view('usuario.index', compact('usuarios', 'roles'));

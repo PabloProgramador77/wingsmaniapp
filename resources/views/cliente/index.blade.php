@@ -12,7 +12,7 @@
             @php
                 $heads = [
 
-                    'Usuario', 'Email', 'Acciones'
+                    'Cliente', 'Email', 'Acciones'
 
                 ];
             @endphp
@@ -26,7 +26,6 @@
                                 <td>{{ $cliente->name }}</td>
                                 <td>{{ $cliente->email }}</td>
                                 <td>
-                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $cliente->id }}" icon="fas fa-pen"></x-adminlte-button>
                                     <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                 </td>
                             </tr>
@@ -47,9 +46,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/cliente/agregar.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/cliente/buscar.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/cliente/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/cliente/borrar.js') }}" type="text/javascript"></script>
 
 @stop

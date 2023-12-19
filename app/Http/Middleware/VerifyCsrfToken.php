@@ -44,6 +44,7 @@ class VerifyCsrfToken extends Middleware
         '/permiso/actualizar',
         '/permiso/buscar',
         '/permiso/borrar',
+        '/cliente/borrar',
 
     ];
 }

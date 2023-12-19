@@ -66,3 +66,6 @@ Route::post('/permiso/agregar', [App\Http\Controllers\PermisoController::class, 
 Route::post('/permiso/buscar', [App\Http\Controllers\PermisoController::class, 'show'])->name('buscar-permiso');
 Route::post('/permiso/actualizar', [App\Http\Controllers\PermisoController::class, 'update'])->name('actualizar-permiso');
 Route::post('/permiso/borrar', [App\Http\Controllers\PermisoController::class, 'destroy'])->name('borrar-permiso');
+
+Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('clientes');
+Route::post('/cliente/borrar', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('borrar-cliente');
