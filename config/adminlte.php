@@ -334,10 +334,16 @@ return [
             'active' => ['clientes']
         ],
         [
-            'text' => 'Roles & Permisos',
+            'text' => 'Roles',
             'url' => 'roles',
             'icon' => 'fas fa-user-tag',
             'active' => ['role']
+        ],
+        [
+            'text' => 'Permisos',
+            'url' => 'permisos',
+            'icon' => 'fas fa-user-circle',
+            'active' => ['permiso']
         ],
     ],
 
