@@ -31,6 +31,9 @@
                                 <td>
                                     <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $role->id }}" icon="fas fa-pen"></x-adminlte-button>
                                     <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $role->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                    @if( count($permisos) >0 )
+                                        <x-adminlte-button class="permisos" id="permisos" label="Permisos" theme="secondary" data-id="{{ $role->id }}" icon="fas fa-user-circle" data-toggle="modal" data-target="#modalPermisos"></x-adminlte-button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -50,6 +53,7 @@
 
     @include('roles.nuevo')
     @include('roles.editar')
+    @include('roles.permisos')
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -57,5 +61,6 @@
     <script src="{{ asset('js/role/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/role/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/role/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/role/permisos.js') }}" type="text/javascript"></script>
 
 @stop
