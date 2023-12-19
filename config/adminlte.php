@@ -333,6 +333,12 @@ return [
             'icon' => 'fas fa-users',
             'active' => ['clientes']
         ],
+        [
+            'text' => 'Roles & Permisos',
+            'url' => 'roles',
+            'icon' => 'fas fa-user-tag',
+            'active' => ['role']
+        ],
     ],
 
     /*
