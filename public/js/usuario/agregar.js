@@ -31,7 +31,8 @@ jQuery(document).ready(function(){
 
                         'nombre' : $("#nombre").val(),
                         'email' : $("#email").val(),
-                        'password' : $("#password").val()
+                        'password' : $("#password").val(),
+                        'rol' : $("#rol").val()
 
                     },
                     dataType: 'json',

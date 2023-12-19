@@ -25,6 +25,11 @@ jQuery(document).ready(function(){
 
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#emailEditar").val(respuesta.email);
+
+                $("#rolEditar").prepend('<option value="'+respuesta.rol+'">'+respuesta.rol+'</option>');
+                $("#rolEditar").val(respuesta.rol);
+                $("#rolEditar option[value='"+respuesta.rol+"']:not(:first)").remove();
+
                 $("#id").val( respuesta.id );
 
                 $("#actualizar").attr('disabled', false);

@@ -17,6 +17,18 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-select2 name="rol" id="rol" >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-user-tag">*</i>
+                        </div>
+                    </x-slot>
+                    @foreach($roles as $rol)
+                        @if( $rol->name != 'Superadmin' && $rol->name != 'Cliente')
+                            <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+                        @endif
+                    @endforeach
+                </x-adminlte-select2>
                 <x-adminlte-input type="password" name="password" id="password" placeholder="Contraseña de acceso">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

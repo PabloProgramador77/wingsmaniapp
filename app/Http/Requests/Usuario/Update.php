@@ -34,6 +34,7 @@ class Update extends FormRequest
             'id' => 'required|integer',
             'nombre' => 'required|string|min:2',
             'email' => 'required|string|email',
+            'rol' => 'required|string|min:2',
             
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\Usuario\Create;
 use App\Http\Requests\Usuario\Read;
@@ -20,8 +21,9 @@ class UserController extends Controller
         if( auth()->user()->id ){
 
             $usuarios = User::all();
+            $roles = Role::all();
 
-            return view('usuario.index', compact('usuarios'));
+            return view('usuario.index', compact('usuarios', 'roles'));
 
         }else{
 
@@ -55,6 +57,8 @@ class UserController extends Controller
 
             if( $usuario->id ){
 
+                $usuario->assignRole($request->rol);
+
                 $datos['exito'] = true;
 
             }
@@ -83,6 +87,7 @@ class UserController extends Controller
                 $datos['exito'] = true;
                 $datos['nombre'] = $usuario->name;
                 $datos['email'] = $usuario->email;
+                $datos['rol'] = $usuario->getRoleNames();
                 $datos['id'] = $usuario->id;
 
             }
@@ -119,6 +124,8 @@ class UserController extends Controller
                     'email' => $request->email
 
                 ]);
+
+            $usuario->assignRole($request->rol);
 
             $datos['exito'] = true;
 

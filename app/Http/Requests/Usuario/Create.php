@@ -34,6 +34,7 @@ class Create extends FormRequest
             'nombre' => 'required|string|min:2',
             'email' => 'required|string|email',
             'password' => 'required|string|min:2',
+            'rol' => 'required|string|min:2',
             
         ];
     }
