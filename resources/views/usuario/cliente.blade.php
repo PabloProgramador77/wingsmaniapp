@@ -23,14 +23,14 @@
             <div class="col-md-6 m-1 p-2">
                 <form novalidate>
                     <div class="form-group">
-                        <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de cliente" value="{{ $cliente->name }}">
+                        <x-adminlte-input name="nombreCliente" id="nombreCliente" placeholder="Nombre de cliente" value="{{ $cliente->name }}">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text text-warning">
                                     <i class="fas fa-user"></i>
                                 </div>
                             </x-slot>
                         </x-adminlte-input>
-                        <x-adminlte-input name="email" id="email" placeholder="Email de cliente" value="{{ $cliente->email }}">
+                        <x-adminlte-input name="emailCliente" id="emailCliente" placeholder="Email de cliente" value="{{ $cliente->email }}">
                             <x-slot name="prependSlot">
                                 <div class="input-group-text text-warning">
                                     <i class="fas fa-envelope"></i>
@@ -136,5 +136,6 @@
     <script src="{{ asset('js/telefono/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/telefono/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/telefono/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/cliente/actualizar.js') }}" type="text/javascript"></script>
     
 @stop

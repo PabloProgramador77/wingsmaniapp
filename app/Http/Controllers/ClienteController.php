@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Cliente\Delete;
+use App\Http\Requests\Cliente\Update;
 
 class ClienteController extends Controller
 {
@@ -61,9 +62,33 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request)
     {
-        //
+        try {
+            
+            $cliente = User::find(auth()->user()->id);
+
+            if( $cliente->id && $cliente->role('Cliente') ){
+
+                $cliente->update([
+
+                    'name' => $request->nombre,
+                    'email' => $request->email
+
+                ]);
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
     /**

@@ -69,6 +69,7 @@ Route::post('/permiso/borrar', [App\Http\Controllers\PermisoController::class, '
 
 Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('clientes');
 Route::post('/cliente/borrar', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('borrar-cliente');
+Route::post('/cliente/actualizar', [App\Http\Controllers\ClienteController::class, 'update'])->name('actualizar-cliente');
 
 Route::post('/domicilio/agregar', [App\Http\Controllers\DomicilioController::class, 'store'])->name('agregar-domicilio');
 Route::post('/domicilio/buscar', [App\Http\Controllers\DomicilioController::class, 'show'])->name('buscar-domicilio');
