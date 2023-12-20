@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Domicilio;
+use App\Models\Telefono;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Requests\Usuario\Create;
@@ -37,7 +39,27 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if( auth()->user()->id ){
+
+            if( auth()->user()->role('Cliente') ){
+
+                $cliente = User::find( auth()->user()->id );
+
+                return view('usuario.cliente', compact('cliente'));
+
+            }else{
+
+                $usuario = User::find( auth()->user()->id );
+                
+                return view('usuario.usuario', compact('usuario'));
+
+            }
+
+        }else{
+
+            return redirect('/');
+
+        }
     }
 
     /**

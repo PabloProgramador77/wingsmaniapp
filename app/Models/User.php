@@ -52,4 +52,16 @@ class User extends Authenticatable
         return 'profile/username';
         
     }
+
+    public function telefonos(){
+
+        return $this->belongsToMany( Telefono::class, 'cliente_has_telefonos', 'idCliente', 'idTelefono' );
+
+    }
+
+    public function domicilios(){
+
+        return $this->belongsToMany( Domicilio::class, 'cliente_has_domicilios', 'idCliente', 'idDomicilio' );
+        
+    }
 }

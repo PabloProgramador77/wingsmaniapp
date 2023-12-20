@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile/username', [App\Http\Controllers\HomeController::class, 'index'])->name('profile');
+Route::get('/profile/username', [App\Http\Controllers\UserController::class, 'create'])->name('profile');
 
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categorias');
 Route::post('/categoria/agregar', [App\Http\Controllers\CategoriaController::class, 'store'])->name('agregar-categoria');
@@ -69,3 +69,13 @@ Route::post('/permiso/borrar', [App\Http\Controllers\PermisoController::class, '
 
 Route::get('/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('clientes');
 Route::post('/cliente/borrar', [App\Http\Controllers\ClienteController::class, 'destroy'])->name('borrar-cliente');
+
+Route::post('/domicilio/agregar', [App\Http\Controllers\DomicilioController::class, 'store'])->name('agregar-domicilio');
+Route::post('/domicilio/buscar', [App\Http\Controllers\DomicilioController::class, 'show'])->name('buscar-domicilio');
+Route::post('/domicilio/actualizar', [App\Http\Controllers\DomicilioController::class, 'update'])->name('actualizar-domicilio');
+Route::post('/domicilio/borrar', [App\Http\Controllers\DomicilioController::class, 'destroy'])->name('borrar-domicilio');
+
+Route::post('/telefono/agregar', [App\Http\Controllers\TelefonoController::class, 'store'])->name('agregar-telefono');
+Route::post('/telefono/buscar', [App\Http\Controllers\TelefonoController::class, 'show'])->name('buscar-telefono');
+Route::post('/telefono/actualizar', [App\Http\Controllers\TelefonoController::class, 'update'])->name('actualizar-telefono');
+Route::post('/telefono/borrar', [App\Http\Controllers\TelefonoController::class, 'destroy'])->name('borrar-telefono');
