@@ -53,6 +53,7 @@ Route::post('/usuario/agregar', [App\Http\Controllers\UserController::class, 'st
 Route::post('/usuario/buscar', [App\Http\Controllers\UserController::class, 'show'])->name('buscar-usuario');
 Route::post('/usuario/actualizar', [App\Http\Controllers\UserController::class, 'update'])->name('actualizar-usuario');
 Route::post('/usuario/borrar', [App\Http\Controllers\UserController::class, 'destroy'])->name('borrar-usuario');
+Route::post('/usuario/perfil', [App\Http\Controllers\UserController::class, 'edit'])->name('perfil-usuario');
 
 Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
 Route::post('/role/agregar', [App\Http\Controllers\RoleController::class, 'store'])->name('agregar-role');

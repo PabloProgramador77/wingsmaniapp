@@ -11,6 +11,7 @@ use App\Http\Requests\Usuario\Create;
 use App\Http\Requests\Usuario\Read;
 use App\Http\Requests\Usuario\Update;
 use App\Http\Requests\Usuario\Delete;
+use App\Http\Requests\Usuario\Edit;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -41,7 +42,7 @@ class UserController extends Controller
     {
         if( auth()->user()->id ){
 
-            if( auth()->user()->role('Cliente') ){
+            if( auth()->user()->hasRole('Cliente') ){
 
                 $cliente = User::find( auth()->user()->id );
 
@@ -127,9 +128,33 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Edit $request)
     {
-        //
+        try {
+            
+            $usuario = User::find( auth()->user()->id );
+
+            if( $usuario->id ){
+
+                $usuario->update([
+                    
+                    'name' => $request->nombre,
+                    'email' => $request->email
+
+                ]);
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
     /**
