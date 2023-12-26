@@ -81,3 +81,5 @@ Route::post('/telefono/agregar', [App\Http\Controllers\TelefonoController::class
 Route::post('/telefono/buscar', [App\Http\Controllers\TelefonoController::class, 'show'])->name('buscar-telefono');
 Route::post('/telefono/actualizar', [App\Http\Controllers\TelefonoController::class, 'update'])->name('actualizar-telefono');
 Route::post('/telefono/borrar', [App\Http\Controllers\TelefonoController::class, 'destroy'])->name('borrar-telefono');
+
+Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedidos');
