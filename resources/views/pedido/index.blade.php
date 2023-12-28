@@ -12,7 +12,7 @@
             @php
                 $heads = [
 
-                    'Cliente de Pedido', 'Total de Pedido', 'Acciones'
+                    'Cliente de Pedido', 'Total de Pedido', 'Tipo de Pedido' 'Acciones'
 
                 ];
             @endphp

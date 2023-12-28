@@ -15,6 +15,7 @@ class Pedido extends Model
 
         'total',
         'estatus',
+        'tipo',
         'idCliente'
 
     ];

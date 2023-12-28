@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use Illuminate\Http\Request;
+use App\Http\Requests\Pedido\Create;
 
 class PedidoController extends Controller
 {
@@ -38,9 +39,35 @@ class PedidoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Create $request)
     {
-        //
+        try {
+            
+            $pedido = Pedido::create([
+
+                'total' => 0,
+                'estatus' => 'Abierto',
+                'tipo' => $request->tipo,
+                'idCliente' => auth()->user()->id
+
+            ]);
+
+            if( $pedido->id ){
+
+                session()->put('idPedido', $pedido->id);
+                
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
     /**
