@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 
@@ -33,7 +34,17 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+
+            $categorias = Categoria::all();
+
+            return view('menu', compact('categorias'));
+
+        }else{
+
+            return redirect('/');
+
+        }
     }
 
     /**
@@ -55,7 +66,7 @@ class PedidoController extends Controller
             if( $pedido->id ){
 
                 session()->put('idPedido', $pedido->id);
-                
+
                 $datos['exito'] = true;
 
             }
@@ -101,4 +112,5 @@ class PedidoController extends Controller
     {
         //
     }
+
 }

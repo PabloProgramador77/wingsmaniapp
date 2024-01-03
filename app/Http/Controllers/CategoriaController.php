@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Platillo;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categoria\Store;
 use App\Http\Requests\Categoria\Search;
@@ -32,9 +34,29 @@ class CategoriaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+
+            $platillos = Platillo::select('id', 'nombre', 'precio')
+                ->where('idCategoria', '=', $id)
+                ->orderBy('nombre', 'asc')
+                ->get();
+
+            $categoria = Categoria::find($id);
+            $pedido = Pedido::find(session()->get('idPedido'));
+            $platillosPedido = Platillo::select('pedido_has_platillos.id', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion', 'platillos.nombre')
+                ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
+                ->get();
+
+            return view('carta', compact('platillos', 'categoria', 'pedido', 'platillosPedido'));
+
+        }else{
+
+            return redirect('/');
+
+        }
     }
 
     /**

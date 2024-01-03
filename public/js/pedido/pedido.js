@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/usuarios';
+                                window.location.href = '/pedido/menu';
 
                             }
 
@@ -69,7 +69,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/usuarios';
+                                window.location.href = '/';
 
                             }
 
@@ -110,7 +110,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/usuarios';
+                                window.location.href = '/pedido/menu';
 
                             }
 
@@ -129,7 +129,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/usuarios';
+                                window.location.href = '/';
 
                             }
 

@@ -56,6 +56,10 @@ class VerifyCsrfToken extends Middleware
         '/telefono/buscar',
         '/telefono/borrar',
         '/pedido/agregar',
+        '/pedido/preparar',
+        '/pedido/borrar',
+        '/pedido/sumar',
+        '/pedido/restar',
 
     ];
 }

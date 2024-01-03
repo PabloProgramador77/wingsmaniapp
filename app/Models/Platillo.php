@@ -32,4 +32,16 @@ class Platillo extends Model
         
     }
 
+    public function preparaciones(){
+
+        return $this->belongsToMany(Preparacion::class, 'platillo_has_preparaciones', 'idPlatillo', 'idPreparacion');
+        
+    }
+
+    public function cantidad(){
+
+        return $this->hasOne(PedidoHasPlatillo::class, 'idPlatillo');
+
+    }
+
 }

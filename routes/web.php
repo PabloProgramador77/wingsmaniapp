@@ -23,12 +23,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/profile/username', [App\Http\Controllers\UserController::class, 'create'])->name('profile');
 
 Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categorias');
+Route::get('/categoria/platillos/{id}', [App\Http\Controllers\CategoriaController::class, 'create'])->name('platillos-categoria');
 Route::post('/categoria/agregar', [App\Http\Controllers\CategoriaController::class, 'store'])->name('agregar-categoria');
 Route::post('/categoria/buscar', [App\Http\Controllers\CategoriaController::class, 'show'])->name('buscar-categoria');
 Route::post('/categoria/actualizar', [App\Http\Controllers\CategoriaController::class, 'update'])->name('actualizar-categoria');
 Route::post('/categoria/borrar', [App\Http\Controllers\CategoriaController::class, 'destroy'])->name('borrar-categoria');
 
 Route::get('/platillos', [App\Http\Controllers\PlatilloController::class, 'index'])->name('platillos');
+Route::get('/platillo/ordenar/{id}', [App\Http\Controllers\PedidoHasPlatilloController::class, 'store'])->name('ordenar-platillo');
 Route::post('/platillo/agregar', [App\Http\Controllers\PlatilloController::class, 'store'])->name('agregar-platillo');
 Route::post('/platillo/buscar', [App\Http\Controllers\PlatilloController::class, 'show'])->name('buscar-platillo');
 Route::post('/platillo/actualizar', [App\Http\Controllers\PlatilloController::class, 'update'])->name('actualizar-platillo');
@@ -83,4 +85,9 @@ Route::post('/telefono/actualizar', [App\Http\Controllers\TelefonoController::cl
 Route::post('/telefono/borrar', [App\Http\Controllers\TelefonoController::class, 'destroy'])->name('borrar-telefono');
 
 Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedidos');
+Route::get('/pedido/menu', [App\Http\Controllers\PedidoController::class, 'create'])->name('menu-pedido');
 Route::post('/pedido/agregar', [App\Http\Controllers\PedidoController::class, 'store'])->name('agregar-pedido');
+Route::post('/pedido/preparar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'update'])->name('preparar-pedido');
+Route::post('/pedido/borrar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'destroy'])->name('borrar-pedido');
+Route::post('/pedido/sumar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'sumar'])->name('sumar-pedido');
+Route::post('/pedido/restar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'restar'])->name('restar-pedido');
