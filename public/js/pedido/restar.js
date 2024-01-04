@@ -5,59 +5,69 @@ jQuery(document).ready(function(){
 
         var dataId = $(this).attr('data-id');
 
-        e.preventDefault();
+        if( $("#cantidadPlatillo[data-id='"+dataId+"']").text() == '1' ){
 
-        $.ajax({
+            e.preventDefault();
 
-            type: 'POST',
-            url: '/pedido/restar',
-            data:{
+            $(this).attr('disabled', true);
 
-                'id' : $(this).attr('data-id'),
+        }else{
 
-            },
-            dataType: 'json',
-            encode: true
+            e.preventDefault();
 
-        }).done(function(respuesta){
+            $.ajax({
 
-            if( respuesta.exito ){
+                type: 'POST',
+                url: '/pedido/restar',
+                data:{
 
-                if( respuesta.cantidad == 1 ){
+                    'id' : $(this).attr('data-id'),
 
-                    $(".restar[data-id='"+dataId+"']").attr('disabled', true);
+                },
+                dataType: 'json',
+                encode: true
 
-                }else{
+            }).done(function(respuesta){
 
-                    $(".restar[data-id='"+dataId+"']").attr('disabled', false);
+                if( respuesta.exito ){
 
-                }
+                    if( respuesta.cantidad == 1 ){
 
-                $("#cantidadPlatillo[data-id='"+dataId+"']").text( respuesta.cantidad );
-                $("#totalPedido").text('Total: $ '+respuesta.total+' MXN');
+                        $(".restar[data-id='"+dataId+"']").attr('disabled', true);
 
-            }else{
+                    }else{
 
-                Swal.fire({
-
-                    icon: 'error',
-                    title: respuesta.mensaje,
-                    allowOutsideClick: false,
-                    showConfirmButton: true
-
-                }).then((resultado)=>{
-
-                    if( resultado.isConfirmed ){
-
-                        window.location.href = '/pedido/menu';
+                        $(".restar[data-id='"+dataId+"']").attr('disabled', false);
 
                     }
 
-                });
+                    $("#cantidadPlatillo[data-id='"+dataId+"']").text( respuesta.cantidad );
+                    $("#totalPedido").text('Total: $ '+respuesta.total+' MXN');
 
-            }
+                }else{
 
-        });
+                    Swal.fire({
+
+                        icon: 'error',
+                        title: respuesta.mensaje,
+                        allowOutsideClick: false,
+                        showConfirmButton: true
+
+                    }).then((resultado)=>{
+
+                        if( resultado.isConfirmed ){
+
+                            window.location.href = '/pedido/menu';
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+        }
 
     });
 

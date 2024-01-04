@@ -163,16 +163,7 @@ class PedidoHasPlatilloController extends Controller
 
                 $totalPedido = $this->total();
 
-                if( $totalPedido > 0 ){
-
-                    $datos['exito'] = true;
-
-                }else{
-
-                    $datos['exito'] = false;
-                    $datos['mensaje'] = 'Total de pedido no actualizado.';
-
-                }
+                $datos['exito'] = true;
 
             }
 
@@ -209,18 +200,9 @@ class PedidoHasPlatilloController extends Controller
 
             $totalPedido = $this->total();
 
-            if( $totalPedido > 0 ){
-
-                $datos['exito'] = true;
-                $datos['cantidad'] = $cantidad->cantidad;
-                $datos['total'] = $totalPedido;
-
-            }else{
-
-                $datos['exito'] = false;
-                $datos['mensaje'] = 'Cantidad de platillo no sumada.';
-
-            }
+            $datos['exito'] = true;
+            $datos['cantidad'] = $cantidad->cantidad;
+            $datos['total'] = $totalPedido;
 
         } catch (\Throwable $th) {
             
@@ -244,29 +226,29 @@ class PedidoHasPlatilloController extends Controller
 
             $cantidad->cantidad = $cantidad->cantidad - 1;
 
-            $pedidoHasPlatillo = PedidoHasPlatillo::where('id', '=', $request->id)
-                ->update([
+            if( $cantidad->cantidad == 0 ){
+
+                $pedidoHasPlatillo = PedidoHasPlatillo::where('id', '=', $request->id);
+                $pedidoHasPlatillo->delete();
+
+            }else{
+
+                $pedidoHasPlatillo = PedidoHasPlatillo::where('id', '=', $request->id)
+                    ->update([
 
                     'cantidad' => $cantidad->cantidad
 
                 ]);
-            
-            $pedido = Pedido::find( session()->get('idPedido') );
-            $totalPedido = $this->total();
-
-            if( $totalPedido > 0 ){
-
-                $datos['exito'] = true;
-                $datos['cantidad'] = $cantidad->cantidad;
-                $datos['total'] = $totalPedido;
-
-            }else{
-
-                $datos['exito'] = false;
-                $datos['mensaje'] = 'Cantidad de platillo no restada.';
 
             }
 
+            $pedido = Pedido::find( session()->get('idPedido') );
+            $totalPedido = $this->total();
+
+            $datos['exito'] = true;
+            $datos['cantidad'] = $cantidad->cantidad;
+            $datos['total'] = $totalPedido;
+            
         } catch (\Throwable $th) {
             
             $datos['exito'] = false;
@@ -310,6 +292,13 @@ class PedidoHasPlatilloController extends Controller
                 return $total;
 
             }else{
+
+                $pedido = Pedido::where('id', '=', session()->get('idPedido'))
+                    ->update([
+
+                        'total' => $total
+
+                    ]);
 
                 return $total;
 
