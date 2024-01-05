@@ -12,7 +12,7 @@
             @php
                 $heads = [
 
-                    'Cliente de Pedido', 'Total de Pedido', 'Tipo de Pedido' 'Acciones'
+                    'Cliente', 'Total de Pedido', 'Tipo de Pedido', 'Fecha', 'Acciones'
 
                 ];
             @endphp
@@ -25,10 +25,11 @@
                             <tr>
                                 <td>{{ $pedido->cliente->name }}</td>
                                 <td>$ {{ $pedido->total }} M.N.</td>
+                                <td>{{ $pedido->tipo }}</td>
+                                <td>{{ $pedido->created_at }}</td>
                                 <td>
                                     <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                    
+                                    <x-adminlte-button class="cancelar" id="cancelar" label="Borrar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                 </td>
                             </tr>
                         @endforeach
@@ -48,5 +49,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
     
 @stop
