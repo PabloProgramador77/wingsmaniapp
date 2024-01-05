@@ -85,9 +85,29 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pedido $pedido)
+    public function show()
     {
-        //
+        try {
+            
+            if( auth()->user()->id && auth()->user()->hasRole('Cliente') ){
+
+                $pedidos = Pedido::where('idCliente', '=', auth()->user()->id)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                return view('pedido.cliente', compact('pedidos'));
+
+            }else{
+
+                return redirect('/');
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            return redirect('/');
+
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#cancelar").on('click', function(e){
+    $(".cancelar").on('click', function(e){
 
         e.preventDefault();
 
@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
                     url: '/pedido/cancelar',
                     data:{
 
-                        'id' : $("#idPedido").val()
+                        'id' : $(this).attr('data-id')
 
                     },
                     dataType: 'json',

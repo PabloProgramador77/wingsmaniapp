@@ -13,7 +13,7 @@
                 <x-adminlte-small-box title="Platillos Favoritos" text="Mis platillos favoritos" theme="secondary" url="" url-text="Ver datos"></x-adminlte-small-box>
             </div>
             <div class="col-lg-4">
-                <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="" url-text="Ver datos"></x-adminlte-small-box>
+                <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="{{ url('/pedidos/cliente') }}" url-text="Ver datos"></x-adminlte-small-box>
             </div>
             <div class="col-lg-4">
                 <x-adminlte-small-box title="Promociones" text="Promociones" theme="info" url="" url-text="Ver datos"></x-adminlte-small-box>

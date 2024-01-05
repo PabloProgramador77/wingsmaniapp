@@ -85,6 +85,7 @@ Route::post('/telefono/actualizar', [App\Http\Controllers\TelefonoController::cl
 Route::post('/telefono/borrar', [App\Http\Controllers\TelefonoController::class, 'destroy'])->name('borrar-telefono');
 
 Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedidos');
+Route::get('/pedidos/cliente', [App\Http\Controllers\PedidoController::class, 'show'])->name('pedidos-cliente');
 Route::get('/pedido/menu', [App\Http\Controllers\PedidoController::class, 'create'])->name('menu-pedido');
 Route::post('/pedido/agregar', [App\Http\Controllers\PedidoController::class, 'store'])->name('agregar-pedido');
 Route::post('/pedido/preparar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'update'])->name('preparar-pedido');
