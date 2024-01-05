@@ -4,22 +4,14 @@ namespace App\Http\Requests\Pedido;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Delete extends FormRequest
+class Cancel extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if( auth()->user()->id & auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
-
-            return true;
-
-        }else{
-
-            return false;
-
-        }
+        return false;
     }
 
     /**
@@ -30,9 +22,7 @@ class Delete extends FormRequest
     public function rules(): array
     {
         return [
-            
-            'id' => 'required|integer',
-            
+            //
         ];
     }
 }

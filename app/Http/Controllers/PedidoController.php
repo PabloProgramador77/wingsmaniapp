@@ -6,6 +6,7 @@ use App\Models\Pedido;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
+use App\Http\Requests\Pedido\Delete;
 
 class PedidoController extends Controller
 {
@@ -108,9 +109,30 @@ class PedidoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pedido $pedido)
+    public function destroy(Delete $request)
     {
-        //
+        try {
+            
+            $pedido = Pedido::find( $request->id );
+
+            if( $pedido->id ){
+
+                $pedido->delete();
+
+                session()->forget('idPedido');
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
 }

@@ -46,9 +46,10 @@
             @endif
             
         </x-adminlte-datatable>
+        <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
     </div>
     <x-slot name="footerSlot">
         <x-adminlte-button theme="primary" label="Ordenar" id="ordenar" icon="fas fa-shopping-cart"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" icon="fas fa-ban"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>
