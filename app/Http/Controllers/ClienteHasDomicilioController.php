@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClienteHasDomicilio;
+use App\Models\Domicilio;
 use Illuminate\Http\Request;
 
 class ClienteHasDomicilioController extends Controller
@@ -12,7 +13,20 @@ class ClienteHasDomicilioController extends Controller
      */
     public function index()
     {
-        //
+        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+
+            $domicilios = Domicilio::select('domicilios.id', 'domicilios.direccion')
+                ->join('cliente_has_domicilios', 'domicilios.id', '=', 'cliente_has_domicilios.idDomicilio')
+                ->where('cliente_has_domicilios.idCliente', '=', auth()->user()->id)
+                ->get();
+
+            return view('entrega', compact('domicilios'));
+
+        }else{
+
+            return redirect('/');
+
+        }
     }
 
     /**

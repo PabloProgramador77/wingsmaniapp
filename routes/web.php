@@ -87,9 +87,12 @@ Route::post('/telefono/borrar', [App\Http\Controllers\TelefonoController::class,
 Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])->name('pedidos');
 Route::get('/pedidos/cliente', [App\Http\Controllers\PedidoController::class, 'show'])->name('pedidos-cliente');
 Route::get('/pedido/menu', [App\Http\Controllers\PedidoController::class, 'create'])->name('menu-pedido');
+Route::get('/pedido/domicilios', [App\Http\Controllers\ClienteHasDomicilioController::class, 'index'])->name('domicilios-cliente');
 Route::post('/pedido/agregar', [App\Http\Controllers\PedidoController::class, 'store'])->name('agregar-pedido');
 Route::post('/pedido/preparar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'update'])->name('preparar-pedido');
 Route::post('/pedido/borrar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'destroy'])->name('borrar-pedido');
 Route::post('/pedido/sumar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'sumar'])->name('sumar-pedido');
 Route::post('/pedido/restar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'restar'])->name('restar-pedido');
 Route::post('/pedido/cancelar', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('cancelar-pedido');
+Route::post('/pedido/ordenar', [App\Http\Controllers\PedidoController::class, 'edit'])->name('ordenar-pedido');
+Route::post('/pedido/entregar', [App\Http\Controllers\PedidoController::class, 'update'])->name('entregar-pedido');

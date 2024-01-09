@@ -37,6 +37,7 @@
         <script src="{{ asset('js/pedido/sumar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/restar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/pedido/ordenar.js') }}" type="text/javascript"></script>
     @endif
 
 @stop

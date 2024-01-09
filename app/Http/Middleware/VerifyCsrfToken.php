@@ -61,6 +61,8 @@ class VerifyCsrfToken extends Middleware
         '/pedido/sumar',
         '/pedido/restar',
         '/pedido/cancelar',
+        '/pedido/ordenar',
+        '/pedido/entregar',
 
     ];
 }

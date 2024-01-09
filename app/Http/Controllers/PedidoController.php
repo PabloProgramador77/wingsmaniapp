@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Categoria;
+use App\Models\User;
+use App\Models\Domicilio;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
+use App\Http\Requests\Pedido\Ordenar;
+use App\Http\Requests\Pedido\Entregar;
 
 class PedidoController extends Controller
 {
@@ -111,19 +115,96 @@ class PedidoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Finalizando pedido y mostrando domicilios en caso de ser necesario
      */
-    public function edit(Pedido $pedido)
+    public function edit(Ordenar $request)
     {
-        //
+        try {
+            
+            $pedido = Pedido::find( $request->id );
+
+            if( $pedido->id ){
+
+                if( $pedido->tipo == 'pickup' ){
+
+                    session()->forget('idPedido');
+
+                    $datos['exito'] = true;
+                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                    $datos['url'] = '/pedidos';
+
+                    //Crear comanda y enviar notificación
+
+                }else{
+
+                    if( count( auth()->user()->domicilios ) > 0 ){
+
+                        if( count( auth()->user()->domicilios ) == 1 ){
+
+                            session()->forget('idPedido');
+
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                            $datos['url'] = '/pedidos';
+
+                            //Crear comanda y enviar notificación
+
+                        }else{
+
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Elige el domicilio para entregar tu pedido.';
+                            $datos['url'] = '/pedido/domicilios';
+
+                        }
+
+                    }else{
+
+                        $datos['exito'] = true;
+                        $datos['mensaje'] = 'Registra un domicilio para entregar tu pedido.';
+                        $datos['url'] = '/pedido/domicilios';
+
+                    }                 
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pedido $pedido)
+    public function update(Entregar $request)
     {
-        //
+        try {
+            
+            $domicilio = Domicilio::find( $request->idDomicilio );
+
+            if( $domicilio->id ){
+
+                session()->forget('idPedido');
+
+                $datos['exito'] = true;
+
+                //Enviar notificación
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
