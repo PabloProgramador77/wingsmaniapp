@@ -131,7 +131,7 @@ class PedidoController extends Controller
 
                     $datos['exito'] = true;
                     $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                    $datos['url'] = '/pedidos';
+                    $datos['url'] = '/pedidos/cliente';
 
                     //Crear comanda y enviar notificación
 
@@ -145,7 +145,7 @@ class PedidoController extends Controller
 
                             $datos['exito'] = true;
                             $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                            $datos['url'] = '/pedidos';
+                            $datos['url'] = '/pedidos/cliente';
 
                             //Crear comanda y enviar notificación
 
