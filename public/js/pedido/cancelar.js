@@ -8,8 +8,8 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas cancelar tu pedido?',
-            html: 'Deberas crear un nuevo pedido si deseas ordenar.',
+            title: '¿En verdad deseas cancelar el pedido?',
+            html: 'Los datos no podrán ser recuperados de ninguna forma.',
             allowOutsideClick: false,
             confirmButtonText: 'Si, cancelalo',
             showConfirmButton: true,
