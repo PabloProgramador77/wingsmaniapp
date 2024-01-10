@@ -139,7 +139,13 @@ class PedidoController extends Controller
 
                     if( count( auth()->user()->domicilios ) > 0 ){
 
-                        if( count( auth()->user()->domicilios ) == 1 ){
+                        if( count( auth()->user()->domicilios ) > 1 ){
+
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Elige el domicilio para entregar tu pedido.';
+                            $datos['url'] = '/pedido/domicilios';
+
+                        }else{
 
                             session()->forget('idPedido');
 
@@ -147,13 +153,7 @@ class PedidoController extends Controller
                             $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
                             $datos['url'] = '/pedidos/cliente';
 
-                            //Crear comanda y enviar notificación
-
-                        }else{
-
-                            $datos['exito'] = true;
-                            $datos['mensaje'] = 'Elige el domicilio para entregar tu pedido.';
-                            $datos['url'] = '/pedido/domicilios';
+                            //Crear comanda y enviar notificación                            
 
                         }
 
