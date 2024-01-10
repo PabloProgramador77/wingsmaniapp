@@ -88,6 +88,7 @@ Route::get('/pedidos', [App\Http\Controllers\PedidoController::class, 'index'])-
 Route::get('/pedidos/cliente', [App\Http\Controllers\PedidoController::class, 'show'])->name('pedidos-cliente');
 Route::get('/pedido/menu', [App\Http\Controllers\PedidoController::class, 'create'])->name('menu-pedido');
 Route::get('/pedido/domicilios', [App\Http\Controllers\ClienteHasDomicilioController::class, 'index'])->name('domicilios-cliente');
+Route::get('/pedido/ver/{idPedido}', [App\Http\Controllers\PedidoController::class, 'pedido'])->name('ver-pedido');
 Route::post('/pedido/agregar', [App\Http\Controllers\PedidoController::class, 'store'])->name('agregar-pedido');
 Route::post('/pedido/preparar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'update'])->name('preparar-pedido');
 Route::post('/pedido/borrar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'destroy'])->name('borrar-pedido');

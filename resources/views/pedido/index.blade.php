@@ -23,7 +23,11 @@
                     @if( count( $pedidos ) > 0 )
                         @foreach($pedidos as $pedido)
                             <tr>
-                                <td>{{ $pedido->cliente->name }}</td>
+                                <td>
+                                    <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
+                                        {{ $pedido->cliente->name }}
+                                    </a>
+                                </td>
                                 <td>$ {{ $pedido->total }} M.N.</td>
                                 <td>{{ $pedido->tipo }}</td>
                                 <td>{{ $pedido->created_at }}</td>

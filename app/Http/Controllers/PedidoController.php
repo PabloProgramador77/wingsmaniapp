@@ -6,6 +6,7 @@ use App\Models\Pedido;
 use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Domicilio;
+use App\Models\Platillo;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
@@ -234,6 +235,35 @@ class PedidoController extends Controller
         }
 
         return response()->json($datos);
+    }
+
+    /**
+     * Consulta detallada de pedido
+     */
+    public function pedido($idPedido){
+        try {
+            
+            $pedido = Pedido::find( $idPedido );
+
+            if( $pedido->id ){
+
+                $platillos = Platillo::select('platillos.nombre', 'platillos.precio', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion')
+                    ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                    ->where('pedido_has_platillos.idPedido', '=', $idPedido)
+                    ->get();
+
+                return view('pedido.pedido', compact('pedido', 'platillos'));
+
+            }else{
+
+                return redirect('/pedidos/cliente');
+            }
+
+        } catch (\Throwable $th) {
+
+            return redirect('/pedidos/cliente');
+
+        }
     }
 
 }

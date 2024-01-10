@@ -23,15 +23,18 @@
                         @foreach($pedidos as $pedido)
                             <tr>
                                 <td>{{ $pedido->created_at }}</td>
-                                <td>$ {{ $pedido->total }} M.N.</td>
+                                <td>
+                                    <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
+                                        $ {{ $pedido->total }} M.N.
+                                    </a>
+                                </td>
                                 <td>{{ $pedido->tipo }}</td>
                                 <td>
                                     @if( $pedido->estatus == 'Abierto' )
                                         <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
                                         <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                        <x-adminlte-button class="ver" id="ver" label="Ver" theme="primary" data-id="{{ $pedido->id }}" icon="fas fa-eye"></x-adminlte-button>
                                     @else
-                                        <x-adminlte-button class="ver" id="ver" label="Ver" theme="primary" data-id="{{ $pedido->id }}" icon="fas fa-eye"></x-adminlte-button>
+                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                     @endif
                                 </td>
                             </tr>
