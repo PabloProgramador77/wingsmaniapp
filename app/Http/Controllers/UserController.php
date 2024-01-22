@@ -12,6 +12,7 @@ use App\Http\Requests\Usuario\Read;
 use App\Http\Requests\Usuario\Update;
 use App\Http\Requests\Usuario\Delete;
 use App\Http\Requests\Usuario\Edit;
+use App\Http\Requests\Usuario\Token;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -198,6 +199,37 @@ class UserController extends Controller
             if( $usuario->id ){
 
                 $usuario->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
+    }
+
+    /**
+     * Carga del TOKEN FCM
+     */
+    public function token(Token $request){
+        try {
+            
+            $usuario = User::find( $auth()->user()->id );
+
+            if( $usuario->id ){
+
+                $usuario = User::where('id', '=', $auth()->user()->id)
+                    ->update([
+
+                        'token' => $request->token
+
+                    ]);
 
                 $datos['exito'] = true;
 

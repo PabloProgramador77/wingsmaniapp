@@ -476,7 +476,7 @@ return [
                     'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
                 ],
             ],
-        ],
+        ]
     ],
 
     /*

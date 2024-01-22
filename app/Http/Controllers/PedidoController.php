@@ -12,6 +12,9 @@ use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\FirebaseMessaging;
+use Kreait\Firebase\Messaging\Notification;
 
 class PedidoController extends Controller
 {
@@ -265,5 +268,9 @@ class PedidoController extends Controller
 
         }
     }
+
+    /**
+     * Notificación de nuevo
+     */
 
 }
