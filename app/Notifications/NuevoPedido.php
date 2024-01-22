@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Pedido;
 
 class NuevoPedido extends Notification
 {
@@ -14,9 +15,9 @@ class NuevoPedido extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Pedido $pedido)
     {
-        //
+        $this->pedido = $pedido;
     }
 
     /**
@@ -26,7 +27,7 @@ class NuevoPedido extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -49,7 +50,12 @@ class NuevoPedido extends Notification
     {
         return [
             
-            'invoice_id' => $this->invoice->id,
+            'id' => $this->pedido->id,
+            'total' => $this->pedido->total,
+            'tipo' => $this->pedido->tipo,
+            'idCliente' => $this->pedido->idCliente,
+            'cliente' => $this->pedido->cliente->name,
+            'fecha' => $this->pedido->created_at,
 
         ];
     }

@@ -12,9 +12,7 @@ use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
-use Kreait\Firebase\Messaging\CloudMessage;
-use Kreait\Firebase\Messaging\FirebaseMessaging;
-use Kreait\Firebase\Messaging\Notification;
+use App\notifications\NuevoPedido;
 
 class PedidoController extends Controller
 {
@@ -131,13 +129,13 @@ class PedidoController extends Controller
 
                 if( $pedido->tipo == 'pickup' ){
 
+                    $this->notification();
+
                     session()->forget('idPedido');
 
                     $datos['exito'] = true;
                     $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
                     $datos['url'] = '/pedidos/cliente';
-
-                    //Crear comanda y enviar notificación
 
                 }else{
 
@@ -151,13 +149,13 @@ class PedidoController extends Controller
 
                         }else{
 
+                            $this->notification();
+
                             session()->forget('idPedido');
 
                             $datos['exito'] = true;
                             $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
                             $datos['url'] = '/pedidos/cliente';
-
-                            //Crear comanda y enviar notificación                            
 
                         }
 
@@ -272,5 +270,24 @@ class PedidoController extends Controller
     /**
      * Notificación de nuevo
      */
+    public function notification(){
+        try {
+            
+            $pedido = Pedido::find( session()->get('idPedido') );
+
+            $usuarios = User::role(['Gerente', 'Mesero'])->get();
+
+            foreach( $usuarios as $usuario ){
+
+                $usuario->notify(new NuevoPedido($pedido));
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo "Error: ".$th->getMessage();
+
+        }
+    }
 
 }
