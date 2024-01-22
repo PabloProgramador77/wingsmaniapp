@@ -13,6 +13,7 @@ use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
 use App\notifications\NuevoPedido;
+use App\Events\OrdenarPedido;
 
 class PedidoController extends Controller
 {
@@ -192,11 +193,12 @@ class PedidoController extends Controller
 
             if( $domicilio->id ){
 
+                $this->notification();
+
                 session()->forget('idPedido');
 
                 $datos['exito'] = true;
 
-                //Enviar notificación
             }
 
         } catch (\Throwable $th) {
@@ -275,13 +277,7 @@ class PedidoController extends Controller
             
             $pedido = Pedido::find( session()->get('idPedido') );
 
-            $usuarios = User::role(['Gerente', 'Mesero'])->get();
-
-            foreach( $usuarios as $usuario ){
-
-                $usuario->notify(new NuevoPedido($pedido));
-
-            }
+            event(new OrdenarPedido( $pedido ) );
 
         } catch (\Throwable $th) {
             

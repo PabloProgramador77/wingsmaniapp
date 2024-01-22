@@ -9,20 +9,17 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Pedido;
 
-class OrdenarPedido implements ShouldBroadcast
+class PedidoEvento
 {
-    public $pedido;
-    
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct(Pedido $pedido)
+    public function __construct()
     {
-        $this->pedido = $pedido;
+        //
     }
 
     /**

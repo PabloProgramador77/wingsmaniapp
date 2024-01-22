@@ -11,6 +11,7 @@ use App\Models\Pedido;
 class NuevoPedido extends Notification
 {
     use Queueable;
+    public $pedido;
 
     /**
      * Create a new notification instance.
