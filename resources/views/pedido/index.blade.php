@@ -22,7 +22,7 @@
                     
                     @if( count( $pedidos ) > 0 )
                         @foreach($pedidos as $pedido)
-                            <tr>
+                            <tr @if( $pedido->estatus == 'Pendiente' ) class="bg-warning" @endif>
                                 <td>
                                     <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
                                         {{ $pedido->cliente->name }}
@@ -32,8 +32,11 @@
                                 <td>{{ $pedido->tipo }}</td>
                                 <td>{{ $pedido->created_at }}</td>
                                 <td>
-                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                    <x-adminlte-button class="cancelar" id="cancelar" label="Borrar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                    @if( $pedido->estatus == 'Pendiente' )
+                                        <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -50,7 +53,7 @@
         </div>
 
     </div>
-
+    
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>

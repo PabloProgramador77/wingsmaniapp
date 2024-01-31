@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Http\Requests\Notifications\Update;
 
 class NotificationController extends Controller
 {
@@ -50,9 +51,28 @@ class NotificationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Notification $notification)
+    public function update(Update $request)
     {
-        //
+        try {
+            
+            $notification = \DB::table('notifications')
+                ->where('id', '=', $request->id)
+                ->update([
+
+                    'read_at' => now()
+
+                ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
     /**

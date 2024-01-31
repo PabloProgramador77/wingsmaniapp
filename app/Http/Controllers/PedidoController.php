@@ -12,8 +12,12 @@ use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
-use App\notifications\NuevoPedido;
+use App\Http\Requests\Pedido\Confirm;
+use App\Notifications\NuevoPedido;
 use App\Events\OrdenarPedido;
+use App\Events\ConfirmarPedidoEvent;
+use App\Notifications\ConfirmarPedidoNotification;
+use Illuminate\Support\Facades\Notification;
 
 class PedidoController extends Controller
 {
@@ -24,9 +28,7 @@ class PedidoController extends Controller
     {
         if( auth()->user()->id && !auth()->User()->hasRole('Cliente') ){
 
-            $pedidos = Pedido::where('estatus', '=', 'Abierto')
-                ->orderBy('created_at', 'asc')
-                ->get();
+            $pedidos = Pedido::where('estatus', '!=', 'Corte')->orderBy('created_at', 'desc')->get();
 
             return view('pedido.index', compact('pedidos'));
 
@@ -65,7 +67,7 @@ class PedidoController extends Controller
             $pedido = Pedido::create([
 
                 'total' => 0,
-                'estatus' => 'Abierto',
+                'estatus' => 'Pendiente',
                 'tipo' => $request->tipo,
                 'idCliente' => auth()->user()->id
 
@@ -278,6 +280,55 @@ class PedidoController extends Controller
             $pedido = Pedido::find( session()->get('idPedido') );
 
             event(new OrdenarPedido( $pedido ) );
+
+        } catch (\Throwable $th) {
+            
+            echo "Error: ".$th->getMessage();
+
+        }
+    }
+
+    /**
+     * Búsqueda Platills & Pedido
+     */
+    public function confirmar(Confirm $request){
+        try {
+            
+            $pedido = Pedido::find( $request->id);
+
+            event( new ConfirmarPedidoEvent( $pedido ) );
+            
+            $this->confirmar_notification( $pedido );
+            
+            $pedido = Pedido::where('id', '=', $request->id)
+                ->update([
+
+                    'estatus' => 'Abierto'
+
+                ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
+    }
+
+    /**
+     * Confirmar notificacion de pedido
+     */
+    public function confirmar_notification($pedido){
+        try {
+            
+            $notification = \DB::table('notifications')
+                ->where('notifiable_id', '=', auth()->user()->id)
+                ->where('data->id', '=', $pedido->id)
+                ->update(['read_at' => now()]);
 
         } catch (\Throwable $th) {
             

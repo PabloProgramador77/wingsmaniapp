@@ -5,10 +5,15 @@
         <div class="container-fluid row col-md-12 border-bottom p-2">
 
             <div class="container-fluid row">
-                <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Mi Pedido</h4>
-                <p class="col-md-3 fs-5 fw-semibold bg-info p-2 m-1 rounded">Tipo de Pedido: {{ $pedido->tipo }}</p>
-                <p class="col-md-4 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: {{ $pedido->created_at }}</p>
-                <p class="col-md-4 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $pedido->total }} MXN</p>
+                <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
+                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: {{ $pedido->tipo }}</p>
+                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: {{ $pedido->created_at }}</p>
+                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $pedido->total }} MXN</p>
+                
+                <div class="col-md-2 m-1">
+                    <x-adminlte-button id="confirmar" class="float-end" label="Confirmar Pedido" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                </div>
+                <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
             </div>
 
             @php
@@ -44,5 +49,9 @@
         </div>
 
     </div>
+
+    <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/confirmar.js') }}" type="text/javascript"></script>
     
 @stop

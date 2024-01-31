@@ -98,3 +98,5 @@ Route::post('/pedido/restar', [App\Http\Controllers\PedidoHasPlatilloController:
 Route::post('/pedido/cancelar', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('cancelar-pedido');
 Route::post('/pedido/ordenar', [App\Http\Controllers\PedidoController::class, 'edit'])->name('ordenar-pedido');
 Route::post('/pedido/entregar', [App\Http\Controllers\PedidoController::class, 'update'])->name('entregar-pedido');
+Route::post('/pedido/confirmar', [App\Http\Controllers\PedidoController::class, 'confirmar'])->name('confirmar-pedido');
+Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');

@@ -7,7 +7,9 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use App\Events\OrdenarPedido;
+use App\Events\ConfirmarPedidoEvent;
 use App\Listeners\PedidoListener;
+use App\Listeners\ConfirmarPedidoListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrdenarPedido::class => [
             PedidoListener::class,
+        ],
+        ConfirmarPedidoEvent::class => [
+            ConfirmarPedidoListener::class,
         ],
     ];
 
