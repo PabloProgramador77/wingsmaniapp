@@ -66,6 +66,7 @@ class VerifyCsrfToken extends Middleware
         '/pedido/confirmar',
         '/pedido/notification/confirmado',
         '/pedido/cobrar',
+        '/pedido/pagar',
 
     ];
 }

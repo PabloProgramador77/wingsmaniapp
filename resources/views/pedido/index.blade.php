@@ -32,13 +32,21 @@
                                 <td>{{ $pedido->tipo }}</td>
                                 <td>{{ $pedido->created_at }}</td>
                                 <td>
-                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                    @if( $pedido->estatus == 'Cobrado' )
+                                        <x-adminlte-button class="pagar" id="pagar" label="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check"></x-adminlte-button>
+                                    @endif
                                     @if( $pedido->estatus == 'Pendiente' )
+                                        <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                         <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
                                     @endif
                                     @if( $pedido->estatus == 'Abierto' )
+                                        <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                                         <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                    @endif
+                                    @if( $pedido->estatus == 'Pagado' )
+                                        <p class="fs-4 fw-semibold text-center bg-warning p-1 m-1"><strong>Pedido Cerrado</strong></p>
                                     @endif
                                 </td>
                             </tr>
@@ -61,5 +69,6 @@
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cobrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/pagar.js') }}" type="text/javascript"></script>
     
 @stop

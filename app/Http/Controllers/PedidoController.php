@@ -14,6 +14,7 @@ use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
 use App\Http\Requests\Pedido\Confirm;
 use App\Http\Requests\Pedido\Cobrar;
+use App\Http\Requests\Pedido\Pagar;
 use App\Notifications\NuevoPedido;
 use App\Events\OrdenarPedido;
 use App\Events\ConfirmarPedidoEvent;
@@ -371,6 +372,37 @@ class PedidoController extends Controller
         }
 
         return response()->json( $datos );
+    }
+
+    /**
+     * Confirmar Pago de Pedido
+     */
+    public function pagar( Pagar $request ){
+        try {
+            
+            $pedido = Pedido::find( $request->id );
+
+            if( $pedido->id ){
+
+                $pedido = Pedido::where('id', '=', $request->id)
+                    ->update([
+
+                        'estatus' => 'Pagado'
+
+                    ]);
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
 }

@@ -101,3 +101,4 @@ Route::post('/pedido/entregar', [App\Http\Controllers\PedidoController::class, '
 Route::post('/pedido/confirmar', [App\Http\Controllers\PedidoController::class, 'confirmar'])->name('confirmar-pedido');
 Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');
 Route::post('/pedido/cobrar', [App\Http\Controllers\PedidoController::class, 'cobrar'])->name('cobrar-pedido');
+Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pagar-pedido');
