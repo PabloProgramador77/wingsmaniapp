@@ -18,6 +18,8 @@ use App\Notifications\NuevoPedido;
 use App\Events\OrdenarPedido;
 use App\Events\ConfirmarPedidoEvent;
 use App\Notifications\ConfirmarPedidoNotification;
+use App\Notifications\CobrarPedidoNotificacion;
+use App\Events\CobrarPedidoEvent;
 use Illuminate\Support\Facades\Notification;
 
 class PedidoController extends Controller
@@ -345,6 +347,8 @@ class PedidoController extends Controller
         try {
             
             $pedido = Pedido::find( $request->id );
+
+            event( new CobrarPedidoEvent( $pedido ) );
 
             if( $pedido->id ){
 

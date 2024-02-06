@@ -10,6 +10,8 @@ use App\Events\OrdenarPedido;
 use App\Events\ConfirmarPedidoEvent;
 use App\Listeners\PedidoListener;
 use App\Listeners\ConfirmarPedidoListener;
+use App\Events\CobrarPedidoEvent;
+use App\Listeners\CobrarPedidoListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ConfirmarPedidoEvent::class => [
             ConfirmarPedidoListener::class,
+        ],
+        CobrarPedidoEvent::class => [
+            CobrarPedidoListener::class,
         ],
     ];
 
