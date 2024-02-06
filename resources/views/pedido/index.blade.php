@@ -37,6 +37,9 @@
                                     @if( $pedido->estatus == 'Pendiente' )
                                         <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
                                     @endif
+                                    @if( $pedido->estatus == 'Abierto' )
+                                        <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -57,5 +60,6 @@
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/cobrar.js') }}" type="text/javascript"></script>
     
 @stop

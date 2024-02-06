@@ -13,6 +13,7 @@ use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
 use App\Http\Requests\Pedido\Confirm;
+use App\Http\Requests\Pedido\Cobrar;
 use App\Notifications\NuevoPedido;
 use App\Events\OrdenarPedido;
 use App\Events\ConfirmarPedidoEvent;
@@ -335,6 +336,37 @@ class PedidoController extends Controller
             echo "Error: ".$th->getMessage();
 
         }
+    }
+
+    /**
+     * Cobrar Pedido
+     */
+    public function cobrar( Cobrar $request ){
+        try {
+            
+            $pedido = Pedido::find( $request->id );
+
+            if( $pedido->id ){
+
+                $pedido = Pedido::where('id', '=', $request->id)
+                    ->update([
+
+                        'estatus' => 'Cobrado'
+
+                    ]);
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
 }
