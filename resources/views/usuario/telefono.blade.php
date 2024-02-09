@@ -14,7 +14,9 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label=" Registrar" id="registrarTelefono" icon="fas fa-save"></x-adminlte-button>
+        @can('agregar-telefono')
+            <x-adminlte-button theme="primary" label=" Registrar" id="registrarTelefono" icon="fas fa-save"></x-adminlte-button>
+        @endcan
         <x-adminlte-button theme="danger" label=" Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-window-close"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

@@ -8,9 +8,11 @@
                 <h4 class="my-auto"><i class="fas fa-tags"></i> Categorías de Menú</h4>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-md-3">
-                <x-adminlte-button label="Agregar categoria" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
-            </div>
+            @can('agregar-categoria')
+                <div class="col-md-3">
+                    <x-adminlte-button label="Agregar categoria" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
+                </div>
+            @endcan
 
             @php
                 $heads = [
@@ -20,29 +22,36 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="categorias" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $categorias ) > 0 )
-                        @foreach($categorias as $categoria)
-                            <tr>
-                                <td>{{ $categoria->nombre }}</td>
-                                
-                                <td>
-                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $categoria->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $categoria->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-categorias')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="categorias" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $categorias ) > 0 )
+                            @foreach($categorias as $categoria)
+                                @can('ver-categoria')
+                                    <tr>
+                                        <td>{{ $categoria->nombre }}</td>
+                                        <td>
+                                            @can('editar-categoria')
+                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $categoria->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                            @endcan
+                                            @can('borrar-categoria')
+                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $categoria->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin categorias de menú registradas</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin categorias de menú registradas</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

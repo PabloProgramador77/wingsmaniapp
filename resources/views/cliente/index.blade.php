@@ -17,28 +17,32 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="salsas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $clientes ) > 0 )
-                        @foreach($clientes as $cliente)
-                            <tr>
-                                <td>{{ $cliente->name }}</td>
-                                <td>{{ $cliente->email }}</td>
-                                <td>
-                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-clientes')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="salsas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $clientes ) > 0 )
+                            @foreach($clientes as $cliente)
+                                @can('ver-cliente')
+                                    <tr>
+                                        <td>{{ $cliente->name }}</td>
+                                        <td>{{ $cliente->email }}</td>
+                                        <td>
+                                            <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin clientes registrados</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin clientes registrados</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

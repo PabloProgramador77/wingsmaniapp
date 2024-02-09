@@ -10,6 +10,7 @@
 
         ];
     @endphp
+    
     <div class="container-fluid col-md-12 my-3">
         <x-adminlte-datatable id="platillos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
             

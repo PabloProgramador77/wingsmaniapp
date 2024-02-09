@@ -46,9 +46,11 @@
         </div>
         <div class="container-fluid row col-md-12 p-2">
             <div class="col-md-6 my-2">
-                <div class="col-md-12">
-                    <x-adminlte-button label="Agregar domicilio" theme="primary" data-toggle="modal" data-target="#modalNuevoDomicilio" icon="fas fa-plus-circle"></x-adminlte-button>
-                </div>
+                @can('agregar-domicilio')
+                    <div class="col-md-12">
+                        <x-adminlte-button label="Agregar domicilio" theme="primary" data-toggle="modal" data-target="#modalNuevoDomicilio" icon="fas fa-plus-circle"></x-adminlte-button>
+                    </div>
+                @endcan
                 @php
                     $heads = [
 
@@ -57,34 +59,44 @@
                     ];
                 @endphp
                 
-                <div class="container-fluid col-md-12 my-3">
-                    <x-adminlte-datatable id="domicilios" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                        @if( count($cliente->domicilios) > 0 )
+                @can('ver-domicilios')
+                    <div class="container-fluid col-md-12 my-3">
+                        <x-adminlte-datatable id="domicilios" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                            @if( count($cliente->domicilios) > 0 )
 
-                            @foreach($cliente->domicilios as $domicilio)
+                                @foreach($cliente->domicilios as $domicilio)
+                                    @can('ver-domicilio')
+                                        <tr>
+                                            <td>{{ $domicilio->direccion }}</td>
+                                            <td>
+                                                @can('editar-domicilio')
+                                                    <x-adminlte-button class="editarDomicilio" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarDomicilio" data-id="{{ $domicilio->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-domicilio')
+                                                    <x-adminlte-button class="eliminarDomicilio" id="eliminar" label="Borrar" theme="danger" data-id="{{ $domicilio->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                @endcan
+                                            </td>
+                                        </tr>
+                                    @endcan
+                                @endforeach
+
+                            @else
                                 <tr>
-                                    <td>{{ $domicilio->direccion }}</td>
-                                    <td>
-                                        <x-adminlte-button class="editarDomicilio" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarDomicilio" data-id="{{ $domicilio->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                        <x-adminlte-button class="eliminarDomicilio" id="eliminar" label="Borrar" theme="danger" data-id="{{ $domicilio->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                    </td>
+                                    <td colspan="4" class="text-info">Sin domicilios registrados</td>
                                 </tr>
-                            @endforeach
-
-                        @else
-                            <tr>
-                                <td colspan="4" class="text-info">Sin domicilios registrados</td>
-                            </tr>
-                        @endif
-                        
-                    </x-adminlte-datatable>
-                </div>
+                            @endif
+                            
+                        </x-adminlte-datatable>
+                    </div>
+                @endcan
             </div>
 
             <div class="col-md-6 my-2">
-                <div class="col-md-12">
-                    <x-adminlte-button label="Agregar telefono" theme="primary" data-toggle="modal" data-target="#modalNuevoTelefono" icon="fas fa-plus-circle"></x-adminlte-button>
-                </div>
+                @can('agregar-telefono')
+                    <div class="col-md-12">
+                        <x-adminlte-button label="Agregar telefono" theme="primary" data-toggle="modal" data-target="#modalNuevoTelefono" icon="fas fa-plus-circle"></x-adminlte-button>
+                    </div>
+                @endcan
                 @php
                     $heads = [
 
@@ -93,28 +105,36 @@
                     ];
                 @endphp
                 
-                <div class="container-fluid col-md-12 my-3">
-                    <x-adminlte-datatable id="telefonos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                        @if( count($cliente->telefonos) > 0 )
-                            @foreach($cliente->telefonos as $telefono)
-                                <tr>
-                                    <td>{{ $telefono->nunmero }}</td>
-                                    <td>
-                                        <x-adminlte-button class="editarTelefono" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarTelefono" data-id="{{ $telefono->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                        <x-adminlte-button class="eliminarTelefono" id="eliminar" label="Borrar" theme="danger" data-id="{{ $telefono->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        @else
-                            <tr>
-                                <td colspan="4" class="text-info">Sin telefonos registrados</td>
-                            </tr>
-                        @endif
+                @can('ver-telefonos')
+                    <div class="container-fluid col-md-12 my-3">
+                        <x-adminlte-datatable id="telefonos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
                         
-                    </x-adminlte-datatable>
-                </div>
+                            @if( count($cliente->telefonos) > 0 )
+                                @foreach($cliente->telefonos as $telefono)
+                                    @can('ver-telefono')
+                                    <tr>
+                                        <td>{{ $telefono->nunmero }}</td>
+                                        <td>
+                                            @can('editar-telefono')
+                                                <x-adminlte-button class="editarTelefono" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarTelefono" data-id="{{ $telefono->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                            @endcan
+                                            @can('borrar-telefono')
+                                                <x-adminlte-button class="eliminarTelefono" id="eliminar" label="Borrar" theme="danger" data-id="{{ $telefono->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                    @endcan
+                                @endforeach
+
+                            @else
+                                <tr>
+                                    <td colspan="4" class="text-info">Sin telefonos registrados</td>
+                                </tr>
+                            @endif
+                            
+                        </x-adminlte-datatable>
+                    </div>
+                @endcan
             </div>
 
         </div>

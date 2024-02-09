@@ -6,7 +6,9 @@
         <div class="container-fluid row">
             
             <div class="col-lg-6">
-                <x-adminlte-small-box title="Pedidos" text="Hay {{ auth()->user()->unreadNotifications()->count() }} pedidos pendientes" theme="warning" url="{{url('/pedidos')}}" url-text="Ver pedidos" icon="fas fa-drumstick-bite"></x-adminlte-small-box>
+                @can('ver-pedidos')
+                    <x-adminlte-small-box title="Pedidos" text="Hay {{ auth()->user()->unreadNotifications()->count() }} pedidos pendientes" theme="warning" url="{{url('/pedidos')}}" url-text="Ver pedidos" icon="fas fa-drumstick-bite"></x-adminlte-small-box>
+                @endcan
             </div>
             
         </div>

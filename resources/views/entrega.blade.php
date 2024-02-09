@@ -17,27 +17,31 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="salsas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $domicilios ) > 0 )
-                        @foreach($domicilios as $domicilio)
-                            <tr>
-                                <td>{{ $domicilio->direccion }}</td>
-                                <td>
-                                    <x-adminlte-button class="entregar" id="entregar" label="Entregar Aquí" theme="info" data-id="{{ $domicilio->id }}" icon="fas fa-hand-pointer"></x-adminlte-button>
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-domicilios')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="salsas" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $domicilios ) > 0 )
+                            @foreach($domicilios as $domicilio)
+                                @can('ver-domicilio')
+                                    <tr>
+                                        <td>{{ $domicilio->direccion }}</td>
+                                        <td>
+                                            <x-adminlte-button class="entregar" id="entregar" label="Entregar Aquí" theme="info" data-id="{{ $domicilio->id }}" icon="fas fa-hand-pointer"></x-adminlte-button>
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin domicilios registrados</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin domicilios registrados</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

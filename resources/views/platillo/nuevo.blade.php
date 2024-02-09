@@ -39,7 +39,9 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Registrar" id="registrar"></x-adminlte-button>
+        @can('agregar-platillo')
+            <x-adminlte-button theme="primary" label="Registrar" id="registrar"></x-adminlte-button>
+        @endcan
         <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

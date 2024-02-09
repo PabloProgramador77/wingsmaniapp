@@ -11,7 +11,9 @@
                 <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $pedido->total }} MXN</p>
                 
                 <div class="col-md-2 m-1">
-                    <x-adminlte-button id="confirmar" class="float-end" label="Confirmar Pedido" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                    @can('confirmar-pedido')
+                        <x-adminlte-button id="confirmar" class="float-end" label="Confirmar Pedido" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                    @endcan
                 </div>
                 <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
             </div>
@@ -24,27 +26,29 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $platillos ) > 0 )
-                        @foreach($platillos as $platillo)
-                            <tr>
-                                <td>{{ $platillo->cantidad }}</td>
-                                <td>{{ $platillo->nombre }}</td>
-                                <td>{{ $platillo->preparacion }}</td>
-                                <td>$ {{ ($platillo->precio * $platillo->cantidad) }} MXN</td>
-                            </tr>
-                        @endforeach
+            @can('ver-pedido')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $platillos ) > 0 )
+                            @foreach($platillos as $platillo)
+                                <tr>
+                                    <td>{{ $platillo->cantidad }}</td>
+                                    <td>{{ $platillo->nombre }}</td>
+                                    <td>{{ $platillo->preparacion }}</td>
+                                    <td>$ {{ ($platillo->precio * $platillo->cantidad) }} MXN</td>
+                                </tr>
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin platillos en el pedido</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin platillos en el pedido</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

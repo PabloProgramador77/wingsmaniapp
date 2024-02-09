@@ -16,39 +16,49 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $pedidos ) > 0 )
-                        @foreach($pedidos as $pedido)
-                            <tr>
-                                <td>{{ $pedido->created_at }}</td>
-                                <td>
-                                    <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
-                                        $ {{ $pedido->total }} M.N.
-                                    </a>
-                                </td>
-                                <td>{{ $pedido->tipo }}</td>
-                                <td>{{ $pedido->estatus }}</td>
-                                <td>
-                                    @if( $pedido->estatus != 'Pagado' && $pedido->estatus != 'Cobrado' )
-                                        <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                    @else
-                                        <a class="btn btn-secondary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-search"></i> Ver</a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-pedidos')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $pedidos ) > 0 )
+                            @foreach($pedidos as $pedido)
+                                @can('ver-pedido')
+                                    <tr>
+                                        <td>{{ $pedido->created_at }}</td>
+                                        <td>
+                                            <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
+                                                $ {{ $pedido->total }} M.N.
+                                            </a>
+                                        </td>
+                                        <td>{{ $pedido->tipo }}</td>
+                                        <td>{{ $pedido->estatus }}</td>
+                                        <td>
+                                            @if( $pedido->estatus != 'Pagado' && $pedido->estatus != 'Cobrado' )
+                                                @can('editar-pedido')
+                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-pedido')
+                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                @endcan
+                                            @else
+                                                @can('ver-pedido')
+                                                    <a class="btn btn-secondary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-search"></i> Ver</a>
+                                                @endcan
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin pedidos pendientes/registrados</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin pedidos pendientes/registrados</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

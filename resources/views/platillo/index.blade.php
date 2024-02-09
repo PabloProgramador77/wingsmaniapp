@@ -9,7 +9,9 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-md-3">
-                <x-adminlte-button id="nuevo" label="Agregar platillo" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
+                @can('agregar-platillo')
+                    <x-adminlte-button id="nuevo" label="Agregar platillo" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
+                @endcan
             </div>
 
             @php
@@ -20,35 +22,47 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="platillos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $platillos ) > 0 )
-                        @foreach($platillos as $platillo)
-                            <tr>
-                                <td>{{ $platillo->nombre }}</td>
-                                <td>$ {{ $platillo->precio }} M.N.</td>
-                                <td>
-                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $platillo->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                    @if( count($salsas) > 0 )
-                                        <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
-                                    @endif
-                                    @if( count($preparaciones) > 0 )
-                                        <x-adminlte-button class="preparaciones" id="preparaciones" label="Preparacion(es)" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-platillos')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="platillos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $platillos ) > 0 )
+                            @foreach($platillos as $platillo)
+                                @can('ver-platillo')
+                                    <tr>
+                                        <td>{{ $platillo->nombre }}</td>
+                                        <td>$ {{ $platillo->precio }} M.N.</td>
+                                        <td>
+                                            @can('editar-platillo')
+                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $platillo->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                            @endcan
+                                            @can('borrar-platillo')
+                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                            @endcan
+                                            @if( count($salsas) > 0 )
+                                                @can('ver-salsas')
+                                                    <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
+                                                @endcan
+                                            @endif
+                                            @if( count($preparaciones) > 0 )
+                                                @can('ver-preparaciones')
+                                                    <x-adminlte-button class="preparaciones" id="preparaciones" label="Preparacion(es)" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
+                                                @endcan
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin platillos registrados</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin platillos registrados</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

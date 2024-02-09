@@ -17,49 +17,69 @@
                 ];
             @endphp
             
-            <div class="container-fluid col-md-12 my-3">
-                <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
-                    
-                    @if( count( $pedidos ) > 0 )
-                        @foreach($pedidos as $pedido)
-                            <tr @if( $pedido->estatus == 'Pendiente' ) class="bg-warning" @endif>
-                                <td>
-                                    <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
-                                        {{ $pedido->cliente->name }}
-                                    </a>
-                                </td>
-                                <td>$ {{ $pedido->total }} M.N.</td>
-                                <td>{{ $pedido->tipo }}</td>
-                                <td>{{ $pedido->created_at }}</td>
-                                <td>
-                                    @if( $pedido->estatus == 'Cobrado' )
-                                        <x-adminlte-button class="pagar" id="pagar" label="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check"></x-adminlte-button>
-                                    @endif
-                                    @if( $pedido->estatus == 'Pendiente' )
-                                        <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                        <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
-                                    @endif
-                                    @if( $pedido->estatus == 'Abierto' )
-                                        <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                        <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                        <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
-                                    @endif
-                                    @if( $pedido->estatus == 'Pagado' )
-                                        <p class="fs-4 fw-semibold text-center bg-warning p-1 m-1"><strong>Pedido Cerrado</strong></p>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+            @can('ver-pedidos')
+                <div class="container-fluid col-md-12 my-3">
+                    <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
+                        
+                        @if( count( $pedidos ) > 0 )
+                            @foreach($pedidos as $pedido)
+                                @can('ver-pedido')
+                                    <tr @if( $pedido->estatus == 'Pendiente' ) class="bg-warning" @endif>
+                                        <td>
+                                            @can('ver-pedido')
+                                                <a href="{{ url('/pedido/ver') }}/{{ $pedido->id }}">
+                                                    {{ $pedido->cliente->name }}
+                                                </a>
+                                            @endcan
+                                        </td>
+                                        <td>$ {{ $pedido->total }} M.N.</td>
+                                        <td>{{ $pedido->tipo }}</td>
+                                        <td>{{ $pedido->created_at }}</td>
+                                        <td>
+                                            @if( $pedido->estatus == 'Cobrado' )
+                                                @can('cobrar-pedido')
+                                                    <x-adminlte-button class="pagar" id="pagar" label="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check"></x-adminlte-button>
+                                                @endcan
+                                            @endif
+                                            @if( $pedido->estatus == 'Pendiente' )
+                                                @can('editar-pedido')
+                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-pedido')
+                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                @endcan
+                                                @can('ver-pedido')
+                                                    <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
+                                                @endcan
+                                            @endif
+                                            @if( $pedido->estatus == 'Abierto' )
+                                                @can('editar-pedido')
+                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="secondary" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-pedido')
+                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                @endcan
+                                                @can('cobrar-pedido')
+                                                    <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                                @endcan
+                                            @endif
+                                            @if( $pedido->estatus == 'Pagado' )
+                                                <p class="fs-4 fw-semibold text-center bg-warning p-1 m-1"><strong>Pedido Cerrado</strong></p>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endcan
+                            @endforeach
 
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-info">Sin pedidos pendientes/registrados</td>
-                        </tr>
-                    @endif
-                    
-                </x-adminlte-datatable>
-            </div>
+                        @else
+                            <tr>
+                                <td colspan="4" class="text-info">Sin pedidos pendientes/registrados</td>
+                            </tr>
+                        @endif
+                        
+                    </x-adminlte-datatable>
+                </div>
+            @endcan
 
         </div>
 

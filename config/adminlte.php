@@ -295,55 +295,64 @@ return [
             'text' => 'Usuarios',
             'url' => 'usuarios',
             'icon' => 'fas fa-user',
-            'active' => ['usuarios']
+            'active' => ['usuarios'],
+            'can' => 'ver-usuarios',
         ],
         [
             'text' => 'Categorías',
             'url' => 'categorias',
             'icon' => 'fas fa-tags',
-            'active' => ['categorias']
+            'active' => ['categorias'],
+            'can' => 'ver-categorias',
         ],
         [
             'text' => 'Platillos',
             'url' => 'platillos',
             'icon' => 'fas fa-drumstick-bite',
-            'active' => ['platillos']
+            'active' => ['platillos'],
+            'can' => 'ver-platillos',
         ],
         [
             'text' => 'Salsas',
             'url' => 'salsas',
             'icon' => 'fas fa-pepper-hot',
-            'active' => ['salsas']
+            'active' => ['salsas'],
+            'can' => 'ver-salsas',
         ],
         [
             'text' => 'Preparaciones',
             'url' => 'preparaciones',
             'icon' => 'fas fa-utensils',
-            'active' => ['preparaciones']
+            'active' => ['preparaciones'],
+            'can' => 'ver-preparaciones',
         ],
         [
             'text' => 'Pedidos',
             'url' => 'pedidos',
             'icon' => 'fas fa-shopping-cart',
-            'active' => ['pedidos']
+            'active' => ['pedidos'],
+            'can' => 'ver-pedidos',
         ],
         [
             'text' => 'Clientes',
             'url' => 'clientes',
             'icon' => 'fas fa-users',
-            'active' => ['clientes']
+            'active' => ['clientes'],
+            'can' => 'ver-clientes',
         ],
         [
             'text' => 'Roles',
             'url' => 'roles',
             'icon' => 'fas fa-user-tag',
-            'active' => ['role']
+            'active' => ['role'],
+            'can' => 'ver-roles',
         ],
         [
             'text' => 'Permisos',
             'url' => 'permisos',
             'icon' => 'fas fa-user-circle',
-            'active' => ['permiso']
+            'active' => ['permiso'],
+            'can' => 'ver-permisos',
         ],
     ],
 

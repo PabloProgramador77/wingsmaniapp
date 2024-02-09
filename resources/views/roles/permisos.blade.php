@@ -15,19 +15,21 @@
             <div class="form-group row">
 
                 @foreach($permisos as $permiso)
-
-                    <div class="col-md-4 col-lg-3">
-                        <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Con permiso" data-off-text="Sin permiso" data-id="{{ $permiso->name }}">
-                        </x-adminlte-input-switch>
-                    </div>
-                    
+                    @can('asignar-permiso')
+                        <div class="col-md-4 col-lg-3">
+                            <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Con permiso" data-off-text="Sin permiso" data-id="{{ $permiso->name }}">
+                            </x-adminlte-input-switch>
+                        </div>
+                    @endcan
                 @endforeach
             </div>
             <input type="hidden" name="idRol" id="idRol">
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" id="permitir"></x-adminlte-button>
+        @can('asignar-permisos')
+            <x-adminlte-button theme="primary" label="Agregar" id="permitir"></x-adminlte-button>
+        @endcan
         <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>
