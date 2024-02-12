@@ -102,3 +102,9 @@ Route::post('/pedido/confirmar', [App\Http\Controllers\PedidoController::class, 
 Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');
 Route::post('/pedido/cobrar', [App\Http\Controllers\PedidoController::class, 'cobrar'])->name('cobrar-pedido');
 Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pagar-pedido');
+
+Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
+Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');
+Route::post('/caja/buscar', [App\Http\Controllers\CajaController::class, 'show'])->name('buscar-caja');
+Route::post('/caja/actualizar', [App\Http\Controllers\CajaController::class, 'update'])->name('actualizar-caja');
+Route::post('/caja/borrar', [App\Http\Controllers\CajaController::class, 'destroy'])->name('borrar-caja');

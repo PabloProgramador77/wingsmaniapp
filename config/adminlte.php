@@ -354,6 +354,13 @@ return [
             'active' => ['permiso'],
             'can' => 'ver-permisos',
         ],
+        [
+            'text' => 'Cajas',
+            'url' => 'cajas',
+            'icon' => 'fas fa-cash-register',
+            'active' => ['cajas'],
+            'can' => 'ver-cajas',
+        ],
     ],
 
     /*
