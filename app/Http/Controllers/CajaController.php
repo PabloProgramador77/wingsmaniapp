@@ -8,6 +8,8 @@ use App\Http\Requests\Caja\Create;
 use App\Http\Requests\Caja\Read;
 use App\Http\Requests\Caja\Update;
 use App\Http\Requests\Caja\Delete;
+use App\Http\Requests\Caja\Abrir;
+use App\Http\Requests\Caja\Cerrar;
 
 class CajaController extends Controller
 {
@@ -32,9 +34,28 @@ class CajaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Abrir $request)
     {
-        //
+        try {
+            
+            $caja = Caja::where('id', '=', $request->id)
+                ->update([
+
+                    'total' => $request->monto,
+                    'estatus' => 'Abierta'
+
+                ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -77,6 +98,7 @@ class CajaController extends Controller
 
                 $datos['exito'] = true;
                 $datos['nombre'] = $caja->nombre;
+                $datos['total'] = $caja->total;
                 $datos['id'] = $caja->id;
 
             }
@@ -94,9 +116,27 @@ class CajaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Caja $caja)
+    public function edit(Cerrar $request)
     {
-        //
+        try {
+            
+            $caja = Caja::where('id', '=', $request->id)
+                ->update([
+
+                    'estatus' => 'Disponible'
+
+                ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

@@ -108,3 +108,5 @@ Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store
 Route::post('/caja/buscar', [App\Http\Controllers\CajaController::class, 'show'])->name('buscar-caja');
 Route::post('/caja/actualizar', [App\Http\Controllers\CajaController::class, 'update'])->name('actualizar-caja');
 Route::post('/caja/borrar', [App\Http\Controllers\CajaController::class, 'destroy'])->name('borrar-caja');
+Route::post('/caja/abrir', [App\Http\Controllers\CajaController::class, 'create'])->name('abrir-caja');
+Route::post('/caja/cerrar', [App\Http\Controllers\CajaController::class, 'edit'])->name('cerrar-caja');

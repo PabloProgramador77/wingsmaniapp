@@ -34,12 +34,24 @@
                                         <td>$ {{ $caja->total }} MXN</td>
                                         <td>{{ $caja->estatus }}</td>
                                         <td>
-                                            @can('editar-caja')
-                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $caja->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                            @endcan
-                                            @can('borrar-caja')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $caja->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
-                                            @endcan
+                                            @if ( $caja->estatus == 'Disponible' )
+                                                @can('editar-caja')
+                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $caja->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-caja')
+                                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $caja->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                @endcan
+                                                @can('abrir-caja')
+                                                    <x-adminlte-button class="abrir" label="Abrir" theme="primary" data-toggle="modal" data-target="#modalAbrir" data-id="{{ $caja->id }}" icon="fas fa-lock-open"></x-adminlte-button>
+                                                @endcan
+                                                
+                                            @else
+
+                                                @can('cerrar-caja')
+                                                    <x-adminlte-button class="cerrar" label="Cerrar" theme="warning" data-toggle="modal" data-target="#modalCerrar" data-id="{{ $caja->id }}" icon="fas fa-lock"></x-adminlte-button>
+                                                @endcan
+                                                
+                                            @endif
                                         </td>
                                     </tr>
                                 @endcan
@@ -62,11 +74,20 @@
     @include('cajas.nuevo')
     @include('cajas.editar')
 
+    @if ($caja->estatus == 'Disponible')
+        @include('cajas.abrir')    
+    @else
+        @include('cajas.cerrar')
+    @endif
+    
+
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/caja/agregar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/caja/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/caja/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/caja/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/caja/abrir.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/caja/cerrar.js') }}" type="text/javascript"></script>
 
 @stop
