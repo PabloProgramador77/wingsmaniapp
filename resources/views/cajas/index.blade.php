@@ -44,7 +44,9 @@
                                                 @can('abrir-caja')
                                                     <x-adminlte-button class="abrir" label="Abrir" theme="primary" data-toggle="modal" data-target="#modalAbrir" data-id="{{ $caja->id }}" icon="fas fa-lock-open"></x-adminlte-button>
                                                 @endcan
-                                                
+                                                @can('ver-movimientos')
+                                                    <a href="{{ url('/movimientos') }}/{{ $caja->id }}" class="btn btn-secondary"><i class="fas fa-money-bill"></i> Movimientos</a>
+                                                @endcan
                                             @else
 
                                                 @can('cerrar-caja')

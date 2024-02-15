@@ -110,3 +110,9 @@ Route::post('/caja/actualizar', [App\Http\Controllers\CajaController::class, 'up
 Route::post('/caja/borrar', [App\Http\Controllers\CajaController::class, 'destroy'])->name('borrar-caja');
 Route::post('/caja/abrir', [App\Http\Controllers\CajaController::class, 'create'])->name('abrir-caja');
 Route::post('/caja/cerrar', [App\Http\Controllers\CajaController::class, 'edit'])->name('cerrar-caja');
+
+Route::get('/movimientos/{idCaja}', [App\Http\Controllers\MovimientoController::class, 'index'])->name('movimientos-caja');
+Route::post('/movimiento/agregar', [App\Http\Controllers\MovimientoController::class, 'store'])->name('agregar-movimiento');
+Route::post('/movimiento/actualizar', [App\Http\Controllers\MovimientoController::class, 'update'])->name('actualizar-movimiento');
+Route::post('/movimiento/buscar', [App\Http\Controllers\MovimientoController::class, 'show'])->name('buscar-movimiento');
+Route::post('/movimiento/borrar', [App\Http\Controllers\MovimientoController::class, 'destroy'])->name('borrar-movimiento');
