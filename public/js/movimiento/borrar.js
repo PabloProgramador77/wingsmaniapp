@@ -3,6 +3,8 @@ jQuery(document).ready(function(){
 
     $(".eliminar").on('click', function(e){
 
+        console.log( $("#idCaja").val() );
+
         e.preventDefault();
 
         Swal.fire({
@@ -26,6 +28,7 @@ jQuery(document).ready(function(){
                     data:{
 
                         'id' : $(this).attr('data-id'),
+                        'idCaja' : $("#idCaja").val()
 
                     },
                     dataType: 'json',

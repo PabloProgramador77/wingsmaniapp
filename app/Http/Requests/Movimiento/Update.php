@@ -35,6 +35,7 @@ class Update extends FormRequest
             'concepto' => 'required|string',
             'tipo' => 'required|string',
             'monto' => 'required|numeric',
+            'idCaja' => 'required|integer',
             
         ];
     }

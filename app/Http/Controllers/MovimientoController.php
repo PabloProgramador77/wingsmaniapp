@@ -36,7 +36,7 @@ class MovimientoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -54,6 +54,8 @@ class MovimientoController extends Controller
                 'idCaja' => $request->idCaja
 
             ]);
+
+            $this->edit( $request, 'store' );
 
             $datos['exito'] = true;
 
@@ -99,9 +101,77 @@ class MovimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Movimiento $movimiento)
+    public function edit(Request $request, $tipoRequest)
     {
-        //
+        try {
+
+            switch ($tipoRequest) {
+                
+                case 'store':
+                    
+                    $caja = Caja::find( $request->idCaja );
+
+                    if( $request->tipo == 'Deposito' ){
+
+                        $caja->total += $request->monto;
+
+                    }else{
+
+                        $caja->total -= $request->monto;
+
+                    }
+
+                    $caja->save();
+
+                    break;
+
+                case 'update':
+
+                    $caja = Caja::find( $request->idCaja );
+                    $movimiento = Movimiento::find( $request->id );
+
+                    if( $request->tipo =='Deposito' ){
+
+                        $caja->total -= $movimiento->monto;
+                        $caja->total += $request->monto;
+
+                    }else{
+
+                        $caja->total += $movimiento->monto;
+                        $caja->total -= $request->monto;
+
+                    }
+
+                    $caja->save();
+
+                    break;
+
+                case 'delete':
+
+                    $caja = Caja::find( $request->idCaja );
+                    $movimiento = Movimiento::find( $request->id );
+
+                    if( $movimiento->tipo == 'Deposito' ){
+
+                        $caja->total -= $movimiento->monto;
+
+                    }else{
+
+                        $caja->total += $movimiento->monto;
+
+                    }
+
+                    $caja->save();
+
+                    break;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo "Error: ".$th->getMessage();
+
+        }
     }
 
     /**
@@ -110,6 +180,8 @@ class MovimientoController extends Controller
     public function update(Update $request)
     {
         try {
+
+            $this->edit( $request, 'update' );
             
             $movimiento = Movimiento::where('id', '=', $request->id)
                 ->update([
@@ -142,6 +214,8 @@ class MovimientoController extends Controller
             $movimiento = Movimiento::find( $request->id );
 
             if( $movimiento->id ){
+
+                $this->edit( $request, 'delete' );
 
                 $movimiento->delete();
 

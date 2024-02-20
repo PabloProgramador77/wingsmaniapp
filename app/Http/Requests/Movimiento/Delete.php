@@ -32,6 +32,7 @@ class Delete extends FormRequest
         return [
             
             'id' => 'required|integer',
+            'idCaja' => 'required|integer',
             
         ];
     }
