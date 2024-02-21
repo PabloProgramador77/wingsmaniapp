@@ -77,6 +77,9 @@ class VerifyCsrfToken extends Middleware
         '/movimiento/actualizar',
         '/movimiento/buscar',
         '/movimiento/borrar',
+        '/corte/calcular',
+        '/corte/agregar',
+        '/corte/borrar',
 
     ];
 }

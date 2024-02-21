@@ -28,11 +28,7 @@ class Pedido extends Model
 
     public function platillos(){
 
-        if( session()->get('idPedido') ){
-
-            return $this->belongsToMany(Platillo::class, 'pedido_has_platillos', 'idPedido', 'idPlatillo');
-
-        }
+        return $this->belongsToMany(Platillo::class, 'pedido_has_platillos', 'idPedido', 'idPlatillo');
         
     }
 }

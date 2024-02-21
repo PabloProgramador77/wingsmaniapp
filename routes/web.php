@@ -116,3 +116,9 @@ Route::post('/movimiento/agregar', [App\Http\Controllers\MovimientoController::c
 Route::post('/movimiento/actualizar', [App\Http\Controllers\MovimientoController::class, 'update'])->name('actualizar-movimiento');
 Route::post('/movimiento/buscar', [App\Http\Controllers\MovimientoController::class, 'show'])->name('buscar-movimiento');
 Route::post('/movimiento/borrar', [App\Http\Controllers\MovimientoController::class, 'destroy'])->name('borrar-movimiento');
+
+Route::get('/cortes/{idCaja}', [App\Http\Controllers\CorteController::class, 'index'])->name('cortes');
+Route::post('/corte/calcular', [App\Http\Controllers\CorteController::class, 'create'])->name('calcular-corte');
+Route::post('/corte/agregar', [App\Http\Controllers\CorteController::class, 'store'])->name('agregar-corte');
+Route::post('/corte/borrar', [App\Http\Controllers\CorteController::class, 'destroy'])->name('borrar-corte');
+Route::get('/corte/{idCorte}', [App\Http\Controllers\CorteController::class, 'show'])->name('buscar-corte');

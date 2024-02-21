@@ -35,6 +35,7 @@
                                         <td>{{ $caja->estatus }}</td>
                                         <td>
                                             @if ( $caja->estatus == 'Disponible' )
+
                                                 @can('editar-caja')
                                                     <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $caja->id }}" icon="fas fa-pen"></x-adminlte-button>
                                                 @endcan
@@ -47,6 +48,7 @@
                                                 @can('ver-movimientos')
                                                     <a href="{{ url('/movimientos') }}/{{ $caja->id }}" class="btn btn-secondary"><i class="fas fa-money-bill"></i> Movimientos</a>
                                                 @endcan
+
                                             @else
 
                                                 @can('cerrar-caja')
@@ -54,6 +56,9 @@
                                                 @endcan
                                                 
                                             @endif
+                                            @can('ver-cortes')
+                                                <a href="{{ url('/cortes') }}/{{ $caja->id }}" class="btn btn-success"><i class="fas fa-cash-register"></i> Cortes</a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endcan
