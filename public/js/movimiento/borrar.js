@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas borrar el movimiento?',
+            title: '¿En verdad deseas borrar el movimiento '+ $(this).attr('data-value') +'?',
             html: 'Los datos no podrán ser recuperados de ninguna manera.',
             allowOutsideClick: false,
             confirmButtonText: 'Si, borrala',

@@ -42,7 +42,7 @@
                                         <td>{{ $corte->created_at }}</td>
                                         <td>
                                             @can('borrar-corte')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $corte->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $corte->id }}" icon="fas fa-trash-alt" data-value="{{ $corte->total }}"></x-adminlte-button>
                                             @endcan
                                             @can('ver-corte')
                                                 <a href="{{ url('/corte') }}/{{ $corte->id }}" class="btn btn-info"><i class="fas fa-list"></i> Detalles</a>

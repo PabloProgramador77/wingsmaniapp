@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas borrar el permiso de usuario?',
+            title: '¿En verdad deseas borrar el permiso '+ $(this).attr('data-value') +'?',
             html: 'Los datos no podrán ser recuperados de ninguna manera.',
             allowOutsideClick: false,
             confirmButtonText: 'Si, borralo',

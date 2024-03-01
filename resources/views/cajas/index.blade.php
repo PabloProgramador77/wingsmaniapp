@@ -43,7 +43,7 @@
                                                     <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $caja->id }}" icon="fas fa-pen"></x-adminlte-button>
                                                 @endcan
                                                 @can('borrar-caja')
-                                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $caja->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $caja->id }}" icon="fas fa-trash-alt" data-value="{{ $caja->nombre }}"></x-adminlte-button>
                                                 @endcan
                                                 @can('abrir-caja')
                                                     <x-adminlte-button class="abrir" label="Abrir" theme="primary" data-toggle="modal" data-target="#modalAbrir" data-id="{{ $caja->id }}" icon="fas fa-lock-open"></x-adminlte-button>

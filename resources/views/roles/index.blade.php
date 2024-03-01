@@ -40,7 +40,7 @@
                                                 <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $role->id }}" icon="fas fa-pen"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-rol')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $role->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $role->id }}" icon="fas fa-trash-alt" data-value="{{ $role->name }}"></x-adminlte-button>
                                             @endcan
                                             @if( count($permisos) >0 )
                                                 @can('asignar-permisos')

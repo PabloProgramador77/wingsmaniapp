@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas cancelar el pedido?',
+            title: '¿En verdad deseas cancelar el pedido de '+ $(this).attr('data-value') +'?',
             html: 'Los datos no podrán ser recuperados de ninguna forma.',
             allowOutsideClick: false,
             confirmButtonText: 'Si, cancelalo',

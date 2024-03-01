@@ -33,7 +33,7 @@
                                         <td>{{ $cliente->name }}</td>
                                         <td>{{ $cliente->email }}</td>
                                         <td>
-                                            <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                            <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt" data-value="{{ $cliente->name }}"></x-adminlte-button>
                                         </td>
                                     </tr>
                                 @endcan

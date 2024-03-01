@@ -45,7 +45,7 @@
                                                 <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $movimiento->id }}" icon="fas fa-pen"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-movimiento')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt" data-value="{{ $movimiento->concepto }}"></x-adminlte-button>
                                             @endcan
                                         </td>
                                     </tr>

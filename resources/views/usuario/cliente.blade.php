@@ -73,7 +73,7 @@
                                                     <x-adminlte-button class="editarDomicilio" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarDomicilio" data-id="{{ $domicilio->id }}" icon="fas fa-pen"></x-adminlte-button>
                                                 @endcan
                                                 @can('borrar-domicilio')
-                                                    <x-adminlte-button class="eliminarDomicilio" id="eliminar" label="Borrar" theme="danger" data-id="{{ $domicilio->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                    <x-adminlte-button class="eliminarDomicilio" id="eliminar" label="Borrar" theme="danger" data-id="{{ $domicilio->id }}" icon="fas fa-trash-alt" data-value="{{ $domicilio->direccion }}"></x-adminlte-button>
                                                 @endcan
                                             </td>
                                         </tr>
@@ -119,7 +119,7 @@
                                                 <x-adminlte-button class="editarTelefono" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditarTelefono" data-id="{{ $telefono->id }}" icon="fas fa-pen"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-telefono')
-                                                <x-adminlte-button class="eliminarTelefono" id="eliminar" label="Borrar" theme="danger" data-id="{{ $telefono->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminarTelefono" id="eliminar" label="Borrar" theme="danger" data-id="{{ $telefono->id }}" icon="fas fa-trash-alt" data-value="{{ $telefono->numero }}"></x-adminlte-button>
                                             @endcan
                                         </td>
                                     </tr>
