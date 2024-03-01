@@ -8,11 +8,14 @@
                 <h4 class="my-auto"><i class="fas fa-tags"></i> Categorías de Menú</h4>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            @can('agregar-categoria')
-                <div class="col-md-3">
+            <div class="col-md-3">
+                @can('agregar-categoria')
                     <x-adminlte-button label="Agregar categoria" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
-                </div>
-            @endcan
+                @endcan
+                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </div>
 
             @php
                 $heads = [

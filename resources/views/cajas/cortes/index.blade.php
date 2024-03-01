@@ -9,11 +9,17 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
                 <input type="hidden" name="idCaja" id="idCaja" value="{{ $caja->id }}">
             </div>
-            @can('agregar-corte')
-                <div class="col-md-3">
+            <div class="col-md-3">
+                @can('agregar-corte')
                     <x-adminlte-button label="Nuevo corte" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle" id="nuevo"></x-adminlte-button>
-                </div>
-            @endcan
+                @endcan
+                <a href="{{ url('/cajas') }}" class="btn btn-warning mx-1 rounded">
+                    <i class="fas fa-cash-register"></i> Cajas
+                </a>
+                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
 
             @php
                 $heads = [

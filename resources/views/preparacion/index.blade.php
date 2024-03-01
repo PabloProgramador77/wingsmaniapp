@@ -12,6 +12,9 @@
                 @can('agregar-preparacion')
                     <x-adminlte-button label="Agregar preparación" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
                 @endcan
+                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
             </div>
 
             @php

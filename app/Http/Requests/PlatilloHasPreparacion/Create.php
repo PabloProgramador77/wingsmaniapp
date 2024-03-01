@@ -32,7 +32,7 @@ class Create extends FormRequest
         return [
             
             'id' => 'required|integer',
-            'preparaciones' => 'required|array',
+            'preparaciones' => 'array',
             'preparaciones.*' => 'integer',
             
         ];

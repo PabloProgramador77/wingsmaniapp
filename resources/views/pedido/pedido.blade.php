@@ -6,14 +6,17 @@
 
             <div class="container-fluid row">
                 <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
-                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: {{ $pedido->tipo }}</p>
+                <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: {{ $pedido->tipo }}</p>
                 <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: {{ $pedido->created_at }}</p>
                 <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $pedido->total }} MXN</p>
                 
-                <div class="col-md-2 m-1">
+                <div class="col-md-3 m-1">
                     @can('confirmar-pedido')
-                        <x-adminlte-button id="confirmar" class="float-end" label="Confirmar Pedido" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                        <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
                     @endcan
+                    <a href="{{ url('/pedidos') }}" class="btn btn-success mx-1 rounded">
+                        <i class="fas fa-shopping-cart"></i> Pedidos
+                    </a>
                 </div>
                 <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
             </div>
