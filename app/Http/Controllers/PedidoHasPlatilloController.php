@@ -108,7 +108,7 @@ class PedidoHasPlatilloController extends Controller
 
             $preparacionPlatillo = '';
             
-            if( count($request->salsas) > 0 ){
+            if( is_array( $request->salsas ) && count( $request->salsas ) > 0 ){
 
                 foreach($request->salsas as $salsa){
 
@@ -118,13 +118,14 @@ class PedidoHasPlatilloController extends Controller
 
             }
 
-            if( count($request->preparaciones) > 0 ){
+            if( is_array( $request->preparaciones ) && count( $request->preparaciones ) > 0 ){
 
                 foreach($request->preparaciones as $preparacion){
 
                     $preparacionPlatillo .= $preparacion.', ';
 
                 }
+
             }
 
             $pedidoHasPlatillo = PedidoHasPlatillo::where('id', '=', $request->id)

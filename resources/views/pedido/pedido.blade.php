@@ -12,7 +12,9 @@
                 
                 <div class="col-md-3 m-1">
                     @can('confirmar-pedido')
-                        <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                        @if( $pedido->estatus == 'Pendiente' )
+                            <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                        @endif
                     @endcan
                     <a href="{{ url('/pedidos') }}" class="btn btn-success mx-1 rounded">
                         <i class="fas fa-shopping-cart"></i> Pedidos

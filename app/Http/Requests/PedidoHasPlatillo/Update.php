@@ -34,8 +34,8 @@ class Update extends FormRequest
             'id' => 'required|integer',
             'salsas' => 'array',
             'salsas.*' => 'string|min:2',
-            'preparaciones' => 'array',
-            'preparaciones.*' => 'string|min:2'
+            'preparaciones' => 'array|nullable',
+            'preparaciones.*' => 'string|nullable'
         ];
     }
 }

@@ -9,6 +9,7 @@
                 </div>
                 
                 @if( session()->get('idPedido') )
+                    
                     <div class="col-lg-6">
                         @can('ver-pedido')
                             <x-adminlte-small-box title="Mi Pedido" icon="fas fa-shopping-cart" theme="primary" url="#" url-text="Ver pedido" data-toggle="modal" data-target="#modalPedido"></x-adminlte-small-box>
