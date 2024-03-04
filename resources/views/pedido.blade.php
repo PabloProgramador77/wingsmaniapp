@@ -1,12 +1,12 @@
 <x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
-        <p class="text-secondary col-lg-5"><b>Información de Pedido</b></p>
+        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-2 fw-semibold">{{ strtoupper( $pedido->tipo ) }}</p>
         <p class="rounded bg-success text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>
     </div>
     @php
         $heads = [
 
-            'Cantidad', 'Platillo', 'Salsa/Preparación', 'Acciones'
+            'Cantidad', 'Platillo', 'Ingrediente(s) & Salsa(s)', 'Acciones'
 
         ];
     @endphp
@@ -30,11 +30,16 @@
                                 
                             @else
                                 
-                                Sin salsas/preparaciones
+                                -
                             
                             @endif
                         </td>
                         <td>
+                            @if( count( $platillo->salsas ) > 0 )
+
+                                <a href="{{ url('platillo/preparar') }}/{{ $platillo->id }}" class="btn btn-info" ><i class="fas fa-pepper-hot"></i> Preparar</a>
+                            
+                            @endif
                             <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                         </td>
                     </tr>
@@ -50,7 +55,7 @@
         <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Ordenar" id="ordenar" icon="fas fa-shopping-cart"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

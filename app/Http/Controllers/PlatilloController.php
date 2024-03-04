@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Salsa;
 use App\Models\Preparacion;
 use Illuminate\Http\Request;
+use App\Models\PedidoHasPlatillo;
 use App\Http\Requests\Platillo\Create;
 use App\Http\Requests\Platillo\Read;
 use App\Http\Requests\Platillo\Update;
@@ -38,9 +39,26 @@ class PlatilloController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+        try {
+
+            $platillo = Platillo::find( $id );
+            
+            $salsas = $platillo->salsas;
+            $preparaciones = $platillo->preparaciones;
+            $pedidoHasPlatillo = PedidoHasPlatillo::where('idPlatillo', '=', $id)
+                                ->where('idPedido', '=', session()->get('idPedido'))
+                                ->first();
+
+            return view('preparar', compact('salsas', 'preparaciones', 'platillo', 'pedidoHasPlatillo'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            //return redirect('/');
+            
+        }
     }
 
     /**

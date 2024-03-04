@@ -22,14 +22,16 @@
                 @if( $salsas->count() > 0 )
 
                     <p class="col-lg-12 text-secondary border shadow p-2 bg-warning m-2"><b>Elige la salsa de tu preferencia</b></p>
+
                     @foreach($salsas as $salsa)
 
-                        <div class="col-md-4 col-lg-3">
-                            <x-adminlte-input-switch id="salsa{{ $salsa->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}">
-                            </x-adminlte-input-switch>
-                        </div>
+                            <div class="col-md-4 col-lg-3">
+                                <x-adminlte-input-switch id="salsa{{ $salsa->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}">
+                                </x-adminlte-input-switch>
+                            </div>
                         
                     @endforeach
+
                 @endif
 
                 @if( $preparaciones->count() > 0 )

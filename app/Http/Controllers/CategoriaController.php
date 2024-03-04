@@ -45,7 +45,7 @@ class CategoriaController extends Controller
 
             $categoria = Categoria::find($id);
             $pedido = Pedido::find(session()->get('idPedido'));
-            $platillosPedido = Platillo::select('pedido_has_platillos.id', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion', 'platillos.nombre')
+            $platillosPedido = Platillo::select('pedido_has_platillos.id', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion', 'platillos.nombre', 'platillos.id')
                 ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
                 ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
                 ->get();
