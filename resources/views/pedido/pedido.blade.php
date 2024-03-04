@@ -11,19 +11,25 @@
                 <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }} MXN</b></p>
                 
                 <div class="col-md-3 m-1">
+                    
                     @can('confirmar-pedido')
                         @if( $pedido->estatus == 'Pendiente' )
                             <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
                         @endif
                     @endcan
-                    @if( auth()->user()->role(['Cliente']) )
+
+                    @if( auth()->user()->hasRole(['Cliente']) )
+
                         <a href="{{ url('/pedidos/cliente') }}" class="btn btn-success mx-1 rounded">
                             <i class="fas fa-shopping-cart"></i> Mis Pedidos
                         </a>
+
                     @else
-                        <a href="{{ url('/pedidos') }}" class="btn btn-success mx-1 rounded">
+                        
+                        <a href="{{ url('/pedidos') }}" class="btn btn-info mx-1 rounded">
                             <i class="fas fa-shopping-cart"></i> Pedidos
                         </a>
+
                     @endif
                     
                 </div>
