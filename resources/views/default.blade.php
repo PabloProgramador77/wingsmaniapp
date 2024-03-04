@@ -7,7 +7,19 @@
         <div class="container-fluid row">
             
             <div class="col-lg-12 my-2">
-                <x-adminlte-button label="Ordenar Ahora" theme="warning" icon="fas fa-utensils" id="pedido"></x-adminlte-button>
+                @if( auth()->user()->hasRole(['Cliente']) && auth()->user()->telefonos->count() > 0 && auth()->user()->domicilios->count() > 0 )
+                    
+                    <x-adminlte-button label="Ordenar Ahora" theme="warning" icon="fas fa-utensils" id="pedido"></x-adminlte-button>
+                
+                @else
+
+                    <div class="col-lg-12 my-2 bg-danger p-2 text-center">
+                        <p class="fs-3 fw-semibold text-center"><i class="fa fa-info"></i> Es necesario registrar un telefono y un domicilio para ordenar. <i class="fas fa-info"></i></p>
+                        <a href="{{ url('profile/username') }}" class="text-center btn btn-danger border"><i class="fas fa-mouse-pointer"></i> <b>Registrar Aquí</b></a>
+                    </div>
+                
+                @endif
+                
             </div>
             <div class="col-lg-6">
                 @can('ver-pedido')

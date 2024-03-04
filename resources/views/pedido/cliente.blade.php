@@ -38,11 +38,9 @@
                                                     <a class="btn btn-secondary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-search"></i> Ver</a>
                                                 @endcan
                                             @else
-                                                @can('editar-pedido')
-                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $pedido->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                                @endcan
+                                                
                                                 @can('borrar-pedido')
-                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->total }}"></x-adminlte-button>
                                                 @endcan
                                             @endif
                                         </td>

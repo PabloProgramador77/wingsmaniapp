@@ -7,6 +7,11 @@
             <div class="col-md-7">
                 <h4 class="my-auto"><i class="fas fa-smile"></i> Perfil de Cliente</h4>
             </div>
+            <div class="col-md-3">
+                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+            </div>
 
         </div>
 
