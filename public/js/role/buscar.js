@@ -26,6 +26,13 @@ jQuery(document).ready(function(){
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#id").val( respuesta.id );
 
+                //PENDIENTE DE VERIFICACIÓN & CORRECIÓN
+                /*$.each(respuesta.permisos, function(i, permiso){
+
+                    $("input[type=checkbox][data-id='"+permiso.name+"']").prop('checked', true);
+
+                });*/
+
                 $("#actualizar").attr('disabled', false);
 
             }else{

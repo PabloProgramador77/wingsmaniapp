@@ -49,6 +49,7 @@ class PedidoConfirmadoNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        
         return [
             
             'id' => $this->pedido->id,

@@ -49,6 +49,16 @@ class CobrarPedidoNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        if( $this->pedido->tipo == 'delivery' ){
+
+            $mensaje = 'Tu pedido esta listo para ser enviado a tu domicilio.';
+
+        }else{
+
+            $mensaje = 'Tu pedido esta listo para que lo recoges en el restaurante.';
+
+        }
+
         return [
             
             'id' => $this->pedido->id,
@@ -57,7 +67,7 @@ class CobrarPedidoNotification extends Notification
             'idCliente' => $this->pedido->idCliente,
             'cliente' => $this->pedido->cliente->name,
             'fecha' => $this->pedido->update_at,
-            'mensaje' => 'Tu pedido esta listo para ser enviado/recogido.',
+            'mensaje' => $mensaje,
 
         ];
     }

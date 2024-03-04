@@ -106,6 +106,7 @@ class RoleController extends Controller
                 $datos['exito'] = true;
                 $datos['nombre'] = $role->name;
                 $datos['id'] = $role->id;
+                $datos['permisos'] = $role->permissions->toArray();
 
             }
 
