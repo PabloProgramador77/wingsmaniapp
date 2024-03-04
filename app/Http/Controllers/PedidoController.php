@@ -104,9 +104,7 @@ class PedidoController extends Controller
             
             if( auth()->user()->id && auth()->user()->hasRole('Cliente') ){
 
-                $pedidos = Pedido::where('idCliente', '=', auth()->user()->id)
-                    ->orderBy('created_at', 'desc')
-                    ->get();
+                $pedidos = Pedido::where('idCliente', '=', auth()->user()->id)->get();
 
                 return view('pedido.cliente', compact('pedidos'));
 

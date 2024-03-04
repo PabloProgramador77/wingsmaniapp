@@ -6,9 +6,9 @@
 
             <div class="container-fluid row">
                 <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
-                <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: {{ $pedido->tipo }}</p>
-                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: {{ $pedido->created_at }}</p>
-                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $pedido->total }} MXN</p>
+                <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: <b>{{ strtoupper( $pedido->tipo ) }}</b></p>
+                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: <b>{{ $pedido->created_at }}</b></p>
+                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }} MXN</b></p>
                 
                 <div class="col-md-3 m-1">
                     @can('confirmar-pedido')
@@ -16,9 +16,16 @@
                             <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
                         @endif
                     @endcan
-                    <a href="{{ url('/pedidos') }}" class="btn btn-success mx-1 rounded">
-                        <i class="fas fa-shopping-cart"></i> Pedidos
-                    </a>
+                    @if( auth()->user()->role(['Cliente']) )
+                        <a href="{{ url('/pedidos/cliente') }}" class="btn btn-success mx-1 rounded">
+                            <i class="fas fa-shopping-cart"></i> Mis Pedidos
+                        </a>
+                    @else
+                        <a href="{{ url('/pedidos') }}" class="btn btn-success mx-1 rounded">
+                            <i class="fas fa-shopping-cart"></i> Pedidos
+                        </a>
+                    @endif
+                    
                 </div>
                 <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
             </div>

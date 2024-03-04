@@ -10,7 +10,7 @@
                 <x-adminlte-button label="Ordenar Ahora" theme="warning" icon="fas fa-utensils" id="pedido"></x-adminlte-button>
             </div>
             <div class="col-lg-6">
-                @can('ver-pedidos')
+                @can('ver-pedido')
                     <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="{{ url('/pedidos/cliente') }}" url-text="Ver pedidos"></x-adminlte-small-box>
                 @endcan
             </div>
