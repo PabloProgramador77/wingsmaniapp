@@ -41,12 +41,17 @@
                                         <td>$ {{ $movimiento->monto }} MXN</td>
                                         <td>{{ $movimiento->created_at }}</td>
                                         <td>
-                                            @can('editar-movimiento')
-                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $movimiento->id }}" icon="fas fa-pen"></x-adminlte-button>
-                                            @endcan
-                                            @can('borrar-movimiento')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt" data-value="{{ $movimiento->concepto }}"></x-adminlte-button>
-                                            @endcan
+                                            @if( $movimiento->tipo !== 'Corte' )
+                                                @can('editar-movimiento')
+                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $movimiento->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                @endcan
+                                                @can('borrar-movimiento')
+                                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt" data-value="{{ $movimiento->concepto }}"></x-adminlte-button>
+                                                @endcan
+                                            @else
+                                                Los cortes de caja no se permiten editarlos o borrarlos.
+                                            @endif
+                                            
                                         </td>
                                     </tr>
                                 @endcan

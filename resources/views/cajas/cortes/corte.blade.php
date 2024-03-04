@@ -5,12 +5,13 @@
         <div class="container-fluid row col-md-12 border-bottom p-2">
 
             <div class="container-fluid row">
-                <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Corte de Caja - {{ $corte->caja->nombre }}</h4>
+                <h4 class="col-md-12 my-auto"><i class="fas fa-cash-register"></i> Corte de Caja - {{ $corte->caja->nombre }}</h4>
                 <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Corte: {{ $corte->created_at }}</p>
                 <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: $ {{ $corte->total }} MXN</p>
                 
-                <div class="col-md-2 m-1">
+                <div class="col-md-3 m-1">
                     <x-adminlte-button id="imprimir" class="float-end" label="Imprimir" icon="fas fa-print" theme="primary"></x-adminlte-button>
+                    <a href="{{ url('/cortes') }}/{{ $corte->idCaja }}" class="btn btn-secondary mx-2"><i class="fas fa-cash-register"></i> Cortes</a>
                 </div>
                 <input type="hidden" name="idCorte" id="idCorte" value="{{ $corte->id }}">
             </div>
@@ -34,9 +35,13 @@
                                     <td>$ {{ $pedido->total }} MXN</td>
                                     <td>{{ $pedido->tipo }}</td>
                                     <td>
-                                        @foreach( $pedido->platillos as $platillo)
-                                            {{ $platillo->nombre }}
-                                        @endforeach
+                                        <ul class="list-unstyled">
+
+                                            @foreach( $pedido->platillos as $platillo)
+                                                <li class="text-center">{{ $platillo->nombre }}</li>
+                                            @endforeach
+
+                                        </ul>
                                     </td>
                                 </tr>
                             @endforeach

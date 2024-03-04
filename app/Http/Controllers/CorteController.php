@@ -6,6 +6,7 @@ use App\Models\Corte;
 use App\Models\Caja;
 use App\Models\Pedido;
 use App\Models\CorteHasPedidos;
+use App\Models\Movimiento;
 use Illuminate\Http\Request;
 use App\Http\Requests\Corte\Calcular;
 use App\Http\Requests\Corte\Create;
@@ -114,6 +115,23 @@ class CorteController extends Controller
                     $pedido->estatus = 'Corte';
                     $pedido->save();
 
+                }
+
+                $movimiento = Movimiento::create([
+
+                    'concepto' => $corte->nombre,
+                    'tipo' => 'Corte',
+                    'monto' => $corte->total,
+                    'idCaja' => $corte->idCaja
+
+                ]);
+
+                if( $movimiento->id ){
+
+                    $caja = Caja::find( $movimiento->idCaja );
+                    $caja->total += $movimiento->monto;
+                    $caja->save();
+                    
                 }
 
                 $datos['exito'] = true;

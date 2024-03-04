@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
             if( respuesta.exito ){
 
                 $("#total").val( respuesta.total );
-                $("#nombre").val( 'Corte' + respuesta.total );
+                $("#nombre").val( 'Corte de ' + respuesta.total );
 
             }else{
 
