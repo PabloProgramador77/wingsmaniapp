@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPreparacion" title="Salsa(s) de Platillo" size="xl" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalPreparacion" title="Salsa(s) de Platillo" size="xl" theme="primary" icon="fas fa-pepper-hot" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Elige la(s) preparacion(es) que deseas agregar al platillo.</p>
         <form novalidate>

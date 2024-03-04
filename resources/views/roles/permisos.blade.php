@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPermisos" title="Permisos de Rol de Usuario" size="xl" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalPermisos" title="Permisos de Rol de Usuario" size="xl" theme="primary" icon="fas fa-users-cog" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Elige los permisos que deseas agregar al rol.</p>
         <form novalidate>

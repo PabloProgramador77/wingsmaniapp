@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalEditar" title="Editar Permiso de Usuario" theme="info" static-backdrop scrollable>
+<x-adminlte-modal id="modalEditar" title="Editar Permiso de Usuario" theme="info" icon="fas fa-edit" static-backdrop scrollable>
 
     <div class="container-fluid border-bottom">
         <p class="text-secondary"><b>Editar los datos como creas necesario</b>. Los campos con * son obligatorios.</p>

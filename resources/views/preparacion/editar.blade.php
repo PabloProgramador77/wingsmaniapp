@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalEditar" title="Editar Preparación" theme="info" static-backdrop scrollable>
+<x-adminlte-modal id="modalEditar" title="Editar Preparación" theme="info" icon="fas fa-edit" static-backdrop scrollable>
 
     <div class="container-fluid border-bottom">
         <p class="text-secondary"><b>Editar los datos de la preparación como creas necesario</b>. Los campos con etiqueta * son obligatorios.</p>

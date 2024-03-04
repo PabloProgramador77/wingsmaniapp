@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nuevo Permiso de Usuario" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevo" title="Nuevo Permiso de Usuario" theme="primary" icon="fas fa-users-cog" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>

@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalSalsa" title="Salsa(s) de Platillo" size="xl" theme="secondary" static-backdrop scrollable>
+<x-adminlte-modal id="modalSalsa" title="Salsa(s) de Platillo" size="xl" theme="secondary" icon="fas fa-wine-bottle" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Elige la(s) salsa(s) que deseas agregar al platillo.</p>
         <form novalidate>

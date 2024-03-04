@@ -19,7 +19,7 @@
                 @endif
             </div>
             
-            <p class="text-center rounded shadow bg-info p-2"><b>Menú de {{ $categoria->nombre }}</b></p>
+            <p class="text-center rounded shadow bg-info p-2"><i class="fas fa-list"></i><b>Menú de {{ $categoria->nombre }}</b></p>
             <div class="container-fluid row">
                 
                 @foreach($platillos as $platillo)

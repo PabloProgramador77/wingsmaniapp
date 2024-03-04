@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nuevo Corte de Caja" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevo" title="Nuevo Corte de Caja" theme="primary" icon="fas fa-cash-register" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos se llena automáticamente.</p>
         <form novalidate>

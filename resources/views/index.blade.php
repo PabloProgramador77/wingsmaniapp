@@ -2,7 +2,7 @@
 @section('contenido')
     <div class="container-fluid col-md-12 bg-white p-2 rounded">
         
-        <p class="fs-2 fw-bold text-center bg-secondary p-2 my-4 rounded shadow">Resumen de Restaurante</p>
+        <p class="fs-2 fw-bold text-center bg-secondary p-2 my-4 rounded shadow"><i class="fas fa-store"></i>Resumen de Restaurante</p>
         <div class="container-fluid row">
             
             <div class="col-lg-6">

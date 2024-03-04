@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevo" title="Nueva Preparación" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevo" title="Nueva Preparación" theme="primary" icon="fas fa-pepper-hot" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>

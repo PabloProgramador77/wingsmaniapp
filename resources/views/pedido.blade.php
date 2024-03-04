@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
         <p class="text-secondary col-lg-5"><b>Información de Pedido</b></p>
         <p class="rounded bg-success text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>

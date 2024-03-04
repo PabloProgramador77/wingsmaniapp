@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalCerrar" title="Cerrado de Caja" theme="warning" static-backdrop scrollable>
+<x-adminlte-modal id="modalCerrar" title="Cerrado de Caja" theme="warning" icon="fas fa-lock" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">A continuación la información de la caja a cerrar</p>
         <form novalidate>

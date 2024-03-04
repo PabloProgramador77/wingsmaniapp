@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalNuevoTelefono" title="Nuevo Telefono" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalNuevoTelefono" title="Nuevo Telefono" theme="primary" icon="fas fa-mobile-alt" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>

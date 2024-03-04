@@ -3,7 +3,7 @@
 
     <div class="container-fluid col-md-12 bg-white p-2 rounded">
         
-        <p class="fs-2 fw-bold text-center bg-info p-2 my-4 rounded shadow">Resumen de Cliente</p>
+        <p class="fs-2 fw-bold text-center bg-info p-2 my-4 rounded shadow"><i class="fas fa-smile"></i> Resumen de Cliente</p>
         <div class="container-fluid row">
             
             <div class="col-lg-12 my-2">

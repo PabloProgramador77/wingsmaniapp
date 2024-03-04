@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalAbrir" title="Apertura de Caja" theme="primary" static-backdrop scrollable>
+<x-adminlte-modal id="modalAbrir" title="Apertura de Caja" theme="primary" icon="fas fa-lock-open" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
