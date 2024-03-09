@@ -351,6 +351,8 @@ class PedidoController extends Controller
 
             event( new CobrarPedidoEvent( $pedido ) );
 
+            $this->ticket( $pedido );
+
             if( $pedido->id ){
 
                 $pedido = Pedido::where('id', '=', $request->id)
@@ -455,6 +457,72 @@ class PedidoController extends Controller
 
         }
 
+    }
+
+    /**
+     * Creación de ticket PDF
+     */
+    public function ticket( $pedido ){
+        try {
+            
+            $ticket = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8',
+                'format' => [80, 2700],
+                'orientation' => 'P',
+                'autoPageBreak' => false,
+
+            ]);
+
+            $platillos = Platillo::select('platillos.nombre', 'pedido_has_platillos.cantidad', 'platillos.precio')
+                        ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                        ->where('pedido_has_platillos.idPedido', '=', $pedido->id)
+                        ->get();
+
+            $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $ticket->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
+            $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
+
+            $ticket->writeHTML('<table style="width: 100%;">');
+            $ticket->writeHTML('<tbody width="100%;">');
+
+            $total = 0;
+
+            foreach( $platillos as $platillo ){
+
+                $ticket->writeHTML('<tr style="width: 100%; display: inline-block;">');
+                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 10%;">'.$platillo->cantidad.'</td>');
+                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 70%;">'.$platillo->nombre.'</td>');
+                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 20%;">$'.( $platillo->precio * $platillo->cantidad ).'</td>');
+                $ticket->writeHTML('</tr>');
+
+                $total += ( $platillo->precio * $platillo->cantidad );
+
+            }
+
+            $ticket->writeHTML('<tr style="width: 100%; display: block;"><td style="width: 100%; display: block; text-align: center; font-size: 12px;" colspan="3">Total: $'.$total.'</td></tr>');
+            $ticket->writeHTML('</tbody>');
+            $ticket->writeHTML('</table>');
+
+            if( file_exists( public_path('tickets') ) ){
+
+                $ticket->Output(public_path('tickets/').'ticket'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE);
+
+            }else{
+
+                mkdir( public_path('tickets') );
+
+                $ticket->Output(public_path('tickets/').'ticket'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE);
+
+            }
+            
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
     }
 
 }
