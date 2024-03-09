@@ -22,6 +22,7 @@ use App\Notifications\ConfirmarPedidoNotification;
 use App\Notifications\CobrarPedidoNotificacion;
 use App\Events\CobrarPedidoEvent;
 use Illuminate\Support\Facades\Notification;
+use \Mpdf\Mpdf as PDF;
 
 class PedidoController extends Controller
 {
@@ -296,12 +297,13 @@ class PedidoController extends Controller
     public function confirmar(Confirm $request){
         try {
             
-            $pedido = Pedido::find( $request->id);
+            $pedido = Pedido::find( $request->id );
 
             event( new ConfirmarPedidoEvent( $pedido ) );
             
             $this->confirmar_notification( $pedido );
-            
+            $this->comanda( $pedido );
+
             $pedido = Pedido::where('id', '=', $request->id)
                 ->update([
 
@@ -401,6 +403,58 @@ class PedidoController extends Controller
         }
 
         return response()->json($datos);
+    }
+
+    /**
+     * Creación de comanda de pedido PDF
+     */
+    public function comanda( $pedido ){
+        try {
+            
+            $comanda = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8',
+                'format' => [80, 2700],
+                'orientation' => 'P',
+                'autoPageBreak' => false,
+
+            ]);
+
+            $comanda->writeHTML('<h1 style="font-size: 24px; text-align: center; font-style: bold;">COMANDA DE COCINA</h1>');
+            $comanda->writeHTML('<h3 style="font-size: 14px; text-align: center;">'.$pedido->created_at.'</h3>');
+            $comanda->writeHTML('<p style="font-size: 14px; text-align: center; font-style: bold;">Para llevar</p>');
+            $comanda->writeHTML('<p style="font-size: 14px; text-align: center; font-style: bold;"><u>'.$pedido->cliente->name.'</u></p>');
+            
+            $platillos = Platillo::select('platillos.nombre', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion')
+                        ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                        ->where('pedido_has_platillos.idPedido', '=', $pedido->id)
+                        ->get();
+
+            foreach( $platillos as $platillo ){
+
+                $comanda->writeHTML('<p style="font-size: 24px; font-style: bold;">'.$platillo->cantidad.' '.$platillo->nombre.'</p>');
+                $comanda->writeHTML('<p style="font-size: 22px; font-style: bold;"><u>'.$platillo->preparacion.'</u></p>');
+
+            }
+
+            if( file_exists( public_path('comandas') ) ){
+
+                $comanda->Output( public_path('comandas/').'comanda'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }else{
+
+                mkdir( public_path('comandas'), 0777, true );
+
+                $comanda->Output( public_path('comandas/').'comanda'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+
     }
 
 }
