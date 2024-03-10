@@ -42,6 +42,7 @@
                                                 @can('borrar-pedido')
                                                     <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->total }}"></x-adminlte-button>
                                                 @endcan
+
                                             @endif
                                         </td>
                                     </tr>
@@ -64,6 +65,10 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
+    @if( auth()->user()->role(['Cliente']) )
+        <script src="{{ asset('js/pedido/cliente.js') }}" type="text/javascript"></script>
+    @else
+        <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
+    @endif
     
 @stop

@@ -227,6 +227,8 @@ class PedidoController extends Controller
 
             if( $pedido->id ){
 
+                $this->cancelacion( $pedido );
+
                 $pedido->delete();
 
                 session()->forget('idPedido');
@@ -512,7 +514,7 @@ class PedidoController extends Controller
 
             }else{
 
-                mkdir( public_path('tickets') );
+                mkdir( public_path('tickets'), 0777, true );
 
                 $ticket->Output(public_path('tickets/').'ticket'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE);
 
@@ -522,6 +524,68 @@ class PedidoController extends Controller
             
             echo $th->getMessage();
             
+        }
+    }
+
+    /**
+     * Creación de ticket de entrega de pedido
+     */
+    public function entrega( $pedido ){
+        try {
+            
+            $ticket = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8',
+                'format' => [80, 2700],
+                'orientation' => 'P',
+                'autoPageBreak' => false,
+
+            ]);
+
+            $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $ticket->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
+            $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;"></p>');
+
+        } catch (\Throwable $th) {
+
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * Comanda de pedido cancelado
+     */
+    public function cancelacion( $pedido ){
+        try {
+            
+            $comanda = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8',
+                'format' => [80, 2700],
+                'orientation' => 'P',
+                'autoPageBreak' => false,
+
+            ]);
+
+            $comanda->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">PEDIDO CANCELADO</p>');
+            $comanda->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $comanda->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $comanda->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
+
+            if( public_path('comandas/canceladas/') ){
+
+                $comanda->Output( public_path('comandas/canceladas/').'comanda'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
         }
     }
 
