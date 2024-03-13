@@ -33,6 +33,7 @@ jQuery(document).ready(function(){
                         'precio' : $("#precioEditar").val(),
                         'categoria' : $("#categoriaEditar").val(),
                         'descripcion' : $("#descripcionEditar").val(),
+                        'salsas' : $("#salsasEditar").val(),
                         'id' : $("#id").val()
 
                     },

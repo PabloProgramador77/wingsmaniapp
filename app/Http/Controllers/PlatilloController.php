@@ -73,7 +73,8 @@ class PlatilloController extends Controller
                 'nombre' => $request->nombre,
                 'precio' => $request->precio,
                 'idCategoria' => $request->categoria,
-                'descripcion' => $request->descripcion
+                'descripcion' => $request->descripcion,
+                'cantidadSalsas' => $request->salsas
 
             ]);
 
@@ -110,6 +111,7 @@ class PlatilloController extends Controller
                 $datos['idCategoria'] = $platillo->idCategoria;
                 $datos['categoria'] = $platillo->categoria->nombre;
                 $datos['descripcion'] = $platillo->descripcion;
+                $datos['salsas'] = $platillo->cantidadSalsas;
                 $datos['id'] = $platillo->id;
 
             }
@@ -145,7 +147,8 @@ class PlatilloController extends Controller
                     'nombre' => $request->nombre,
                     'precio' => $request->precio,
                     'idCategoria' => $request->categoria,
-                    'descripcion' => $request->descripcion
+                    'descripcion' => $request->descripcion,
+                    'cantidadSalsas' => $request->salsas
 
                 ]);
 

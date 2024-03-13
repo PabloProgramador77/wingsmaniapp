@@ -42,7 +42,7 @@
                                             @can('borrar-platillo')
                                                 <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt" data-value="{{ $platillo->nombre }}"></x-adminlte-button>
                                             @endcan
-                                            @if( count($salsas) > 0 )
+                                            @if( count($salsas) > 0 && $platillo->cantidadSalsas > 0)
                                                 @can('ver-salsas')
                                                     <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
                                                 @endcan

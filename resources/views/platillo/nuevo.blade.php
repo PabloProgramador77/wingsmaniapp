@@ -27,6 +27,14 @@
                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                     @endforeach
                 </x-adminlte-select2>
+                
+                <x-adminlte-input name="salsas" id="salsas" placeholder="Limite de salsas">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-pepper-hot">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
                 <x-adminlte-textarea name="descripcion" id="descripcion" placeholder="Descripción del platillo (OPCIONAL)">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

@@ -32,7 +32,8 @@ jQuery(document).ready(function(){
                         'nombre' : $("#nombre").val(),
                         'precio' : $("#precio").val(),
                         'categoria' : $("#categoria").val(),
-                        'descripcion' : $("#descripcion").val()
+                        'descripcion' : $("#descripcion").val(),
+                        'salsas' : $("#salsas").val()
 
                     },
                     dataType: 'json',

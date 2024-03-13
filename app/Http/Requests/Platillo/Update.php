@@ -35,6 +35,7 @@ class Update extends FormRequest
             'precio' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'categoria' => 'required|integer',
             'id' => 'required|integer',
+            'salsas' => 'required|integer|nullable',
 
         ];
     }
