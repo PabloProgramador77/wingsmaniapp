@@ -62,5 +62,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/corte/imprimir.js') }}" type="text/javascript"></script>
     
 @stop

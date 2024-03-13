@@ -12,6 +12,8 @@ use App\Http\Requests\Corte\Calcular;
 use App\Http\Requests\Corte\Create;
 use App\Http\Requests\Corte\Delete;
 use App\Http\Requests\Corte\Read;
+use App\Http\Requests\Corte\Imprimir;
+use \Mpdf\Mpdf as PDF;
 
 class CorteController extends Controller
 {
@@ -174,9 +176,78 @@ class CorteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Corte $corte)
+    public function edit(Imprimir $request)
     {
-        //
+        try {
+            
+            $totalDelivery = 0;
+            $totalPickup = 0;
+            $corte = Corte::find( $request->id );
+
+            $pedidosDelivery = Pedido::select('pedidos.total')
+                ->join('corte_has_pedidos', 'pedidos.id', '=', 'corte_has_pedidos.idPedido')
+                ->where('corte_has_pedidos.idCorte', '=', $corte->id)
+                ->where('pedidos.tipo', '=', 'delivery')
+                ->get();
+
+            foreach( $pedidosDelivery as $pedido ){
+
+                $totalDelivery += $pedido->total;
+
+            }
+
+            $pedidosPickup = Pedido::select('pedidos.total')
+                ->join('corte_has_pedidos', 'pedidos.id', '=', 'corte_has_pedidos.idPedido')
+                ->where('corte_has_pedidos.idCorte', '=', $corte->id)
+                ->where('pedidos.tipo', '=', 'pickup')
+                ->get();
+
+            foreach( $pedidosPickup as $pedido ){
+
+                $totalPickup += $pedido->total;
+                
+            }
+
+            $ticket = new \Mpdf\Mpdf([
+
+                'mode' => 'utf-8',
+                'format' => [80, 2700],
+                'orientation' => 'P',
+                'autoPageBreak' => false,
+
+            ]);
+
+            $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
+            $ticket->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
+            $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$corte->id.'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;">Total de corte: $'.$corte->total.'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;">Total Delivery: $'.$totalDelivery.'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;">Pedidos Delivery:'.$pedidosDelivery->count().'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;">Total Pickup: $'.$totalPickup.'</p>');
+            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;">Pedido Pickup:'.$pedidosPickup->count().'</p>');
+
+            if( file_exists( public_path('cortes') ) ){
+
+                $ticket->Output( public_path('cortes/').'corte'.$corte->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }else{
+
+                mkdir( public_path('cortes'), 0777, true );
+
+                $ticket->Output( public_path('cortes/').'corte'.$corte->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

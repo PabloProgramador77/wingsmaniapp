@@ -123,3 +123,4 @@ Route::post('/corte/calcular', [App\Http\Controllers\CorteController::class, 'cr
 Route::post('/corte/agregar', [App\Http\Controllers\CorteController::class, 'store'])->name('agregar-corte');
 Route::post('/corte/borrar', [App\Http\Controllers\CorteController::class, 'destroy'])->name('borrar-corte');
 Route::get('/corte/{idCorte}', [App\Http\Controllers\CorteController::class, 'show'])->name('buscar-corte');
+Route::post('/corte/imprimir', [App\Http\Controllers\CorteController::class, 'edit'])->name('imprimir-corte');
