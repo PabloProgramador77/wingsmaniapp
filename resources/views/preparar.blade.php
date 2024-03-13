@@ -11,6 +11,7 @@
                 <div class="col-lg-4">
                     <p class="bg-light border text-center p-2 mx-3 rounded">{{ $platillo->nombre }}</p>
                     <input type="hidden" name="id" id="id" value="{{ $pedidoHasPlatillo->id }}">
+                    <input type="hidden" name="salsas" id="salsas" value="{{ $platillo->cantidadSalsas }}">
                 </div>
                 <div class="col-lg-3">
                     <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
