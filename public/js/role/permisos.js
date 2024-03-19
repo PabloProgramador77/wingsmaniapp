@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 
         $("input[name=permiso]:checked").each(function(){
 
-            permisos.push($(this).attr('data-id'));
+            permisos.push($(this).val());
 
         });
 

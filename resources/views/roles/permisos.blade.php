@@ -16,10 +16,10 @@
 
                 @foreach($permisos as $permiso)
                     @can('asignar-permiso')
-                        <div class="col-md-4 col-lg-3">
-                            <x-adminlte-input-switch id="permiso{{ $permiso->id }}" name="permiso" label="{{ $permiso->name }}" data-on-text="Con permiso" data-off-text="Sin permiso" data-id="{{ $permiso->name }}">
-                            </x-adminlte-input-switch>
-                        </div>
+                    <div class="form-check form-switch col-md-4 col-lg-3 my-1">
+                        <input class="form-check-input-switch" type="checkbox" role="switch" name="permiso" id="{{ $permiso->id }}" value="{{ $permiso->name }}">
+                        <label class="form-check-label" for="{{ $permiso->id }}">{{ $permiso->name }}</label>
+                    </div> 
                     @endcan
                 @endforeach
             </div>

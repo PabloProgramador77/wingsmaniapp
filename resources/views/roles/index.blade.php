@@ -44,7 +44,7 @@
                                             @endcan
                                             @if( count($permisos) >0 )
                                                 @can('asignar-permisos')
-                                                    <x-adminlte-button class="permisos" id="permisos" label="Permisos" theme="secondary" data-id="{{ $role->id }}" icon="fas fa-user-circle" data-toggle="modal" data-target="#modalPermisos"></x-adminlte-button>
+                                                    <x-adminlte-button class="permisos" id="permisos" label="Permisos" theme="secondary" data-id="{{ $role->id }}" icon="fas fa-user-circle" data-toggle="modal" data-target="#modalPermisos" ></x-adminlte-button>
                                                 @endcan
                                             @endif
                                         </td>

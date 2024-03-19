@@ -26,13 +26,6 @@ jQuery(document).ready(function(){
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#id").val( respuesta.id );
 
-                //PENDIENTE DE VERIFICACIÓN & CORRECIÓN
-                /*$.each(respuesta.permisos, function(i, permiso){
-
-                    $("input[type=checkbox][data-id='"+permiso.name+"']").prop('checked', true);
-
-                });*/
-
                 $("#actualizar").attr('disabled', false);
 
             }else{
@@ -66,6 +59,8 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        $('input[type=checkbox]').prop('checked', false);
+
         $.ajax({
 
             type: 'POST',
@@ -86,6 +81,12 @@ jQuery(document).ready(function(){
                 $("#idRol").val( respuesta.id );
 
                 $("#permitir").attr('disabled', false);
+
+                $.each(respuesta.permisos, function(i, permiso){
+
+                    $('input[type=checkbox][id="'+permiso.id+'"]').prop('checked', true);
+
+                });
 
             }else{
 

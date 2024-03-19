@@ -25,7 +25,6 @@
                     </a>
                     <nav class="nav">
                         <a class="nav-link disabled" aria-disabled="true"><b>Dirección: </b>Calle Alamo 110, Barrio de San Antonio, San Francisco del Rincón, Gto.</a>
-                        <a class="nav-link text-black fw-bold" href="#">Promociones</a>
                         @if( Route::has('login') )
                             @auth
                                 <a class="btn btn-warning p-2 mx-5" href="{{ route('home') }}">Ordenar</a>
@@ -42,7 +41,7 @@
             <div class="container-fluid col-xxl-8 px-4 bg-warning" id="inicio">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
                     <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="{{ asset('img/2812940-min.jpg') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                        <img src="{{ asset('img/alas 4.png') }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
                     </div>
                     <div class="col-lg-6 p-5">
                         <h1 class="display-5 fw-bold p-2 text-white text-center">Wings Mania</h1>
@@ -104,11 +103,14 @@
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 5" class=""></button>
+                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 6" class=""></button>
                 </div>
                 <div class="carousel-inner">
                     
                     <div class="carousel-item active">
-                        <img src="{{ asset('img/1022-min.jpg') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <img src="{{ asset('img/alas 3.png') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
                         <div class="container">
                             <div class="carousel-caption text-end">
@@ -118,7 +120,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ asset('img/20212-min.jpg') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <img src="{{ asset('img/03.png') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
                         <div class="container">
                             <div class="carousel-caption text-end">
@@ -128,12 +130,42 @@
                         </div>
                     </div>
                     <div class="carousel-item ">
+                        <img src="{{ asset('img/hambru-1.jpg') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1 class="fs-1 fw-bold text-black">Hamburguesas</h1>
+                                <p class="fs-5 fw-semibold">Elige tu favorita de boneless o clásica.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="{{ asset('img/2.png') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1 class="fs-1 fw-bold text-black">Pizzas</h1>
+                                <p class="fs-5 fw-semibold">Elige tu favorita de boneless o clásica.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <img src="{{ asset('img/perrito 2.png') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                        <div class="container">
+                            <div class="carousel-caption text-end">
+                                <h1 class="fs-1 fw-bold text-black">Hot Dogs</h1>
+                                <p class="fs-5 fw-semibold">Elige tu favorito de boneless o clásico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
                         <img src="{{ asset('img/2812940-min.jpg') }}" alt="Alitas" class="bd-placeholder-img shadow rounded" width="50%" height="auto" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
                         <div class="container">
                             <div class="carousel-caption text-end">
                                 <h1 class="fs-1 fw-bold text-black">Paquetes</h1>
-                                <p class="fs-5 fw-semibold">Elige tu favorito</p>
+                                <p class="fs-5 fw-semibold">Alitas o boneless con papas y bebidas.</p>
                             </div>
                         </div>
                     </div>
@@ -152,10 +184,10 @@
             <!--Section Mas Vendidos-->
             <div class="container px-4 py-5" id="custom-cards">
                 <h2 class="fw-bold fs-3 p-2 border-bottom">No sabes que pedir</h2>
-                <p class="fw-semibold fs-6 mx-2 text-secondary">Estos son los platillos favoritos de nuestros clientes</p> 
+                <p class="fw-semibold fs-6 mx-2 my-1 text-secondary">Estos son los platillos favoritos de nuestros clientes</p> 
                 <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/1022-min.jpg'); background-position: center; background-size: cover;">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/hambru-1.jpg'); background-position: center; background-size: cover;">
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Hamburguesa de Boneless</h3>
                                 <ul class="d-flex list-unstyled mt-auto">
@@ -176,9 +208,9 @@
                     </div>
 
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/20212-min.jpg'); background-position: center; background-size: cover;">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/perrito 2.png'); background-position: center; background-size: cover;">
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Paquete 1 de Alitas</h3>
+                                <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Hotchowings</h3>
                                 <ul class="d-flex list-unstyled mt-auto">
                                     <li class="me-auto">
                                         <img src="{{ asset('img/logo_min.png') }}" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
@@ -197,7 +229,7 @@
                     </div>
 
                     <div class="col">
-                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/2812940-min.jpg'); background-position: center; background-size: cover;">
+                        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('img/2.png'); background-position: center; background-size: cover;">
                             <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
                                 <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Pizza de Boneless</h3>
                                 <ul class="d-flex list-unstyled mt-auto">
