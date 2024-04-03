@@ -12,7 +12,6 @@ use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
 use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
-use App\Http\Requests\Pedido\Confirm;
 use App\Http\Requests\Pedido\Cobrar;
 use App\Http\Requests\Pedido\Pagar;
 use App\Notifications\NuevoPedido;
@@ -156,6 +155,7 @@ class PedidoController extends Controller
                         }else{
 
                             $this->notification();
+                            $this->comanda( $pedido );
 
                             session()->forget('idPedido');
 
@@ -198,7 +198,10 @@ class PedidoController extends Controller
 
             if( $domicilio->id ){
 
+                $pedido = Pedido::find( session()->get('idPedido') );
+
                 $this->notification();
+                $this->comanda( $pedido );
 
                 session()->forget('idPedido');
 
@@ -296,33 +299,30 @@ class PedidoController extends Controller
     /**
      * Búsqueda Platills & Pedido
      */
-    public function confirmar(Confirm $request){
+    public function confirmar($id){
         try {
             
-            $pedido = Pedido::find( $request->id );
+            //$pedido = Pedido::find( $id );
 
-            event( new ConfirmarPedidoEvent( $pedido ) );
+            //event( new ConfirmarPedidoEvent( $pedido ) );
             
-            $this->confirmar_notification( $pedido );
-            $this->comanda( $pedido );
+            //$this->confirmar_notification( $pedido );
 
-            $pedido = Pedido::where('id', '=', $request->id)
+            $pedido = Pedido::where('id', '=', $id)
                 ->update([
 
                     'estatus' => 'Abierto'
 
                 ]);
 
-            $datos['exito'] = true;
+            return redirect('/pedidos');
 
         } catch (\Throwable $th) {
             
-            $datos['exito'] = false;
-            $datos['mensaje'] = $th->getMessage();
+            return redirect('/');
 
         }
 
-        return response()->json($datos);
     }
 
     /**
@@ -586,6 +586,44 @@ class PedidoController extends Controller
             
             echo $th->getMessage();
 
+        }
+    }
+
+    /**Impresión de comanda */
+    public function impresion( $id ){
+        try {
+
+            $pedido = Pedido::where('id', '=',  $id )
+                    ->update([
+
+                        'estatus' => 'Abierto'
+
+                    ]);
+            
+            $headers = [
+
+                'Content-Type' => 'application/pdf'
+            
+            ];
+
+            if( file_exists( public_path( 'comandas/' ).'comanda'.$id.'.pdf' ) ){
+
+                ob_end_clean();
+
+                return response()->download(
+
+                    public_path( 'comandas/' ).'comanda'.$id.'.pdf', 
+                    'comanda'.$id.'.pdf', 
+                    $headers
+
+                );
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
         }
     }
 

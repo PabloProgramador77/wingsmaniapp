@@ -14,7 +14,7 @@
                     
                     @can('confirmar-pedido')
                         @if( $pedido->estatus == 'Pendiente' )
-                            <x-adminlte-button id="confirmar" class="float-end" label="Confirmar" icon="fas fa-check" theme="primary"></x-adminlte-button>
+                            <a href="{{ url('/pedido/confirmar') }}/{{ $pedido->id }}" class="btn btn-primary mx-2 confirmar" title="Confirmar Pedido"><i class="fas fa-check"></i> Confirmar</a>
                         @endif
                     @endcan
 
@@ -74,6 +74,5 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pedido/confirmar.js') }}" type="text/javascript"></script>
     
 @stop

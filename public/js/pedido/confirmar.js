@@ -1,7 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#confirmar").on('click', function(e){
+    $(".confirmar").on('click', function(e){
 
         e.preventDefault();
 
@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
 
             title: 'Enviando a Cocina',
             html: 'Un momento por favor: <b></b>',
-            timer: 9975,
+            timer: 4975,
             allowOutsideClick: false,
             didOpen: ()=>{
 
@@ -20,63 +20,6 @@ jQuery(document).ready(function(){
                     b.textContent = Swal.getTimerLeft();
 
                 }, 100);
-
-                $.ajax({
-
-                    type: 'POST',
-                    url: '/pedido/confirmar',
-                    data:{
-
-                        'id' : $("#idPedido").val() 
-
-                    },
-                    dataType: 'json',
-                    encode: true
-
-                }).done(function(respuesta){
-
-                    if( respuesta.exito ){
-
-                        Swal.fire({
-
-                            icon: 'success',
-                            title: 'Enviado.',
-                            allowOutsideClick: false,
-                            showConfirmButton: true
-
-                        }).then((resultado)=>{
-
-                            if( resultado.isConfirmed ){
-
-                                window.location.href = '/pedidos';
-
-                            }
-
-                        });
-
-
-                    }else{
-
-                        Swal.fire({
-
-                            icon: 'error',
-                            title: respuesta.mensaje,
-                            allowOutsideClick: false,
-                            showConfirmButton: true
-
-                        }).then((resultado)=>{
-
-                            if( resultado.isConfirmed ){
-
-                                window.location.href = '/pedidos';
-
-                            }
-
-                        });
-
-                    }
-
-                });
 
             },
             willClose: ()=>{
@@ -89,22 +32,7 @@ jQuery(document).ready(function(){
 
             if( resultado.dismiss == Swal.DismissReason.timer ){
 
-                Swal.fire({
-
-                    icon: 'warning',
-                    title: 'Hubo un inconveniente. Trata de nuevo.',
-                    allowOutsideClick: false,
-                    showConfirmButton: true
-
-                }).then((resultado)=>{
-
-                    if( resultado.isConfirmed ){
-
-                        window.location.href = '/pedidos';
-
-                    }
-
-                });
+                window.location.href = '/pedidos';
 
             }
 

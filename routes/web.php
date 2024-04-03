@@ -99,10 +99,11 @@ Route::post('/pedido/restar', [App\Http\Controllers\PedidoHasPlatilloController:
 Route::post('/pedido/cancelar', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('cancelar-pedido');
 Route::post('/pedido/ordenar', [App\Http\Controllers\PedidoController::class, 'edit'])->name('ordenar-pedido');
 Route::post('/pedido/entregar', [App\Http\Controllers\PedidoController::class, 'update'])->name('entregar-pedido');
-Route::post('/pedido/confirmar', [App\Http\Controllers\PedidoController::class, 'confirmar'])->name('confirmar-pedido');
+Route::get('/pedido/confirmar/{id}', [App\Http\Controllers\PedidoController::class, 'impresion'])->name('confirmar-pedido');
 Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');
 Route::post('/pedido/cobrar', [App\Http\Controllers\PedidoController::class, 'cobrar'])->name('cobrar-pedido');
 Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pagar-pedido');
+Route::post('/pedido/imprimir', [App\Http\Controllers\PedicoController::class, 'impresion'])->name('imprimir-pedido');
 
 Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
 Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');
