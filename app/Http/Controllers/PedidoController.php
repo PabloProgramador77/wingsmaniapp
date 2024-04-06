@@ -135,6 +135,7 @@ class PedidoController extends Controller
                 if( $pedido->tipo == 'pickup' ){
 
                     $this->notification();
+                    $this->comanda( $pedido );
 
                     session()->forget('idPedido');
 
@@ -610,13 +611,15 @@ class PedidoController extends Controller
 
                 ob_end_clean();
 
-                return response()->download(
+                return response()->download( public_path( 'comandas/' ).'comanda'.$id.'.pdf', 'comanda'.$id.'.pdf', $headers );
 
-                    public_path( 'comandas/' ).'comanda'.$id.'.pdf', 
-                    'comanda'.$id.'.pdf', 
-                    $headers
+            }else{
 
-                );
+                $pedido = Pedido::find( $id );
+
+                $this->comanda( $pedido );
+
+                return response()->download( public_path('comandas/').'comanda'.$id.'.pdf', 'comanda'.$id.'.pdf', $headers );
 
             }
 
