@@ -16,7 +16,8 @@ class Pedido extends Model
         'total',
         'estatus',
         'tipo',
-        'idCliente'
+        'idCliente',
+        'idPedido',
 
     ];
 
@@ -29,6 +30,12 @@ class Pedido extends Model
     public function platillos(){
 
         return $this->belongsToMany(Platillo::class, 'pedido_has_platillos', 'idPedido', 'idPlatillo');
+        
+    }
+
+    public function envio(){
+
+        return $this->hasOne( Envio::class, 'id', 'idEnvio' );
         
     }
 }

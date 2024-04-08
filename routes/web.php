@@ -125,3 +125,9 @@ Route::post('/corte/agregar', [App\Http\Controllers\CorteController::class, 'sto
 Route::post('/corte/borrar', [App\Http\Controllers\CorteController::class, 'destroy'])->name('borrar-corte');
 Route::get('/corte/{idCorte}', [App\Http\Controllers\CorteController::class, 'show'])->name('buscar-corte');
 Route::post('/corte/imprimir', [App\Http\Controllers\CorteController::class, 'edit'])->name('imprimir-corte');
+
+Route::get('/envios', [App\Http\Controllers\EnvioController::class, 'index'])->name('envios');
+Route::post('/envio/agregar', [App\Http\Controllers\EnvioController::class, 'store'])->name('agregar-envio');
+Route::post('/envio/actualizar', [App\Http\Controllers\EnvioController::class, 'update'])->name('actualizar-envio');
+Route::post('/envio/buscar', [App\Http\Controllers\EnvioController::class, 'show'])->name('buscar-envio');
+Route::post('/envio/borrar', [App\Http\Controllers\EnvioController::class, 'destroy'])->name('borrar-envio');

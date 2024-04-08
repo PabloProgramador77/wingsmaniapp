@@ -361,6 +361,12 @@ return [
             'active' => ['cajas'],
             'can' => 'ver-cajas',
         ],
+        [
+            'text' => 'Envios',
+            'url' => 'envios',
+            'icon' => 'fas fa-truck',
+            'active' => ['envios'],
+        ]
     ],
 
     /*

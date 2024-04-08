@@ -80,6 +80,10 @@ class VerifyCsrfToken extends Middleware
         '/corte/agregar',
         '/corte/borrar',
         '/corte/imprimir',
+        '/envio/agregar',
+        '/envio/actualizar',
+        '/envio/buscar',
+        '/envio/borrar',
 
     ];
 }
