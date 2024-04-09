@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Ticket Impreso y Cliente Notificado',
+                            title: 'Ticket Impreso',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -57,9 +57,27 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/pedidos';
+                                window.location.href = '/pedido/ticket/' + $("#idPedido").val();
 
                             }
+
+                            Swal.fire({
+
+                                icon: 'info',
+                                title: '¿Imprimes el ticket de entrega del pedido?',
+                                allowOutsideClick: false,
+                                showConfirmButton: true
+    
+                            }).then((resultado)=>{
+    
+                                if( resultado.isConfirmed ){
+    
+                                    window.location.href = '/pedido/entrega/' + $("#idPedido").val();
+    
+                                }
+    
+                            });
+
 
                         });
 

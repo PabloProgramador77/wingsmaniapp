@@ -709,4 +709,61 @@ class PedidoController extends Controller
         return response()->json( $datos );
     }
 
+    /**
+     * Descarga de ticket
+     * 
+     */
+    public function descargarTicket( $id ){
+        try {
+            
+            $pedido = Pedido::find( $id );
+
+            if( $pedido->id ){
+                
+                $headers = [
+
+                    'Content-Type' => 'application/pdf'
+                
+                ];
+
+                if( $pedido->tipo == 'delivery' ){
+
+                    return response()->download( public_path('tickets/').'ticket'.$id.'.pdf', 'ticket'.$id.'.pdf', $headers );
+
+                }else{
+
+                    return response()->download( public_path('tickets/').'ticket'.$id.'.pdf', 'ticket'.$id.'.pdf', $headers );
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
+    }
+
+    /**
+     * Descarga del PDF de entrega
+     */
+    public function descargarEntrega( $id ){
+        try {
+            
+            $headers = [
+
+                'Content-Type' => 'application/pdf'
+            
+            ];
+
+            return response()->download( public_path('entregas/').'entrega'.$id.'.pdf', 'entrega'.$id.'.pdf', $headers );
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+            
+        }
+    }
+
 }
