@@ -48,11 +48,11 @@
                 @endif
 
             </div>
-            <input type="hidden" name="id" token="id">
+            <input type="hidden" name="idPedido" id="idPedido">
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" id="agregar"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Agregar" id="agregarEnvio" icon="fas fa-save"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

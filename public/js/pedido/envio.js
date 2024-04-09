@@ -1,6 +1,7 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
+    //Recuperación de datos del pedido (Domicilio y Total)
     $(".envios").on('click', function(e){
 
         var cliente = $(this).attr('data-value');
@@ -28,6 +29,7 @@ jQuery(document).ready(function(){
 
                 $("#domicilio").val( respuesta.domicilio );
                 $("#total").val( respuesta.total );
+                $("#idPedido").val( idPedido );
 
             }else{
 

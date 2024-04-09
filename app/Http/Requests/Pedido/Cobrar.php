@@ -32,6 +32,8 @@ class Cobrar extends FormRequest
         return [
             
             'id' => 'required|integer',
+            'envios' => 'array',
+            'envios.*' => 'integer|nullable',
             
         ];
     }

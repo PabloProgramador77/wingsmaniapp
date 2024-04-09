@@ -368,6 +368,20 @@ class PedidoController extends Controller
 
             event( new CobrarPedidoEvent( $pedido ) );
 
+            if( $pedido->tipo == 'delivery' ){
+
+                foreach( $request->envios as $envio ){
+
+                    $pedido->idEnvio = $envio;
+                    $pedido->save();
+
+                }
+
+                $pedido->total += $pedido->envio->monto;
+                $pedido->save();
+
+            }
+
             $this->ticket( $pedido );
 
             if( $pedido->id ){
@@ -496,32 +510,36 @@ class PedidoController extends Controller
                         ->where('pedido_has_platillos.idPedido', '=', $pedido->id)
                         ->get();
 
-            $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
-            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
-            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
-            $ticket->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
-            $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
-
-            $ticket->writeHTML('<table style="width: 100%;">');
-            $ticket->writeHTML('<tbody width="100%;">');
+            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
+            $ticket->writeHTML('<p style="font-size: 12px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $ticket->writeHTML('<p style="font-size: 12px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $ticket->writeHTML('<p style="font-size: 8px; font-style: normal; text-align: center; padding: 0px;" >Hora de Impresión: '.date('Y-m-d H:m:s').'</p>');
+            $ticket->writeHTML('<p style="font-size: 10px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
 
             $total = 0;
 
             foreach( $platillos as $platillo ){
 
-                $ticket->writeHTML('<tr style="width: 100%; display: inline-block;">');
-                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 10%;">'.$platillo->cantidad.'</td>');
-                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 70%;">'.$platillo->nombre.'</td>');
-                $ticket->writeHTML('<td style="font-size: 12px; text-align: left; width: 20%;">$'.( $platillo->precio * $platillo->cantidad ).'</td>');
-                $ticket->writeHTML('</tr>');
+                $ticket->writeHTML('<p style="font-size: 11px; text-align: center; width: 100%;">'.$platillo->cantidad.' - '.$platillo->nombre.' $'.($platillo->precio * $platillo->cantidad).'</p>');
 
                 $total += ( $platillo->precio * $platillo->cantidad );
 
             }
 
-            $ticket->writeHTML('<tr style="width: 100%; display: block;"><td style="width: 100%; display: block; text-align: center; font-size: 12px;" colspan="3">Total: $'.$total.'</td></tr>');
-            $ticket->writeHTML('</tbody>');
-            $ticket->writeHTML('</table>');
+            if( $pedido->tipo == 'delivery' ){
+
+                $total += $pedido->envio->monto;
+
+                $ticket->writeHTML('<p style="width: 100%; display: block;"><p style="width: 100%; text-align: center; font-size: 11px; ">Envio a domicilio: $'.$pedido->envio->monto.'</p>');
+                $ticket->writeHTML('<p style="width: 100%; display: block;"><p style="width: 100%; display: block; text-align: center; font-size: 11px;"><b>Total: $'.$total.'</b></p>');
+                
+            }else{
+
+                $ticket->writeHTML('<p style="width: 100%; display: block;"><p style="width: 100%; display: block; text-align: center; font-size: 12px;"><b>Total: $'.$total.'</b></p>');
+                
+            }
+
+            
 
             if( file_exists( public_path('tickets') ) ){
 
@@ -558,11 +576,10 @@ class PedidoController extends Controller
             ]);
 
             $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
-            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
-            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
-            $ticket->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
             $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
-            $ticket->writeHTML('<p style="font-size: 13px; font-style: bold; text-align: center;"></p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->domicilio->direccion.'</p>');
 
         } catch (\Throwable $th) {
 

@@ -100,5 +100,6 @@
     <script src="{{ asset('js/pedido/cobrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/pagar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/envio.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/agregarEnvio.js') }}" type="text/javascript"></script>
     
 @stop
