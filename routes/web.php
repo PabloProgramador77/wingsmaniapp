@@ -104,6 +104,7 @@ Route::post('/pedido/notification/confirmado', [App\Http\Controllers\Notificatio
 Route::post('/pedido/cobrar', [App\Http\Controllers\PedidoController::class, 'cobrar'])->name('cobrar-pedido');
 Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pagar-pedido');
 Route::post('/pedido/imprimir', [App\Http\Controllers\PedicoController::class, 'impresion'])->name('imprimir-pedido');
+Route::post('/pedido/domicilio', [App\Http\Controllers\PedidoController::class, 'domicilio'])->name('domicilio-pedido');
 
 Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
 Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');

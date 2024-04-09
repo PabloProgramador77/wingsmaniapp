@@ -61,7 +61,12 @@
                                                     <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
                                                 @endcan
                                                 @can('cobrar-pedido')
-                                                    <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                                    @if( $pedido->tipo == 'delivery' )
+                                                        <x-adminlte-button class="envios" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt" data-toggle="modal" data-target="#modalEnvios" data-id="{{ $pedido->id }}" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
+                                                    @else
+                                                        <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                                    @endif
+                                                    
                                                 @endcan
                                             @endif
                                             
@@ -86,11 +91,14 @@
         </div>
 
     </div>
+
+    @include('pedido.envios')
     
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/cobrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/pedido/pagar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/envio.js') }}" type="text/javascript"></script>
     
 @stop

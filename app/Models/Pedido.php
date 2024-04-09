@@ -17,7 +17,8 @@ class Pedido extends Model
         'estatus',
         'tipo',
         'idCliente',
-        'idPedido',
+        'idDomicilio',
+        'idEnvio',
 
     ];
 
@@ -29,13 +30,19 @@ class Pedido extends Model
 
     public function platillos(){
 
-        return $this->belongsToMany(Platillo::class, 'pedido_has_platillos', 'idPedido', 'idPlatillo');
+        return $this->belongsToMany( Platillo::class, 'pedido_has_platillos', 'idPedido', 'idPlatillo' );
         
     }
 
     public function envio(){
 
         return $this->hasOne( Envio::class, 'id', 'idEnvio' );
+        
+    }
+
+    public function domicilio(){
+
+        return $this->hasOne( Domicilio::class, 'id', 'idDomicilio' );
         
     }
 }

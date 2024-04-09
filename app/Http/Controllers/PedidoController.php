@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Domicilio;
 use App\Models\Platillo;
+use App\Models\Envio;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
@@ -33,8 +34,9 @@ class PedidoController extends Controller
         if( auth()->user()->id && !auth()->User()->hasRole('Cliente') ){
 
             $pedidos = Pedido::where('estatus', '!=', 'Corte')->orderBy('created_at', 'desc')->get();
+            $envios = Envio::all();
 
-            return view('pedido.index', compact('pedidos'));
+            return view('pedido.index', compact('pedidos', 'envios'));
 
         }else{
 
@@ -155,6 +157,15 @@ class PedidoController extends Controller
 
                         }else{
 
+                            $domicilios = $pedido->cliente->domicilios;
+
+                            foreach( $domicilios as $domicilio ){
+
+                                $pedido->idDomicilio = $domicilio->id;
+                                $pedido->save();
+
+                            }
+
                             $this->notification();
                             $this->comanda( $pedido );
 
@@ -200,6 +211,8 @@ class PedidoController extends Controller
             if( $domicilio->id ){
 
                 $pedido = Pedido::find( session()->get('idPedido') );
+                $pedido->idDomicilio = $request->idDomicilio;
+                $pedido->save();
 
                 $this->notification();
                 $this->comanda( $pedido );
@@ -627,6 +640,19 @@ class PedidoController extends Controller
             
             echo $th->getMessage();
             
+        }
+    }
+
+    /**
+     * Búsqueda de domicilio de pedido
+     */
+    public function domicilio(Request $request){
+        try {
+            
+            
+
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 
