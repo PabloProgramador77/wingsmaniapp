@@ -17,6 +17,13 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-input name="total" id="total" readonly="true">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
             </div>
             <p class="text-secondary border-bottom">Envio(s)</p>
             <div class="form-group row">

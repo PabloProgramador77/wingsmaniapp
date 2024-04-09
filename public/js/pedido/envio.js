@@ -26,23 +26,8 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                Swal.fire({
-
-                    icon: 'success',
-                    title: 'Impreso y Cliente Notificado',
-                    allowOutsideClick: false,
-                    showConfirmButton: true
-
-                }).then((resultado)=>{
-
-                    if( resultado.isConfirmed ){
-
-                        window.location.href = '/pedidos';
-
-                    }
-
-                });
-
+                $("#domicilio").val( respuesta.domicilio );
+                $("#total").val( respuesta.total );
 
             }else{
 

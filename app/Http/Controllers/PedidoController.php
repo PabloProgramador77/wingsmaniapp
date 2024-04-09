@@ -15,6 +15,7 @@ use App\Http\Requests\Pedido\Ordenar;
 use App\Http\Requests\Pedido\Entregar;
 use App\Http\Requests\Pedido\Cobrar;
 use App\Http\Requests\Pedido\Pagar;
+use App\Http\Requests\Pedido\ReadDomicilio;
 use App\Notifications\NuevoPedido;
 use App\Events\OrdenarPedido;
 use App\Events\ConfirmarPedidoEvent;
@@ -646,14 +647,27 @@ class PedidoController extends Controller
     /**
      * Búsqueda de domicilio de pedido
      */
-    public function domicilio(Request $request){
+    public function domicilio(ReadDomicilio $request){
         try {
             
-            
+            $pedido = Pedido::find( $request->id );
+
+            if( $pedido->id ){
+
+                $datos['exito'] = true;
+                $datos['domicilio'] = $pedido->domicilio->direccion;
+                $datos['total'] = $pedido->total;
+
+            }
 
         } catch (\Throwable $th) {
-            //throw $th;
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
         }
+
+        return response()->json( $datos );
     }
 
 }
