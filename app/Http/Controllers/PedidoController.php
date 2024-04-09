@@ -539,17 +539,27 @@ class PedidoController extends Controller
                 
             }
 
-            
-
             if( file_exists( public_path('tickets') ) ){
 
                 $ticket->Output(public_path('tickets/').'ticket'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE);
+
+                if( $pedido->tipo == 'delivery' ){
+
+                    $this->entrega( $pedido );
+
+                }
 
             }else{
 
                 mkdir( public_path('tickets'), 0777, true );
 
                 $ticket->Output(public_path('tickets/').'ticket'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE);
+
+                if( $pedido->tipo == 'delivery' ){
+
+                    $this->entrega( $pedido );
+                    
+                }
 
             }
             
@@ -575,11 +585,23 @@ class PedidoController extends Controller
 
             ]);
 
-            $ticket->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
+            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
             $ticket->writeHTML('<p style="font-size: 11px; font-style: bold; text-align: center; padding: 0px;">#'.$pedido->id.'</p>');
-            $ticket->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
-            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
-            $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->domicilio->direccion.'</p>');
+            $ticket->writeHTML('<p style="font-size: 12px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
+            $ticket->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->domicilio->direccion.'</p>');
+
+            if( file_exists( public_path('entregas') ) ){
+
+                $ticket->Output( public_path('entregas/').'entrega'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }else{
+
+                mkdir( public_path('entregas'), 0777, true );
+
+                $ticket->Output( public_path('entregas/').'entrega'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+
+            }
 
         } catch (\Throwable $th) {
 
@@ -603,10 +625,10 @@ class PedidoController extends Controller
 
             ]);
 
-            $comanda->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;">PEDIDO CANCELADO</p>');
+            $comanda->writeHTML('<p style="font-size: 18px; font-style: bold; text-align: center; padding: 0px;"><b>PEDIDO CANCELADO</b></p>');
             $comanda->writeHTML('<p style="font-size: 14px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
             $comanda->writeHTML('<p style="font-size: 14px; font-style: bold; text-align: center; padding: 0px;">'.$pedido->cliente->name.'</p>');
-            $comanda->writeHTML('<p style="font-size: 10px; font-style: normal; text-align: center; padding: 0px;">'.date('Y-m-d H:m:s').'</p>');
+            $comanda->writeHTML('<p style="font-size: 8px; font-style: normal; text-align: center; padding: 0px;">Hora de Impresión: '.date('Y-m-d H:m:s').'</p>');
 
             if( public_path('comandas/canceladas/') ){
 
