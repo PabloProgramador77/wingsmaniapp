@@ -19,16 +19,27 @@
                 @endif
             </div>
             
-            <p class="text-center rounded shadow bg-info p-2"><i class="fas fa-list"></i><b>Menú de {{ $categoria->nombre }}</b></p>
+            <p class="text-center rounded shadow bg-info p-2"><i class="fas fa-list"></i><b> Menú de {{ $categoria->nombre }}</b></p>
             <div class="container-fluid row">
                 
+                @if ( count( $paquetes ) > 0 )
+                    
+                    @foreach ($paquetes as $paquete)
+                        <div class="col-lg-4">
+                            <x-adminlte-small-box title="$ {{ $paquete->precio }}" text="{{ $paquete->nombre }}" icon="fas fa-tag" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
+                        </div>
+                    @endforeach
+
+                @endif
+
                 @foreach($platillos as $platillo)
                     
                     <div class="col-lg-4">
-                        <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }} MXN" icon="fas fa-tag" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
+                        <x-adminlte-small-box title="${{ $platillo->precio }}" text="{{ $platillo->nombre }}" icon="fas fa-tag" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
                     </div>
 
                 @endforeach
+                
 
             </div>
             

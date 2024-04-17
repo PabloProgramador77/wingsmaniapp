@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Platillo;
 use App\Models\Pedido;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 use App\Http\Requests\Categoria\Store;
 use App\Http\Requests\Categoria\Search;
@@ -39,9 +40,13 @@ class CategoriaController extends Controller
         if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
 
             $platillos = Platillo::select('id', 'nombre', 'precio')
-                ->where('idCategoria', '=', $id)
-                ->orderBy('nombre', 'asc')
-                ->get();
+                        ->where('idCategoria', '=', $id)
+                        ->orderBy('nombre', 'asc')
+                        ->get();
+
+            $paquetes = Paquete::select('id', 'nombre', 'precio')
+                        ->where('idCategoria', '=', $id)
+                        ->get();
 
             $categoria = Categoria::find($id);
             $pedido = Pedido::find(session()->get('idPedido'));
@@ -50,7 +55,7 @@ class CategoriaController extends Controller
                 ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
                 ->get();
 
-            return view('carta', compact('platillos', 'categoria', 'pedido', 'platillosPedido'));
+            return view('carta', compact('platillos', 'categoria', 'pedido', 'platillosPedido', 'paquetes'));
 
         }else{
 
