@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaqueteHasPlatillo;
 use Illuminate\Http\Request;
+use App\Http\Requests\PaqueteHasPlatillo\Create;
 
 class PaqueteHasPlatilloController extends Controller
 {
@@ -26,9 +27,66 @@ class PaqueteHasPlatilloController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Create $request)
     {
-        //
+        try {
+
+            $platillos = PaqueteHasPlatillo::where('idPaquete', '=', $request->id )->get();
+
+            if( count( $platillos ) > 0 ){
+
+                foreach( $platillos as $platillo ){
+
+                    $platillo->delete();
+
+                }
+
+                if( count( $request->platillos ) > 0 ){
+
+                    foreach( $request->platillos as $platillo ){
+    
+                        $paqueteHasPlatillo = PaqueteHasPlatillo::create([
+    
+                            'idPaquete' => $request->id,
+                            'idPlatillo' => $platillo
+    
+                        ]);
+    
+                    }
+    
+                    $datos['exito'] = true;
+    
+                }
+
+            }else{
+
+                if( count( $request->platillos ) > 0 ){
+
+                    foreach( $request->platillos as $platillo ){
+    
+                        $paqueteHasPlatillo = PaqueteHasPlatillo::create([
+    
+                            'idPaquete' => $request->id,
+                            'idPlatillo' => $platillo
+    
+                        ]);
+    
+                    }
+    
+                    $datos['exito'] = true;
+    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

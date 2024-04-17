@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paquete;
 use App\Models\Categoria;
 use App\Models\Platillo;
+use App\Models\Salsa;
 use Illuminate\Http\Request;
 use App\Http\Requests\Paquete\Create;
 use App\Http\Requests\Paquete\Read;
@@ -23,8 +24,9 @@ class PaqueteController extends Controller
             $paquetes = Paquete::all();
             $categorias = Categoria::all();
             $platillos = Platillo::all();
+            $salsas = Salsa::all();
 
-            return view('platillo.paquetes.index', compact('paquetes', 'categorias', 'platillos'));
+            return view('platillo.paquetes.index', compact('paquetes', 'categorias', 'platillos', 'salsas'));
 
         }else{
 
@@ -82,6 +84,11 @@ class PaqueteController extends Controller
 
             if( $paquete->id ){
 
+                $platillos = Platillo::select('platillos.id', 'platillos.nombre')
+                            ->join('paquete_has_platillos', 'platillos.id', '=', 'paquete_has_platillos.idPlatillo')
+                            ->where('paquete_has_platillos.idPaquete', '=', $paquete->id)
+                            ->get();
+
                 $datos['exito'] = true;
                 $datos['nombre'] = $paquete->nombre;
                 $datos['precio'] = $paquete->precio;
@@ -91,6 +98,7 @@ class PaqueteController extends Controller
                 $datos['bebidas'] = $paquete->cantidadBebidas;
                 $datos['descripcion'] = $paquete->descripcion;
                 $datos['id'] = $paquete->id;
+                $datos['platillos'] = $platillos;
 
             }
 

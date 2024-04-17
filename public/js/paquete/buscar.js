@@ -63,14 +63,14 @@ jQuery(document).ready(function(){
 
     });
 
-    $(".salsas").on('click', function(e){
+    $(".platillos").on('click', function(e){
 
         e.preventDefault();
 
         $.ajax({
 
             type: 'POST',
-            url: '/platillo/buscar',
+            url: '/paquete/buscar',
             data:{
 
                 'id' : $(this).attr('data-id'),
@@ -83,10 +83,27 @@ jQuery(document).ready(function(){
 
             if( respuesta.exito ){
 
-                $("#nombrePlatillo").val( respuesta.nombre ); 
-                $("#id").val( respuesta.id );
+                if( respuesta.platillos.length > 0 ){
 
-                $("#agregar").attr('disabled', false);
+                    $.each( respuesta.platillos, function(i, platillo){
+
+                        $('input[type=checkbox][id='+ platillo.id +']').prop('checked', true);
+
+                    });
+                    
+                    $("#nombrePaquete").val( respuesta.nombre ); 
+                    $("#id").val( respuesta.id );
+
+                    $("#agregar").attr('disabled', false);
+
+                }else{
+
+                    $("#nombrePaquete").val( respuesta.nombre ); 
+                    $("#id").val( respuesta.id );
+
+                    $("#agregar").attr('disabled', false);
+
+                }
 
             }else{
 
@@ -101,7 +118,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/platillos';
+                        window.location.href = '/paquetes';
 
                     }
 
@@ -115,14 +132,14 @@ jQuery(document).ready(function(){
 
     });
 
-    $(".preparaciones").on('click', function(e){
+    $(".bebidas").on('click', function(e){
 
         e.preventDefault();
 
         $.ajax({
 
             type: 'POST',
-            url: '/platillo/buscar',
+            url: '/paquete/buscar',
             data:{
 
                 'id' : $(this).attr('data-id'),

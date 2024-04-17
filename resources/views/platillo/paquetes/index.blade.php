@@ -43,17 +43,12 @@
                                             @can('borrar-platillo')
                                                 <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                                             @endcan
-                                            @if( $paquete->cantidadSalsas > 0)
-                                                @can('ver-salsas')
-                                                    <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $paquete->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
-                                                @endcan
-                                            @endif
                                             @if ( $paquete->cantidadBebidas > 0 )
                                                 <x-adminlte-button class="bebidas" id="bebidas" label="Bebida(s)" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-drink" data-toggle="modal" data-target="#modalBebidas"></x-adminlte-button>
                                             @endif
                                             @if( count($platillos) > 0 )
                                                 @can('ver-platillos')
-                                                    <x-adminlte-button class="platillos" id="platillos" label="Platillo(s)" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-drumstick-bite" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
+                                                    <x-adminlte-button class="platillos" id="platillos" label="Platillo(s)" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-drumstick-bite" data-toggle="modal" data-target="#modalPlatillos"></x-adminlte-button>
                                                 @endcan
                                             @endif
                                         </td>
@@ -77,6 +72,7 @@
 
     @include('platillo.paquetes.nuevo')
     @include('platillo.paquetes.editar')
+    @include('platillo.paquetes.platillos')
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -84,5 +80,6 @@
     <script src="{{ asset('js/paquete/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/paquete/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/paquete/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/paquete/platillos.js') }}" type="text/javascript"></script>
 
 @stop

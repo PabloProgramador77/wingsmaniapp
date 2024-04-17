@@ -140,3 +140,4 @@ Route::post('/paquete/agregar', [App\Http\Controllers\PaqueteController::class, 
 Route::post('/paquete/buscar', [App\Http\Controllers\PaqueteController::class, 'show'])->name('buscar-paquete');
 Route::post('/paquete/actualizar', [App\Http\Controllers\PaqueteController::class, 'update'])->name('actualizar-paquete');
 Route::post('/paquete/borrar', [App\Http\Controllers\PaqueteController::class, 'destroy'])->name('borrar-paquete');
+Route::post('/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'store'])->name('agregar-platillos-paquete');

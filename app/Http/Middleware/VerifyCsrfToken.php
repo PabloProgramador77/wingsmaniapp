@@ -89,6 +89,7 @@ class VerifyCsrfToken extends Middleware
         '/paquete/buscar',
         '/paquete/actualizar',
         '/paquete/borrar',
+        '/paquete/platillos',
 
     ];
 }
