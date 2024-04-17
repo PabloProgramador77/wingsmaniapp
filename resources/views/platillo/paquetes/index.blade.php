@@ -43,9 +43,6 @@
                                             @can('borrar-platillo')
                                                 <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                                             @endcan
-                                            @if ( $paquete->cantidadBebidas > 0 )
-                                                <x-adminlte-button class="bebidas" id="bebidas" label="Bebida(s)" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-drink" data-toggle="modal" data-target="#modalBebidas"></x-adminlte-button>
-                                            @endif
                                             @if( count($platillos) > 0 )
                                                 @can('ver-platillos')
                                                     <x-adminlte-button class="platillos" id="platillos" label="Platillo(s)" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-drumstick-bite" data-toggle="modal" data-target="#modalPlatillos"></x-adminlte-button>
