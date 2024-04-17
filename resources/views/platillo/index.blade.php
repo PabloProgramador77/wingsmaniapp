@@ -8,10 +8,11 @@
                 <h4 class="my-auto"><i class="fas fa-drumstick-bite"></i> Platillos</h4>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-5">
                 @can('agregar-platillo')
-                    <x-adminlte-button id="nuevo" label="Agregar platillo" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
+                    <x-adminlte-button id="nuevo" label="Platillo" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
                 @endcan
+                <a href="{{ url('/paquetes') }}" class="btn btn-info mx-1 rounded"><i class="fas fa-boxes"></i> Paquetes</a>
                 <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>

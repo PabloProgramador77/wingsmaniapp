@@ -134,3 +134,9 @@ Route::post('/envio/agregar', [App\Http\Controllers\EnvioController::class, 'sto
 Route::post('/envio/actualizar', [App\Http\Controllers\EnvioController::class, 'update'])->name('actualizar-envio');
 Route::post('/envio/buscar', [App\Http\Controllers\EnvioController::class, 'show'])->name('buscar-envio');
 Route::post('/envio/borrar', [App\Http\Controllers\EnvioController::class, 'destroy'])->name('borrar-envio');
+
+Route::get('/paquetes', [App\Http\Controllers\PaqueteController::class, 'index'])->name('paquetes');
+Route::post('/paquete/agregar', [App\Http\Controllers\PaqueteController::class, 'store'])->name('agregar-paquete');
+Route::post('/paquete/buscar', [App\Http\Controllers\PaqueteController::class, 'show'])->name('buscar-paquete');
+Route::post('/paquete/actualizar', [App\Http\Controllers\PaqueteController::class, 'update'])->name('actualizar-paquete');
+Route::post('/paquete/borrar', [App\Http\Controllers\PaqueteController::class, 'destroy'])->name('borrar-paquete');
