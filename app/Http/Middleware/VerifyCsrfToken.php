@@ -90,6 +90,8 @@ class VerifyCsrfToken extends Middleware
         '/paquete/actualizar',
         '/paquete/borrar',
         '/paquete/platillos',
+        '/paquete/bebidas',
+        '/paquetes/bebidas',
 
     ];
 }

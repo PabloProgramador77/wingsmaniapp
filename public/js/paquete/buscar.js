@@ -132,4 +132,73 @@ jQuery(document).ready(function(){
 
     });
 
+    $(".bebidas").on('click', function(e){
+
+        e.preventDefault();
+
+        $.ajax({
+
+            type: 'POST',
+            url: '/paquetes/bebidas',
+            data:{
+
+                'id' : $(this).attr('data-id'),
+
+            },
+            dataType: 'json',
+            encode: true
+
+        }).done(function(respuesta){
+
+            if( respuesta.exito ){
+
+                if( respuesta.platillos.length > 0 ){
+
+                    $.each( respuesta.platillos, function(i, platillo){
+
+                        $('input[name=bebida][id='+ platillo.id +']').prop('checked', true);
+
+                    });
+                    
+                    $("#nombrePaqueteBeb").val( respuesta.nombre ); 
+                    $("#idPaquete").val( respuesta.id );
+
+                    $("#agregarBebida").attr('disabled', false);
+
+                }else{
+
+                    $("#nombrePaqueteBeb").val( respuesta.nombre ); 
+                    $("#idPaquete").val( respuesta.id );
+
+                    $("#agregarBebida").attr('disabled', false);
+
+                }
+
+            }else{
+
+                Swal.fire({
+
+                    icon: 'error',
+                    title: respuesta.mensaje,
+                    allowOutsideClick: false,
+                    showConfirmButton: true
+
+                }).then((resultado)=>{
+
+                    if( resultado.isConfirmed ){
+
+                        window.location.href = '/paquetes';
+
+                    }
+
+                });
+
+                $("#agregarBebida").attr('disabled', true);
+
+            }
+
+        });
+
+    });
+
 });

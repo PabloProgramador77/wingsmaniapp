@@ -141,4 +141,5 @@ Route::post('/paquete/buscar', [App\Http\Controllers\PaqueteController::class, '
 Route::post('/paquete/actualizar', [App\Http\Controllers\PaqueteController::class, 'update'])->name('actualizar-paquete');
 Route::post('/paquete/borrar', [App\Http\Controllers\PaqueteController::class, 'destroy'])->name('borrar-paquete');
 Route::post('/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'store'])->name('agregar-platillos-paquete');
-Route::post('/paquete/bebidas', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'edit'])->name('agregar-bebidas-paquete');
+Route::post('/paquetes/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('buscar-bebidas-paquete');
+Route::post('/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'store'])->name('agregar-bebidas-paquete');
