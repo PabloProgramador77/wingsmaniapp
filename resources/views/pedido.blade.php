@@ -15,7 +15,9 @@
         <x-adminlte-datatable id="platillos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
             
             @if( count( $platillosPedido ) > 0 )
+
                 @foreach($platillosPedido as $platillo)
+
                     <tr>
                         <td>
                             <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $platillo->id }}" icon="fas fa-plus-circle" class="mx-2 sumar"></x-adminlte-button>
@@ -43,12 +45,38 @@
                             <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
                         </td>
                     </tr>
+
                 @endforeach
 
-            @else
-                <tr>
-                    <td colspan="4" class="text-info">Sin platillos ordenados</td>
-                </tr>
+            @endif
+
+            @if ( count( $paquetesPedido ) > 0 )
+
+                @foreach ( $paquetesPedido as $paquete )
+                    
+                    <tr>
+                        <td>
+                            <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $paquete->id }}" icon="fas fa-plus-circle" class="mx-2 sumarPaquete"></x-adminlte-button>
+                            <b class="cantidadPlatillo" id="cantidadPaquete" data-id="{{ $paquete->id }}">{{ $paquete->cantidad }}</b>
+                            <x-adminlte-button type="button" name="restar" id="restar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-minus-circle" class="mx-2 restarPaquete"></x-adminlte-button>
+                        </td>
+                        <td>{{ $paquete->nombre }}</td>
+                        <td>
+                            @if ( $paquete->preparacion != NULL )
+                            
+                                {{ $paquete->preparacion }}
+
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            <x-adminlte-button class="borrar" id="borrar" label="Borrar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                        </td>
+                    </tr>
+
+                @endforeach
+                
             @endif
             
         </x-adminlte-datatable>

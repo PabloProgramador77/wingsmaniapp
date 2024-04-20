@@ -26,7 +26,7 @@
                     
                     @foreach ($paquetes as $paquete)
                         <div class="col-lg-4">
-                            <x-adminlte-small-box title="$ {{ $paquete->precio }}" text="{{ $paquete->nombre }}" icon="fas fa-tag" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
+                            <x-adminlte-small-box title="$ {{ $paquete->precio }}" text="{{ $paquete->nombre }}" icon="fas fa-tag" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
                         </div>
                     @endforeach
 
@@ -56,6 +56,9 @@
         <script src="{{ asset('js/pedido/restar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/ordenar.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/pedido/borrarPaquete.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/pedido/restarPaquete.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/pedido/sumarPaquete.js') }}" type="text/javascript"></script>
     @endif
 
 @stop

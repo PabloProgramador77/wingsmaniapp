@@ -49,13 +49,20 @@ class CategoriaController extends Controller
                         ->get();
 
             $categoria = Categoria::find($id);
+
             $pedido = Pedido::find(session()->get('idPedido'));
+            
             $platillosPedido = Platillo::select('pedido_has_platillos.id', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion', 'platillos.nombre', 'platillos.id')
                 ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
                 ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
                 ->get();
 
-            return view('carta', compact('platillos', 'categoria', 'pedido', 'platillosPedido', 'paquetes'));
+            $paquetesPedido = Paquete::select('pedido_has_paquetes.id', 'pedido_has_paquetes.cantidad', 'pedido_has_paquetes.preparacion', 'paquetes.nombre')
+                            ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                            ->where('pedido_has_paquetes.idPedido', '=', session()->get('idPedido'))
+                            ->get();
+
+            return view('carta', compact('platillos', 'categoria', 'pedido', 'platillosPedido', 'paquetes', 'paquetesPedido'));
 
         }else{
 
