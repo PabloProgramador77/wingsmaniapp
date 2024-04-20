@@ -42,7 +42,7 @@ jQuery(document).ready(function(){
                     }
 
                     $("#cantidadPaquete[data-id='"+dataId+"']").text( respuesta.cantidad );
-                    $("#totalPedido").text('Total: $ '+respuesta.total+' MXN');
+                    $("#totalPedido").text('Total: $ '+respuesta.total);
 
                 }else{
 

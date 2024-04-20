@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PedidoHasPlatillo;
 use App\Models\Platillo;
 use App\Models\Pedido;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 use App\Http\Requests\PedidoHasPlatillo\Create;
 use App\Http\Requests\PedidoHasPlatillo\Update;
@@ -269,26 +270,38 @@ class PedidoHasPlatilloController extends Controller
 
             $total = 0;
             
+            $platillos = collect();
+
             $pedido = Pedido::find( session()->get('idPedido') );
+
             $platillosPedido = Platillo::select('platillos.precio', 'pedido_has_platillos.cantidad')
                 ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
                 ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
                 ->get();
 
-            if( count( $platillosPedido ) > 0 ){
+            $platillos = $platillos->merge( $platillosPedido );
 
-                foreach( $platillosPedido as $platillo ){
+            $paquetesPedido = Paquete::select('paquetes.precio', 'pedido_has_paquetes.cantidad')
+                        ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                        ->where('pedido_has_paquetes.idPedido', '=', session()->get('idPedido'))
+                        ->get();
+
+            $platillos = $platillos->merge( $paquetesPedido );
+
+            if( count( $platillos ) > 0 ){
+
+                foreach( $platillos as $platillo ){
 
                     $total += ($platillo->precio * $platillo->cantidad);
 
                 }
 
                 $pedido = Pedido::where('id', '=', session()->get('idPedido'))
-                    ->update([
+                        ->update([
 
-                        'total' => $total
+                            'total' => $total
 
-                    ]);
+                ]);
 
                 return $total;
 

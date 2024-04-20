@@ -195,19 +195,29 @@ class PedidoHasPaqueteController extends Controller
         try {
 
             $total = 0;
-            
+            $platillos = collect();
+
             $pedido = Pedido::find( session()->get('idPedido') );
 
             $paquetesPedido = Paquete::select('paquetes.precio', 'pedido_has_paquetes.cantidad')
-                ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
-                ->where('pedido_has_paquetes.idPedido', '=', session()->get('idPedido'))
-                ->get();
+                            ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                            ->where('pedido_has_paquetes.idPedido', '=', session()->get('idPedido'))
+                            ->get();
 
-            if( count( $paquetesPedido ) > 0 ){
+            $platillos = $platillos->merge( $paquetesPedido );
 
-                foreach( $paquetesPedido as $paquete ){
+            $platillosPedido = Platillo::select('platillos.precio', 'pedido_has_platillos.cantidad')
+                            ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                            ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
+                            ->get();
 
-                    $total += ($paquete->precio * $paquete->cantidad);
+            $platillos = $platillos->merge( $platillosPedido );
+
+            if( count( $platillos ) > 0 ){
+
+                foreach( $platillos as $platillo ){
+
+                    $total += ($platillo->precio * $platillo->cantidad);
 
                 }
 
@@ -216,7 +226,7 @@ class PedidoHasPaqueteController extends Controller
 
                         'total' => $total
 
-                    ]);
+                ]);
 
                 return $total;
 
