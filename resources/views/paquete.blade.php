@@ -58,9 +58,20 @@
                         
                     @endforeach
 
-                @else
+                @endif
 
-                    <p class="col-lg-12 text-danger border shadow p-2 bg-warning m-2 rounded text-center">Sin platillos agregados al paquete</p>
+                @if ( count( $paquete->bebidas ) > 0 )
+                    
+                    <p class="col-lg-12 col-md-12 text-secondary border shadow p-2 bg-info m-2"><b>Elige las bebidas de tu paquete</b></p>
+
+                    @foreach ($paquete->bebidas as $bebida)
+                        
+                        <div class="col-md-4 col-lg-3">
+                            <x-adminlte-input-switch id="bebida{{ $bebida->id }}" name="bebida" label="{{ $bebida->nombre }}" data-on-text="Con {{ $bebida->nombre }}" data-off-text="Sin {{ $bebida->nombre }}" data-id="{{ $bebida->nombre }}">
+                            </x-adminlte-input-switch>
+                        </div>
+
+                    @endforeach
 
                 @endif
 

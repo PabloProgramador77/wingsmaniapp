@@ -30,13 +30,13 @@ class Paquete extends Model
 
     public function categoria(){
 
-        return $this->hasOne( Categoria::class, 'id','idCategoria' );
+        return $this->hasOne( Categoria::class, 'id', 'idCategoria' );
         
     }
 
     public function bebidas(){
 
-        return $this->belongsToMany( Platillo::class,'paquete_has_bebidas', 'idPaquete', 'idBebida' );
+        return $this->belongsToMany( Platillo::class, 'paquete_has_bebidas', 'idPaquete', 'idBebida' );
         
     }
 }
