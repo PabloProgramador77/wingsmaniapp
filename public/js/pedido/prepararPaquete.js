@@ -3,8 +3,7 @@ jQuery(document).ready(function(){
 
     $("#continuar").on('click', function(e){
 
-        var salsas = new Array();
-        var preparaciones = new Array();
+        var preparaciones = '';
 
         e.preventDefault();
 
@@ -12,13 +11,29 @@ jQuery(document).ready(function(){
 
         $("input[name=salsa]:checked").each(function(){
 
-            salsas.push($(this).attr('data-id'));
+            if( preparaciones.includes( $(this).attr('data-value') ) === true ){
+
+                preparaciones += ', ' + $(this).attr('data-id');
+
+            }else{
+
+                preparaciones += ', ' + $(this).attr('data-value') + ', ' + $(this).attr('data-id');
+
+            }
 
         });
 
         $("input[name=preparacion]:checked").each(function(){
 
-            preparaciones.push($(this).attr('data-id'));
+            if( preparaciones.includes( $(this).attr('data-value') ) === true ){
+
+                preparaciones += ', ' + $(this).attr('data-id');
+
+            }else{
+
+                preparaciones += ', ' + $(this).attr('data-value') + ', ' + $(this).attr('data-id');
+
+            }
 
         });
 
@@ -45,7 +60,6 @@ jQuery(document).ready(function(){
                     data:{
 
                         'id' : $("#id").val(),
-                        'salsas' : salsas,
                         'preparaciones' : preparaciones,
 
                     },

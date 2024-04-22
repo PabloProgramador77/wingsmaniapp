@@ -117,33 +117,11 @@ class PedidoHasPaqueteController extends Controller
     public function update(Update $request)
     {
         try {
-            
-            $preparacionPaquete = '';
-
-            if( is_array( $request->salsas ) && count( $request->salsas ) > 0 ){
-
-                foreach( $request->salsas as $salsa ){
-
-                    $preparacionPaquete .= $salsa.', ';
-
-                }
-
-            }
-
-            if( is_array( $request->preparaciones ) && count( $request->preparaciones ) > 0 ){
-
-                foreach( $request->preparaciones as $preparacion ){
-
-                    $preparacionPaquete .= $preparacion.', ';
-
-                }
-
-            }
 
             $pedidoHasPaquete = PedidoHasPaquete::where('id', '=', $request->id )
                                 ->update([
 
-                                    'preparacion' => $preparacionPaquete
+                                    'preparacion' => $request->preparaciones
 
             ]);
 

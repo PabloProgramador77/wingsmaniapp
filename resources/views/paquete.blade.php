@@ -33,7 +33,7 @@
                             @foreach($platillo->salsas as $salsa)
 
                                 <div class="col-md-4 col-lg-3">
-                                    <x-adminlte-input-switch id="salsa{{ $salsa->id }}{{ $platillo->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}">
+                                    <x-adminlte-input-switch id="salsa{{ $salsa->id }}{{ $platillo->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}" data-value="{{ $platillo->nombre }}">
                                     </x-adminlte-input-switch>
                                 </div>
                                 
@@ -48,7 +48,7 @@
                             @foreach( $platillo->preparaciones as $preparacion )
 
                                 <div class="col-md-4 col-lg-3">
-                                    <x-adminlte-input-switch id="preparacion{{ $preparacion->id }}{{ $platillo->id }}" name="preparacion" label="{{ $preparacion->nombre }}" data-on-text="{{ $preparacion->nombre }}" data-off-text="Sin preparación" data-id="{{ $preparacion->nombre }}">
+                                    <x-adminlte-input-switch id="preparacion{{ $preparacion->id }}{{ $platillo->id }}" name="preparacion" label="{{ $preparacion->nombre }}" data-on-text="{{ $preparacion->nombre }}" data-off-text="Sin preparación" data-id="{{ $preparacion->nombre }}" data-value="{{ $platillo->nombre }}">
                                     </x-adminlte-input-switch>
                                 </div>
                                 
