@@ -8,7 +8,7 @@
                 <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
                 <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: <b>{{ strtoupper( $pedido->tipo ) }}</b></p>
                 <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: <b>{{ $pedido->created_at }}</b></p>
-                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }} MXN</b></p>
+                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }}</b></p>
                 
                 <div class="col-md-3 m-1">
                     
@@ -54,14 +54,23 @@
                                     <td>{{ $platillo->cantidad }}</td>
                                     <td>{{ $platillo->nombre }}</td>
                                     <td>{{ $platillo->preparacion }}</td>
-                                    <td>$ {{ ($platillo->precio * $platillo->cantidad) }} MXN</td>
+                                    <td>$ {{ ($platillo->precio * $platillo->cantidad) }}</td>
                                 </tr>
                             @endforeach
 
-                        @else
-                            <tr>
-                                <td colspan="4" class="text-info">Sin platillos en el pedido</td>
-                            </tr>
+                        @endif
+
+                        @if ( count( $paquetes ) > 0 )
+
+                            @foreach ($paquetes as $paquete)
+                                <tr>
+                                    <td>{{ $paquete->cantidad }}</td>
+                                    <td>{{ $paquete->nombre }}</td>
+                                    <td>{{ $paquete->preparacion }}</td>
+                                    <td>$ {{ $paquete->precio * $paquete->cantidad }}</td>
+                                </tr>
+                            @endforeach
+                            
                         @endif
                         
                     </x-adminlte-datatable>

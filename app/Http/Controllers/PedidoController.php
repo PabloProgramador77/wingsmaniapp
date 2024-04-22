@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Domicilio;
 use App\Models\Platillo;
 use App\Models\Envio;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
@@ -273,18 +274,30 @@ class PedidoController extends Controller
             
             $pedido = Pedido::find( $idPedido );
 
+            $platillosPedido = collect();
+
             if( $pedido->id ){
 
                 $platillos = Platillo::select('platillos.nombre', 'platillos.precio', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion')
-                    ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
-                    ->where('pedido_has_platillos.idPedido', '=', $idPedido)
-                    ->get();
+                            ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                            ->where('pedido_has_platillos.idPedido', '=', $idPedido)
+                            ->get();
 
-                return view('pedido.pedido', compact('pedido', 'platillos'));
+                $platillosPedido = $platillosPedido->merge( $platillos );
+
+                $paquetes = Paquete::select('paquetes.nombre', 'paquetes.precio', 'pedido_has_paquetes.cantidad', 'pedido_has_paquetes.preparacion')
+                            ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                            ->where('pedido_has_paquetes.idPedido', '=', $idPedido)
+                            ->get();
+
+                $platillosPedido = $platillosPedido->merge( $paquetes );
+
+                return view('pedido.pedido', compact('pedido', 'platillos', 'paquetes'));
 
             }else{
 
                 return redirect('/pedidos/cliente');
+
             }
 
         } catch (\Throwable $th) {
@@ -453,6 +466,8 @@ class PedidoController extends Controller
 
             ]);
 
+            $platillosComanda = collect();
+
             $comanda->writeHTML('<h1 style="font-size: 24px; text-align: center; font-style: bold;">COMANDA DE COCINA</h1>');
             $comanda->writeHTML('<h3 style="font-size: 14px; text-align: center;">'.$pedido->created_at.'</h3>');
             $comanda->writeHTML('<p style="font-size: 14px; text-align: center; font-style: bold;">Para llevar</p>');
@@ -463,7 +478,16 @@ class PedidoController extends Controller
                         ->where('pedido_has_platillos.idPedido', '=', $pedido->id)
                         ->get();
 
-            foreach( $platillos as $platillo ){
+            $platillosComanda = $platillosComanda->merge( $platillos );
+
+            $paquetes = Paquete::select('paquetes.nombre', 'pedido_has_paquetes.preparacion', 'pedido_has_paquetes.cantidad')
+                        ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                        ->where('pedido_has_paquetes.idPedido', '=', $pedido->id)
+                        ->get();
+
+            $platillosComanda = $platillosComanda->merge( $paquetes );
+
+            foreach( $platillosComanda as $platillo ){
 
                 $comanda->writeHTML('<p style="font-size: 24px; font-style: bold;">'.$platillo->cantidad.' '.$platillo->nombre.'</p>');
                 $comanda->writeHTML('<p style="font-size: 22px; font-style: bold;"><u>'.$platillo->preparacion.'</u></p>');
@@ -505,10 +529,21 @@ class PedidoController extends Controller
 
             ]);
 
+            $platillosTicket = collect();
+
             $platillos = Platillo::select('platillos.nombre', 'pedido_has_platillos.cantidad', 'platillos.precio')
                         ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
                         ->where('pedido_has_platillos.idPedido', '=', $pedido->id)
                         ->get();
+
+            $platillosTicket = $platillosTicket->merge( $platillos );
+
+            $paquetes = Paquete::select('paquetes.nombre', 'paquetes.precio', 'pedido_has_paquetes.cantidad')
+                        ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                        ->where('pedido_has_paquetes.idPedido', '=', $pedido->id)
+                        ->get();
+
+            $platillosTicket = $platillosTicket->merge( $paquetes );
 
             $ticket->writeHTML('<p style="font-size: 16px; font-style: bold; text-align: center; padding: 0px;">Wings Mania</p>');
             $ticket->writeHTML('<p style="font-size: 12px; font-style: normal; text-align: center; padding: 0px;">'.strtoupper($pedido->tipo).'</p>');
@@ -518,7 +553,7 @@ class PedidoController extends Controller
 
             $total = 0;
 
-            foreach( $platillos as $platillo ){
+            foreach( $platillosTicket as $platillo ){
 
                 $ticket->writeHTML('<p style="font-size: 11px; text-align: center; width: 100%;">'.$platillo->cantidad.' - '.$platillo->nombre.' $'.($platillo->precio * $platillo->cantidad).'</p>');
 
