@@ -12,24 +12,7 @@
                     <p class="bg-light border text-center p-2 mx-3 rounded">{{ $paquete->nombre }}</p>
                     <input type="hidden" name="id" id="id" value="{{ $pedidoHasPaquete->id }}">
                     <input type="hidden" name="bebidas" id="bebidas" value="{{ $paquete->cantidadBebidas }}">
-                    @if ( $paquete->cantidadSalsas == NULL || $paquete->cantidadSalsas == 0 )
-                        
-                        @foreach ($paquete->platillos as $platillo)
-
-                            @if ($platillo->cantidadSalsas != NULL || $platillo->cantidadSalsas > 0)
-                                
-                                <input type="hidden" name="salsas" id="salsas{{ $platillo->id }}" value="{{ $platillo->cantidadSalsas }}" data-id="{{ $platillo->nombre }}">    
-                            
-                            @endif
-                            
-                        @endforeach
-
-                    @else
-                    
-                        <input type="hidden" name="salsas" id="salsas" value="{{ $paquete->cantidadSalsas }}">
-
-                    @endif
-                    
+                    <input type="hidden" name="salsas" id="salsas" value="{{ $paquete->cantidadSalsas }}">
                 </div>
                 <div class="col-lg-3">
                     <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
@@ -51,7 +34,7 @@
                             @foreach($platillo->salsas as $salsa)
 
                                 <div class="col-md-4 col-lg-3">
-                                    <x-adminlte-input-switch id="salsa{{ $salsa->id }}{{ $platillo->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}" data-value="{{ $platillo->nombre }}">
+                                    <x-adminlte-input-switch class="salsa" id="salsa{{ $salsa->id }}{{ $platillo->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}" data-value="{{ $platillo->nombre }}">
                                     </x-adminlte-input-switch>
                                 </div>
                                 
@@ -101,16 +84,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/prepararPaquete.js') }}" type="text/javascript"></script>
     
-
-    @if ( $paquete->cantidadSalsas == NULL || $paquete->cantidadSalsas == 0 )
-                        
-        <script src="{{ asset() }}" type="text/javascript"></script>
-
-    @else
-    
-        <script src="{{ asset('js/pedido/prepararPaquete.js') }}" type="text/javascript"></script>
-
-    @endif
-
 @stop

@@ -53,7 +53,7 @@ jQuery(document).ready(function(){
 
             Swal.fire({
                 icon: 'info',
-                title: 'Máximo ' + $("#bebidas").val() + ' bebida(s)',
+                title: 'Máximo ' + $("#bebidas").val() + ' bebida(s).',
                 allowOutsideClick: false,
                 showConfirmButton: true
             });
