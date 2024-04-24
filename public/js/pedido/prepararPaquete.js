@@ -5,12 +5,15 @@ jQuery(document).ready(function(){
 
         var preparaciones = '';
         var bebidas = new Array();
+        var salsas = new Array();
 
         e.preventDefault();
 
         let procesamiento;
 
         $("input[name=salsa]:checked").each(function(){
+
+            salsas.push( $(this).attr('data-id') );
 
             if( preparaciones.includes( $(this).attr('data-value') ) === true ){
 
@@ -46,11 +49,11 @@ jQuery(document).ready(function(){
 
         });
 
-        if( bebidas.length > $("#bebidas").val() ){
+        if( bebidas.length > $("#bebidas").val() || salsas.length > $("#salsas").val() ){
 
             Swal.fire({
                 icon: 'info',
-                title: 'Este paquete solo permite ' + $("#bebidas").val() + ' bebida(s).',
+                title: 'Máximo ' + $("#bebidas").val() + ' bebida(s) y ' + $("#salsas").val() + ' salsa(s).',
                 allowOutsideClick: false,
                 showConfirmButton: true
             });
