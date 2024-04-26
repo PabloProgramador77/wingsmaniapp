@@ -366,6 +366,7 @@ return [
             'url' => 'envios',
             'icon' => 'fas fa-truck',
             'active' => ['envios'],
+            'can' => 'ver-envios',
         ]
     ],
 

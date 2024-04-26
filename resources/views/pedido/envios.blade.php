@@ -28,31 +28,39 @@
             <p class="text-secondary border-bottom">Envio(s)</p>
             <div class="form-group row">
 
-                @if ( count( $envios ) > 0 )
-    
-                    @foreach($envios as $envio)
-
-                        <div class="col-md-4 col-lg-4">
-                            <x-adminlte-input-switch id="envio{{ $envio->id }}" name="envio" label="{{ $envio->nombre }}" data-on-text="{{ $envio->monto }}" data-off-text="{{ $envio->monto }}" data-id="{{ $envio->id }}">
-                            </x-adminlte-input-switch>
-                        </div>
-
-                    @endforeach
-
-                @else
-
-                    <div class="col-md-12">
-                        <p class="fs-5 fw-semibold text-center text-danger"><i class="fas fa-info-circle"></i> Sin envios registrados. <a href="{{ url('envios') }}">Registralos aquí</a></p>
-                    </div>
+                @can('ver-envios')
                     
-                @endif
+                    @if ( count( $envios ) > 0 )
+        
+                        @foreach($envios as $envio)
+
+                            @can('ver-envio')
+                                <div class="col-md-4 col-lg-4">
+                                    <x-adminlte-input-switch id="envio{{ $envio->id }}" name="envio" label="{{ $envio->nombre }}" data-on-text="{{ $envio->monto }}" data-off-text="{{ $envio->monto }}" data-id="{{ $envio->id }}">
+                                    </x-adminlte-input-switch>
+                                </div>
+                            @endcan
+
+                        @endforeach
+
+                    @else
+
+                        <div class="col-md-12">
+                            <p class="fs-5 fw-semibold text-center text-danger"><i class="fas fa-info-circle"></i> Sin envios registrados. <a href="{{ url('envios') }}">Registralos aquí</a></p>
+                        </div>
+                        
+                    @endif
+
+                @endcan
 
             </div>
             <input type="hidden" name="idPedido" id="idPedido">
         </form>
     </div>
-    <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" id="agregarEnvio" icon="fas fa-save"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
-    </x-slot>
+    @can('asignar-envio')
+        <x-slot name="footerSlot">
+            <x-adminlte-button theme="primary" label="Agregar" id="agregarEnvio" icon="fas fa-save"></x-adminlte-button>
+            <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
+        </x-slot>
+    @endcan
 </x-adminlte-modal>
