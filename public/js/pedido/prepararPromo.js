@@ -6,6 +6,7 @@ jQuery(document).ready(function(){
         var preparaciones = '';
         var bebidas = new Array();
         var salsas = new Array();
+        var countById = {};
 
         e.preventDefault();
 
@@ -13,15 +14,45 @@ jQuery(document).ready(function(){
 
         $("input[name=salsa]:checked").each(function(){
 
-            salsas.push( $(this).attr('data-id') );
+            var valoresPlatillo = $(this).attr('data-value').split(',');
 
-            if( preparaciones.includes( $(this).attr('data-value') ) === true ){
+            var id = valoresPlatillo[0];
+            var value = parseInt( valoresPlatillo[1] );
 
-                preparaciones += ', ' + $(this).attr('data-id');
+            if( !countById.hasOwnProperty(id) ){
+
+                countById[id] = 0;
+
+            }
+
+            countById[id]++;
+
+            console.log( countById );
+
+            if( countById[id] > value ){
+
+                Swal.fire({
+
+                    icon: 'warning',
+                    title: 'Máximo ' + value + ' salsa(s) en el platillo ' + id,
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+                
+                });
 
             }else{
 
-                preparaciones += ', ' + $(this).attr('data-value') + ', ' + $(this).attr('data-id');
+                salsas.push( $(this).attr('data-id') );
+
+                if( preparaciones.includes( valoresPlatillo[0] ) === true ){
+
+                    preparaciones += ', ' + valoresPlatillo[0];
+
+                }else{
+
+                    preparaciones += ', ' + valoresPlatillo[0] + ', ' + $(this).attr('data-id');
+
+                }
 
             }
 
@@ -49,133 +80,111 @@ jQuery(document).ready(function(){
 
         });
 
-        if( bebidas.length > $("#bebidas").val() ){
+        Swal.fire({
+    
+            title: 'Preparando...',
+            html: 'Un momento por favor: <b></b>',
+            timer: 9975,
+            allowOutsideClick: false,
+            didOpen: ()=>{
 
-            Swal.fire({
-                icon: 'info',
-                title: 'Máximo ' + $("#bebidas").val() + ' bebida(s).',
-                allowOutsideClick: false,
-                showConfirmButton: true
-            });
+                Swal.showLoading();
+                const b = Swal.getHtmlContainer().querySelector('b');
+                procesamiento = setInterval(()=>{
 
-        }else if( salsas.length > $("#salsas").val() ){
+                    b.textContent = Swal.getTimerLeft();
 
-            Swal.fire({
-                icon: 'info',
-                title: 'Máximo ' + $("#salsas").val() + ' salsa(s).',
-                allowOutsideClick: false,
-                showConfirmButton: true
-            });
+                }, 100);
 
-        }else{
+                $.ajax({
 
-            Swal.fire({
-    
-                title: 'Preparando...',
-                html: 'Un momento por favor: <b></b>',
-                timer: 9975,
-                allowOutsideClick: false,
-                didOpen: ()=>{
-    
-                    Swal.showLoading();
-                    const b = Swal.getHtmlContainer().querySelector('b');
-                    procesamiento = setInterval(()=>{
-    
-                        b.textContent = Swal.getTimerLeft();
-    
-                    }, 100);
-    
-                    $.ajax({
-    
-                        type: 'POST',
-                        url: '/paquete/preparar',
-                        data:{
-    
-                            'id' : $("#id").val(),
-                            'preparaciones' : preparaciones,
-    
-                        },
-                        dataType: 'json',
-                        encode: true
-    
-                    }).done(function(respuesta){
-    
-                        if( respuesta.exito ){
-    
-                            Swal.fire({
-    
-                                icon: 'success',
-                                title: 'Paquete Preparado',
-                                allowOutsideClick: false,
-                                showConfirmButton: true
-    
-                            }).then((resultado)=>{
-    
-                                if( resultado.isConfirmed ){
-    
-                                    window.location.href = '/pedido/menu';
-    
-                                }
-    
-                            });
-    
-                        }else{
-    
-                            Swal.fire({
-    
-                                icon: 'error',
-                                title: respuesta.mensaje,
-                                allowOutsideClick: false,
-                                showConfirmButton: true
-    
-                            }).then((resultado)=>{
-    
-                                if( resultado.isConfirmed ){
-    
-                                    window.location.href = '/pedido/menu';
-    
-                                }
-    
-                            });
-    
-                        }
-    
-                    });
-    
-                },
-                willClose: ()=>{
-    
-                    clearInterval(procesamiento);
-    
-                }
-    
-            }).then(function(resultado){
-    
-                if( resultado.dismiss == Swal.DismissReason.timer ){
-    
-                    Swal.fire({
-    
-                        icon: 'warning',
-                        title: 'Hubo un inconveniente. Trata de nuevo.',
-                        allowOutsideClick: false,
-                        showConfirmButton: true
-    
-                    }).then((resultado)=>{
-    
-                        if( resultado.isConfirmed ){
-    
-                            window.location.href = '/pedido/menu';
-    
-                        }
-    
-                    });
-    
-                }
-                
-            });
+                    type: 'POST',
+                    url: '/paquete/preparar',
+                    data:{
 
-        }
+                        'id' : $("#id").val(),
+                        'preparaciones' : preparaciones,
+
+                    },
+                    dataType: 'json',
+                    encode: true
+
+                }).done(function(respuesta){
+
+                    if( respuesta.exito ){
+
+                        Swal.fire({
+
+                            icon: 'success',
+                            title: 'Paquete Preparado',
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+
+                        }).then((resultado)=>{
+
+                            if( resultado.isConfirmed ){
+
+                                window.location.href = '/pedido/menu';
+
+                            }
+
+                        });
+
+                    }else{
+
+                        Swal.fire({
+
+                            icon: 'error',
+                            title: respuesta.mensaje,
+                            allowOutsideClick: false,
+                            showConfirmButton: true
+
+                        }).then((resultado)=>{
+
+                            if( resultado.isConfirmed ){
+
+                                window.location.href = '/pedido/menu';
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+            },
+            willClose: ()=>{
+
+                clearInterval(procesamiento);
+
+            }
+
+        }).then(function(resultado){
+
+            if( resultado.dismiss == Swal.DismissReason.timer ){
+
+                Swal.fire({
+
+                    icon: 'warning',
+                    title: 'Hubo un inconveniente. Trata de nuevo.',
+                    allowOutsideClick: false,
+                    showConfirmButton: true
+
+                }).then((resultado)=>{
+
+                    if( resultado.isConfirmed ){
+
+                        window.location.href = '/pedido/menu';
+
+                    }
+
+                });
+
+            }
+            
+        });
 
     });
-
+    
 });
