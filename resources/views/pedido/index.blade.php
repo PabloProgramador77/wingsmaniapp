@@ -13,6 +13,7 @@
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
+            <p class="p-1 bg-light fw-semibold text-center my-2 col-lg-12"><i class="fas fa-info-circle"></i> En amarillo se marcan los pedidos nuevos que deben ser confirmados para su preparación en cocina.</p>
 
             @php
                 $heads = [
@@ -43,35 +44,35 @@
                                         <td>
                                             @if( $pedido->estatus == 'Cobrado' )
                                                 @can('cobrar-pedido')
-                                                    <x-adminlte-button class="pagar" id="pagar" label="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check"></x-adminlte-button>
+                                                    <x-adminlte-button class="pagar" id="pagar" title="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check-double"></x-adminlte-button>
                                                 @endcan
                                             @endif
 
                                             @if( $pedido->estatus == 'Pendiente' )
                                                 @can('borrar-pedido')
-                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
+                                                    <x-adminlte-button class="cancelar" id="cancelar" title="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
                                                 @endcan
                                                 @can('ver-pedido')
-                                                    <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i> Confirmar</a>
+                                                    <a class="btn btn-primary" href="{{ url('/pedido/ver') }}/{{ $pedido->id }}"><i class="fas fa-check"></i></a>
                                                 @endcan
                                             @endif
                                             
                                             @if( $pedido->estatus == 'Abierto' )
                                                 @can('borrar-pedido')
-                                                    <x-adminlte-button class="cancelar" id="cancelar" label="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
+                                                    <x-adminlte-button class="cancelar" id="cancelar" title="Cancelar" theme="danger" data-id="{{ $pedido->id }}" icon="fas fa-trash-alt" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
                                                 @endcan
                                                 @can('cobrar-pedido')
                                                     @if( $pedido->tipo == 'delivery' )
-                                                        <x-adminlte-button class="envios" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt" data-toggle="modal" data-target="#modalEnvios" data-id="{{ $pedido->id }}" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
+                                                        <x-adminlte-button class="envios" id="cobrar" title="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt" data-toggle="modal" data-target="#modalEnvios" data-id="{{ $pedido->id }}" data-value="{{ $pedido->cliente->name }}"></x-adminlte-button>
                                                     @else
-                                                        <x-adminlte-button class="cobrar" id="cobrar" label="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
+                                                        <x-adminlte-button class="cobrar" id="cobrar" title="Cobrar" theme="success" data-id="{{ $pedido->id }}" icon="fas fa-money-bill-alt"></x-adminlte-button>
                                                     @endif
                                                     
                                                 @endcan
                                             @endif
                                             
                                             @if( $pedido->estatus == 'Pagado' )
-                                                <p class="fs-4 fw-semibold text-center bg-warning p-1 m-1"><strong>Pedido Cerrado</strong></p>
+                                                <p class="fs-4 fw-semibold text-center bg-success p-1 m-1"><strong>Pedido Cerrado</strong></p>
                                             @endif
                                         </td>
                                     </tr>

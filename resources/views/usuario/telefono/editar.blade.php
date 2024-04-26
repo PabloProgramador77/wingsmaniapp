@@ -1,7 +1,7 @@
 <x-adminlte-modal id="modalEditarTelefono" title="Editar Telefono" theme="info" icon="fas fa-edit" static-backdrop scrollable>
 
     <div class="container-fluid border-bottom">
-        <p class="text-secondary"><b>Editar los datos como creas necesario</b>. Los campos con etiqueta * son obligatorios.</p>
+        <p class="text-secondary"><b>Edita el teléfono como creas necesario</b>.</p>
 
         <form novalidate>
             <div class="form-group">
@@ -18,8 +18,8 @@
     </div>
     <x-slot name="footerSlot">
         @can('editar-telefono')
-            <x-adminlte-button theme="primary" label="Guardar Cambios" id="actualizarTelefono"></x-adminlte-button>
+            <x-adminlte-button theme="primary" label="Guardar Cambios" id="actualizarTelefono" icon="fas fa-save"></x-adminlte-button>
         @endcan
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

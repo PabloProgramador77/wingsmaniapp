@@ -2,10 +2,19 @@
 @section('contenido')
     <div class="container-fluid col-md-12 p-2 bg-white">
 
-        <div class="container-fluid row col-md-12 border-bottom p-2">
+        <div class="container-fluid row border-bottom p-2">
 
-            <div class="col-md-7">
+            <div class="col-md-6 col-lg-7">
                 <h4 class="my-auto"><i class="fas fa-shopping-cart"></i> Mis Pedidos</h4>
+                
+            </div>
+
+            <div class="col-md-3 col-lg-4">
+
+                <a href="{{ url('/home') }}" class="btn btn-info mx-1 rounded">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
+
             </div>
 
             @php

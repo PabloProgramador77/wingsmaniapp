@@ -6,6 +6,10 @@
 
             <div class="container-fluid row">
                 <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
+                @if ( $pedido->tipo == 'delivery' )
+                    <p class="col-md-12 m-1 p-1 bg-light fw-semibold text-center"><i class="fas fa-info-circle"></i> Para los pedidos a domicilio, se hace un cargo extra al final de su preparación en el restaurante. Por lo que el total mostrado no es el precio final.</p>    
+                @endif
+                
                 <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: <b>{{ strtoupper( $pedido->tipo ) }}</b></p>
                 <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: <b>{{ $pedido->created_at }}</b></p>
                 <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }}</b></p>
@@ -20,13 +24,13 @@
 
                     @if( auth()->user()->hasRole(['Cliente']) )
 
-                        <a href="{{ url('/pedidos/cliente') }}" class="btn btn-success mx-1 rounded">
+                        <a href="{{ url('/pedidos/cliente') }}" class="btn btn-info rounded">
                             <i class="fas fa-shopping-cart"></i> Mis Pedidos
                         </a>
 
                     @else
                         
-                        <a href="{{ url('/pedidos') }}" class="btn btn-info mx-1 rounded">
+                        <a href="{{ url('/pedidos') }}" class="btn btn-info rounded">
                             <i class="fas fa-shopping-cart"></i> Pedidos
                         </a>
 

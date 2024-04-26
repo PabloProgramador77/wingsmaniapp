@@ -1,31 +1,31 @@
 <x-adminlte-modal id="modalEnvios" title="Envios de Pedido(s)" size="md" theme="success" icon="fas fa-truck" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
-        <p class="text-secondary">Elige el envio para el pedido.</p>
+        <p class="text-secondary"><b>Elige el envio para el pedido y presiona el botón "<i class="fas fa-save"></i> Cobrar"</b>.</p>
         <form novalidate>
             <div class="form-group">
                 <x-adminlte-input name="cliente" id="cliente" readonly="true">
                     <x-slot name="prependSlot">
-                        <div class="input-group-text tex-info">
+                        <div class="input-group-text text-warning">
                             <i class="fas fa-smile"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
                 <x-adminlte-input name="domicilio" id="domicilio" readonly="true">
                     <x-slot name="prependSlot">
-                        <div class="input-group-text tex-info">
+                        <div class="input-group-text text-warning">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
                 <x-adminlte-input name="total" id="total" readonly="true">
                     <x-slot name="prependSlot">
-                        <div class="input-group-text tex-info">
+                        <div class="input-group-text text-warning">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
             </div>
-            <p class="text-secondary border-bottom">Envio(s)</p>
+            <p class="p-1 bg-secondary text-center fw-semibold">Envio(s)</p>
             <div class="form-group row">
 
                 @can('ver-envios')
@@ -59,7 +59,7 @@
     </div>
     @can('asignar-envio')
         <x-slot name="footerSlot">
-            <x-adminlte-button theme="primary" label="Agregar" id="agregarEnvio" icon="fas fa-save"></x-adminlte-button>
+            <x-adminlte-button theme="primary" label="Cobrar" id="agregarEnvio" icon="fas fa-save"></x-adminlte-button>
             <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
         </x-slot>
     @endcan

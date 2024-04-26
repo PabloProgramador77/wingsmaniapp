@@ -7,12 +7,13 @@
             <div class="col-md-7">
                 <h4 class="my-auto"><i class="fas fa-map-marker-alt"></i> Tus Domicilios</h4>
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-smile"></i> Panel de Cliente</p>
+                <p class="p-1 bg-light text-center fw-semibold">Elige el domicilio en el que deseas recibir el pedido. Pulsa el botón con el icono <i class="fas fa-map-marker-alt"></i></p>
             </div>
 
             @php
                 $heads = [
 
-                    'Domicilio(s)', 'Acciones'
+                    'Domicilio(s)', 'Recibir aquí'
 
                 ];
             @endphp
@@ -27,7 +28,7 @@
                                     <tr>
                                         <td>{{ $domicilio->direccion }}</td>
                                         <td>
-                                            <x-adminlte-button class="entregar" id="entregar" label="Entregar Aquí" theme="info" data-id="{{ $domicilio->id }}" icon="fas fa-hand-pointer"></x-adminlte-button>
+                                            <x-adminlte-button class="entregar" id="entregar" title="Entregar Aquí" theme="info" data-id="{{ $domicilio->id }}" icon="fas fa-map-marker-alt"></x-adminlte-button>
                                         </td>
                                     </tr>
                                 @endcan

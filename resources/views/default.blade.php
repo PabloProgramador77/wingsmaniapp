@@ -6,11 +6,12 @@
         <p class="fs-2 fw-bold text-center bg-info p-2 my-4 rounded shadow"><i class="fas fa-smile"></i> Resumen de Cliente</p>
         <div class="container-fluid row">
             
-            <div class="col-lg-12 my-2">
+            <div class="col-lg-6">
                 @if( auth()->user()->hasRole(['Cliente']) && auth()->user()->telefonos->count() > 0 && auth()->user()->domicilios->count() > 0 )
                     
-                    <x-adminlte-button label="Ordenar Ahora" theme="warning" icon="fas fa-utensils" id="pedido"></x-adminlte-button>
-                
+                    <!--<x-adminlte-button label="Ordenar Ahora" theme="warning" icon="fas fa-utensils" id="pedido"></x-adminlte-button>-->
+                    <x-adminlte-small-box title="Ordenar" text="Crear nuevo pedido" theme="warning" url="#" id="pedido" icon="fas fa-drumstick-bite" url-text="Ordenar aquí"></x-adminlte-small-box>
+
                 @else
 
                     <div class="col-lg-12 my-2 bg-danger p-2 text-center">
@@ -23,13 +24,13 @@
             </div>
             <div class="col-lg-6">
                 @can('ver-pedido')
-                    <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="{{ url('/pedidos/cliente') }}" url-text="Ver pedidos"></x-adminlte-small-box>
+                    <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="{{ url('/pedidos/cliente') }}" url-text="Ver pedidos" icon="fas fa-list-alt"></x-adminlte-small-box>
                 @endcan
             </div>
 
             @can('ver-notificaciones')
                 <div class="col-lg-12">
-                    <p class="fs-3 fw-semibold bg-info p-2 m-2"><i class="fas fa-bell"></i> Notificaciones de Pedidos</p>
+                    <p class="fs-3 fw-semibold bg-info p-2 m-2"><i class="fas fa-bell"></i> Notificaciones de tus pedidos</p>
                     @php
                         $heads = [
 
@@ -51,7 +52,7 @@
                                         <td><strong>{{ $notification->data['mensaje'] }}</strong></td>
                                         <td>
                                             @can('confirmar-notificacion')
-                                                <x-adminlte-button class="notification" id="notification" label="Ok, enterado" theme="primary" data-id="{{ $notification->id }}"></x-adminlte-button>
+                                                <x-adminlte-button class="notification" id="notification" title="Ok, enterado" theme="primary" data-id="{{ $notification->id }}" icon="fas fa-check-double"></x-adminlte-button>
                                             @endcan
                                         </td>
                                     </tr>

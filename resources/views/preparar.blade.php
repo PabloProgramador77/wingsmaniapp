@@ -5,8 +5,9 @@
         <div class="container-fluid row col-md-12 border-bottom p-2">
 
             <div class="container-fluid row my-2">
+                <p class="p-1 bg-light fw-semibold col-lg-12 text-center m"><i class="fas fa-info-circle"></i> A continuación, elige las salsas e ingredientes de tu platillo y para continuar pulsa el botón "Listo, ya lo prepare".</p>
                 <div class="col-lg-5">
-                    <h4 class="my-auto"><i class="fas fa-drumstick-bite"></i> Preparando Platillo</h4>
+                    <h4 class="my-auto"><i class="fas fa-drumstick-bite"></i> Preparación de Platillo</h4>
                 </div>
                 <div class="col-lg-4">
                     <p class="bg-light border text-center p-2 mx-3 rounded">{{ $platillo->nombre }}</p>
@@ -22,7 +23,7 @@
 
                 @if( $salsas->count() > 0 )
 
-                    <p class="col-lg-12 text-secondary border shadow p-2 bg-warning m-2"><b>Elige la salsa de tu preferencia</b></p>
+                    <p class="col-lg-12 text-secondary border shadow p-1 bg-warning m-2"><b>Elige la salsa de tu preferencia. Máximo {{ $platillo->cantidadSalsas }} salsas</b></p>
 
                     @foreach($salsas as $salsa)
 

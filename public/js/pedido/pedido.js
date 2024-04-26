@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'info',
-            title: '¿Qué tipo de pedido será?',
+            title: '¿Qué tipo de pedido?',
             html: 'A domicilio o para recoger en restaurante.',
             allowOutsideClick: false,
             confirmButtonText: 'A domicilio',
@@ -42,7 +42,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Elige los platillos de tu pedido.',
+                            title: 'Ahora los platillos de tu pedido.',
                             allowOutsideClick: false,
                             showConfirmButton: true
 

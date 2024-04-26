@@ -2,6 +2,9 @@
     <div class="container-fluid row border-bottom">
         <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-2 fw-semibold">{{ strtoupper( $pedido->tipo ) }}</p>
         <p class="rounded bg-success text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>
+        @if ( $pedido->tipo == 'delivery' )
+            <p class="rounded bg-light text-center fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> A los pedidos a domicilio se les agrega al final un costo de envio, por lo que el total mostrado no es el precio final.</p>
+        @endif
     </div>
     @php
         $heads = [
@@ -39,10 +42,10 @@
                         <td>
                             @if( count( $platillo->salsas ) > 0 )
 
-                                <a href="{{ url('platillo/preparar') }}/{{ $platillo->id }}" class="btn btn-info" ><i class="fas fa-pepper-hot"></i> Preparar</a>
+                                <a href="{{ url('platillo/preparar') }}/{{ $platillo->id }}" class="btn btn-info" ><i class="fas fa-utensils"></i></a>
                             
                             @endif
-                            <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                            <x-adminlte-button class="eliminar" id="eliminar" title="Borrar platillo" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt" data-value="{{ $platillo->nombre }}"></x-adminlte-button>
                         </td>
                     </tr>
 
@@ -71,7 +74,7 @@
                             @endif
                         </td>
                         <td>
-                            <x-adminlte-button class="borrar" id="borrar" label="Borrar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt"></x-adminlte-button>
+                            <x-adminlte-button class="borrar" id="borrar" title="Borrar paquete" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                         </td>
                     </tr>
 
