@@ -57,7 +57,8 @@ class PaqueteController extends Controller
                 'descripcion' => $request->descripcion,
                 'cantidadBebidas' => $request->bebidas,
                 'cantidadSalsas' => $request->salsas,
-                'idCategoria' => $request->categoria
+                'idCategoria' => $request->categoria,
+                'diaActivacion' => $request->dia,
 
             ]);
 
@@ -97,6 +98,7 @@ class PaqueteController extends Controller
                 $datos['salsas'] = $paquete->cantidadSalsas;
                 $datos['bebidas'] = $paquete->cantidadBebidas;
                 $datos['descripcion'] = $paquete->descripcion;
+                $datos['dia'] = $paquete->diaActivacion;
                 $datos['id'] = $paquete->id;
                 $datos['platillos'] = $platillos;
 
@@ -135,7 +137,8 @@ class PaqueteController extends Controller
                     'descripcion' => $request->descripcion,
                     'cantidadBebidas' => $request->bebidas,
                     'cantidadSalsas' => $request->salsas,
-                    'idCategoria' => $request->categoria
+                    'idCategoria' => $request->categoria,
+                    'diaActivacion' => $request->dia,
 
             ]);
 

@@ -36,13 +36,27 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-input name="bebidasEditar" id="bebidasEditar" placeholder="Limite de salsas">
+                <x-adminlte-input name="bebidasEditar" id="bebidasEditar" placeholder="Limite de bebidas">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-pepper-hot">*</i>
+                            <i class="fas fa-wine-bottle">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-select2 name="diaEditar" id="diaEditar" >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-calendar-alt">*</i>
+                        </div>
+                    </x-slot>
+                    <option value="lunes">Lunes</option>
+                    <option value="martes">Martes</option>
+                    <option value="miércoles">Miércoles</option>
+                    <option value="jueves">Jueves</option>
+                    <option value="viernes">Viernes</option>
+                    <option value="sábado">Sábado</option>
+                    <option value="domingo">Domingo</option>
+                </x-adminlte-select2>
                 <x-adminlte-textarea name="descripcionEditar" id="descripcionEditar" placeholder="Descripción del platillo (OPCIONAL)">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

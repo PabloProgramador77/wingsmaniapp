@@ -11,6 +11,7 @@ use App\Http\Requests\Categoria\Store;
 use App\Http\Requests\Categoria\Search;
 use App\Http\Requests\Categoria\Update;
 use App\Http\Requests\Categoria\Delete;
+use Carbon\Carbon;
 
 class CategoriaController extends Controller
 {
@@ -39,6 +40,8 @@ class CategoriaController extends Controller
     {
         if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
 
+            $hoy = Carbon::now()->locale('es')->translatedFormat('l');
+
             $platillos = Platillo::select('id', 'nombre', 'precio')
                         ->where('idCategoria', '=', $id)
                         ->orderBy('nombre', 'asc')
@@ -46,7 +49,15 @@ class CategoriaController extends Controller
 
             $paquetes = Paquete::select('id', 'nombre', 'precio')
                         ->where('idCategoria', '=', $id)
+                        ->where('diaActivacion', '=', NULL)
                         ->get();
+
+            $paquetesHoy = Paquete::select('id', 'nombre', 'precio')
+                        ->where('idCategoria', '=', $id)
+                        ->where('diaActivacion', '=', $hoy)
+                        ->get();
+
+            $paquetes = $paquetes->merge( $paquetesHoy )->unique('id');
 
             $categoria = Categoria::find($id);
 

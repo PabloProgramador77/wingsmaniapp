@@ -35,6 +35,7 @@ jQuery(document).ready(function(){
                         'descripcion' : $("#descripcionEditar").val(),
                         'salsas' : $("#salsasEditar").val(),
                         'bebidas' : $("#bebidasEditar").val(),
+                        'dia' : $("#diaEditar").val(),
                         'id' : $("#id").val()
 
                     },

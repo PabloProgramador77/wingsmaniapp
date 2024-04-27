@@ -38,6 +38,7 @@ class Update extends FormRequest
             'salsas' => 'integer|nullable',
             'bebidas' => 'integer|nullable',
             'descripcion' => 'string|nullable',
+            'dia' => 'required|string',
             
         ];
     }

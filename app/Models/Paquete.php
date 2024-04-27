@@ -19,6 +19,7 @@ class Paquete extends Model
         'cantidadBebidas',
         'cantidadSalsas',
         'idCategoria',
+        'diaActivacion',
 
     ];
 

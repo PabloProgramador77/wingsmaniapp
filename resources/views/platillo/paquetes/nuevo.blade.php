@@ -41,6 +41,20 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-select2 name="dia" id="dia" >
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text tex-info">
+                            <i class="fas fa-calendar-alt">*</i>
+                        </div>
+                    </x-slot>
+                    <option value="lunes">Lunes</option>
+                    <option value="martes">Martes</option>
+                    <option value="miércoles">Miércoles</option>
+                    <option value="jueves">Jueves</option>
+                    <option value="viernes">Viernes</option>
+                    <option value="sábado">Sábado</option>
+                    <option value="domingo">Domingo</option>
+                </x-adminlte-select2>
                 <x-adminlte-textarea name="descripcion" id="descripcion" placeholder="Descripción del paquete (OPCIONAL)">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

@@ -23,11 +23,13 @@
             <div class="container-fluid row">
                 
                 @if ( count( $paquetes ) > 0 )
-                    
+
                     @foreach ($paquetes as $paquete)
+
                         <div class="col-lg-4 col-md-3">
                             <x-adminlte-small-box title="$ {{ $paquete->precio }}" text="{{ $paquete->nombre }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
-                        </div>
+                        </div>    
+                    
                     @endforeach
 
                 @endif
