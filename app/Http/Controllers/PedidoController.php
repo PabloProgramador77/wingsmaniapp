@@ -667,7 +667,7 @@ class PedidoController extends Controller
 
             if( public_path('comandas/canceladas/') ){
 
-                $comanda->Output( public_path('comandas/canceladas/').'comanda'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
+                $comanda->Output( public_path('comandas/canceladas/').'comandaCancelada'.$pedido->id.'.pdf', \Mpdf\Output\Destination::FILE );
 
             }
 
@@ -798,6 +798,27 @@ class PedidoController extends Controller
             
             echo $th->getMessage();
             
+        }
+    }
+
+    /**
+     * Descarga de PDF cancelación
+     */
+    public function descargarCancelacion( $id ){
+        try {
+            
+            $headers = [
+
+                'Content-Type' => 'application/pdf'
+            
+            ];
+
+            return response()->download( public_path('comandas/canceladas/').'comandaCancelada'.$id.'.pdf' );
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
         }
     }
 

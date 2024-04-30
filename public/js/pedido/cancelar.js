@@ -5,6 +5,8 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        var id = $(this).attr('data-id');
+
         Swal.fire({
 
             icon: 'warning',
@@ -25,7 +27,7 @@ jQuery(document).ready(function(){
                     url: '/pedido/cancelar',
                     data:{
 
-                        'id' : $(this).attr('data-id')
+                        'id' : id
 
                     },
                     dataType: 'json',
@@ -46,7 +48,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/home';
+                                window.location.href = '/pedido/cancelado/' + id;
 
                             }
 
