@@ -98,14 +98,10 @@ class PaqueteHasBebidaController extends Controller
                     ->where('paquete_has_bebidas.idPaquete', '=', $request->id)
                     ->get();
 
-            if( count( $bebidas ) > 0 ){
-
-                $datos['exito'] = true;
-                $datos['id'] = $paquete->id;
-                $datos['nombre'] = $paquete->nombre;
-                $datos['platillos'] = $bebidas;
-
-            }
+            $datos['exito'] = true;
+            $datos['id'] = $paquete->id;
+            $datos['nombre'] = $paquete->nombre;
+            $datos['platillos'] = $bebidas;
 
         } catch (\Throwable $th) {
             

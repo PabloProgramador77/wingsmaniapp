@@ -72,6 +72,9 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        $("input[name=platillo]").prop('checked', false);
+        $("#nombrePaquete").val('');
+
         $.ajax({
 
             type: 'POST',
@@ -141,6 +144,9 @@ jQuery(document).ready(function(){
 
         e.preventDefault();
 
+        $("input[name=bebida]").prop('checked', false);
+        $("#nombrePaqueteBeb").val('');
+
         $.ajax({
 
             type: 'POST',
@@ -158,6 +164,8 @@ jQuery(document).ready(function(){
             if( respuesta.exito ){
 
                 if( respuesta.platillos.length > 0 ){
+
+                    $("input[name=bebida]").prop('checked', false);
 
                     $.each( respuesta.platillos, function(i, platillo){
 

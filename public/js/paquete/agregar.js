@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
                         'categoria' : $("#categoria").val(),
                         'descripcion' : $("#descripcion").val(),
                         'salsas' : $("#salsas").val(),
-                        'bebidas' : $("#bebidas").val(),
+                        'bebidas' : $("#cantidadBebidas").val(),
                         'dia' : $("#dia").val(),
 
                     },

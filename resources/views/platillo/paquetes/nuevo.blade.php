@@ -34,10 +34,10 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-input name="bebidas" id="bebidas" placeholder="Limite de bebidas">
+                <x-adminlte-input name="cantidadBebidas" id="cantidadBebidas" placeholder="Limite de bebidas">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
-                            <i class="fas fa-pepper-hot">*</i>
+                            <i class="fas fa-wine-bottle">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
@@ -47,6 +47,7 @@
                             <i class="fas fa-calendar-alt">*</i>
                         </div>
                     </x-slot>
+                    <option value="">Todos los días</option>
                     <option value="lunes">Lunes</option>
                     <option value="martes">Martes</option>
                     <option value="miércoles">Miércoles</option>

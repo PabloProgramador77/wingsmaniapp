@@ -31,7 +31,7 @@ jQuery(document).ready(function(){
                 $("#categoriaEditar").val(respuesta.idCategoria);
                 $("#categoriaEditar option[value='"+respuesta.idCategoria+"']:not(:first)").remove();
 
-                $("#salsasEditar").val( respuesta.salsas );
+                $("#salsasEditar").val( respuesta.cantidadSalsas );
                 $("#descripcionEditar").val(respuesta.descripcion); 
                 $("#id").val( respuesta.id );
 

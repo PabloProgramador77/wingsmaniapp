@@ -49,6 +49,7 @@
                             <i class="fas fa-calendar-alt">*</i>
                         </div>
                     </x-slot>
+                    <option value="">Todos los días</option>
                     <option value="lunes">Lunes</option>
                     <option value="martes">Martes</option>
                     <option value="miércoles">Miércoles</option>

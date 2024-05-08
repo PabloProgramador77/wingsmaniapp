@@ -23,7 +23,7 @@ class PaqueteController extends Controller
 
             $paquetes = Paquete::all();
             $categorias = Categoria::all();
-            $platillos = Platillo::all();
+            $platillos = Platillo::orderBy('nombre', 'asc')->get();
             $salsas = Salsa::all();
 
             return view('platillo.paquetes.index', compact('paquetes', 'categorias', 'platillos', 'salsas'));
@@ -88,6 +88,7 @@ class PaqueteController extends Controller
                 $platillos = Platillo::select('platillos.id', 'platillos.nombre')
                             ->join('paquete_has_platillos', 'platillos.id', '=', 'paquete_has_platillos.idPlatillo')
                             ->where('paquete_has_platillos.idPaquete', '=', $paquete->id)
+                            ->orderBy('platillos.nombre', 'asc')
                             ->get();
 
                 $datos['exito'] = true;

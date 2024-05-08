@@ -111,7 +111,8 @@ class PlatilloController extends Controller
                 $datos['idCategoria'] = $platillo->idCategoria;
                 $datos['categoria'] = $platillo->categoria->nombre;
                 $datos['descripcion'] = $platillo->descripcion;
-                $datos['salsas'] = $platillo->cantidadSalsas;
+                $datos['cantidadSalsas'] = $platillo->cantidadSalsas;
+                $datos['salsas'] = $platillo->salsas;
                 $datos['id'] = $platillo->id;
 
             }
