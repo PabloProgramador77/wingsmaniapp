@@ -34,7 +34,7 @@ class Create extends FormRequest
             'nombre' => 'required|string|min:2',
             'precio' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'categoria' => 'required|integer',
-            'salsas' => 'required|integer|nullable',
+            'salsas' => 'integer|nullable',
 
         ];
     }
