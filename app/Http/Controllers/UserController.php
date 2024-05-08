@@ -111,7 +111,7 @@ class UserController extends Controller
                 $datos['exito'] = true;
                 $datos['nombre'] = $usuario->name;
                 $datos['email'] = $usuario->email;
-                $datos['rol'] = $usuario->getRoleNames();
+                $datos['rol'] = $usuario->getRoleNames()->first();
                 $datos['id'] = $usuario->id;
 
             }
@@ -164,16 +164,13 @@ class UserController extends Controller
     public function update(Update $request)
     {
         try {
-            
-            $usuario = User::where('id', '=', $request->id)
-                ->update([
 
-                    'name' => $request->nombre,
-                    'email' => $request->email
+            $usuario = User::find( $request->id );
+            $usuario->name = $request->nombre;
+            $usuario->email = $request->email;
+            $usuario->save();
 
-                ]);
-
-            $usuario->assignRole($request->rol);
+            $usuario->assignRole( $request->rol );
 
             $datos['exito'] = true;
 

@@ -32,7 +32,7 @@ jQuery(document).ready(function(){
                         'nombre' : $("#nombreEditar").val(),
                         'email' : $("#emailEditar").val(),
                         'id' : $("#id").val(),
-                        'rol' : $("#rol").val()
+                        'rol' : $("#rolEditar").val()
 
                     },
                     dataType: 'json',

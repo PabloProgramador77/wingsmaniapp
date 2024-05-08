@@ -20,7 +20,7 @@
             @php
                 $heads = [
 
-                    'Usuario', 'Email', 'Acciones'
+                    'Usuario', 'Rol de Usuario', 'Email', 'Acciones'
 
                 ];
             @endphp
@@ -34,6 +34,7 @@
                                 @can('ver-usuario')
                                     <tr>
                                         <td>{{ $usuario->name }}</td>
+                                        <td>{{ $usuario->getRoleNames()->first() }}</td>
                                         <td>{{ $usuario->email }}</td>
                                         <td>
                                             @can('editar-usuario')
