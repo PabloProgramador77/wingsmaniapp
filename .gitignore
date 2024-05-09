@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/comandas
+/public/cortes
+/public/entregas
+/public/tickets
