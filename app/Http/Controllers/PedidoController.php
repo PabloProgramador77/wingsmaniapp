@@ -25,6 +25,9 @@ use App\Notifications\CobrarPedidoNotificacion;
 use App\Events\CobrarPedidoEvent;
 use Illuminate\Support\Facades\Notification;
 use \Mpdf\Mpdf as PDF;
+use Vonage\Client;
+use Vonage\SMS\Message\SMS;
+use Vonage\Client\Credentials\Basic;
 
 class PedidoController extends Controller
 {
@@ -141,11 +144,27 @@ class PedidoController extends Controller
                     $this->notification();
                     $this->comanda( $pedido );
 
-                    session()->forget('idPedido');
+                    $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
+                    $client = new Client( $basic );
 
-                    $datos['exito'] = true;
-                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                    $datos['url'] = '/pedidos/cliente';
+                    $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
+
+                    foreach( $response as $msg){
+
+                        if( $msg->getStatus() == 0 ){
+
+                            session()->forget('idPedido');
+    
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                            $datos['url'] = '/pedidos/cliente';
+                            
+                            break;
+    
+                        }
+
+                    }
+                    
 
                 }else{
 
@@ -171,11 +190,26 @@ class PedidoController extends Controller
                             $this->notification();
                             $this->comanda( $pedido );
 
-                            session()->forget('idPedido');
+                            $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
+                            $client = new Client( $basic );
 
-                            $datos['exito'] = true;
-                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                            $datos['url'] = '/pedidos/cliente';
+                            $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
+
+                            foreach( $response as $msg){
+
+                                if( $msg->getStatus() == 0 ){
+
+                                    session()->forget('idPedido');
+    
+                                    $datos['exito'] = true;
+                                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                                    $datos['url'] = '/pedidos/cliente';
+    
+                                    break;
+                                }
+
+                            }
+                            
 
                         }
 
@@ -219,9 +253,24 @@ class PedidoController extends Controller
                 $this->notification();
                 $this->comanda( $pedido );
 
-                session()->forget('idPedido');
+                $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
+                $client = new Client( $basic );
 
-                $datos['exito'] = true;
+                $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
+
+                foreach( $response as $msg){
+
+                    if( $msg->getStatus() == 0 ){
+
+                        session()->forget('idPedido');
+    
+                        $datos['exito'] = true;
+    
+                        break;
+
+                    }
+
+                }
 
             }
 
