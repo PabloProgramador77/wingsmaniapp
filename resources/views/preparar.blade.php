@@ -14,9 +14,7 @@
                     <input type="hidden" name="id" id="id" value="{{ $pedidoHasPlatillo->id }}">
                     <input type="hidden" name="salsas" id="salsas" value="{{ $platillo->cantidadSalsas }}">
                 </div>
-                <div class="col-lg-3">
-                    <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
-                </div>
+                
             </div>
 
             <div class="form-group row">
@@ -50,6 +48,11 @@
 
                 @endif
 
+            </div>
+            <div class="container row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
+                </div>
             </div>
 
         </div>
