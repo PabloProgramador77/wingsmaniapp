@@ -31,7 +31,7 @@
                             
                             @foreach($platillo->salsas as $salsa)
 
-                                <div class="col-md-4 col-lg-3">
+                                <div class="col-md-4 col-lg-3 col-sm-6">
                                     <x-adminlte-input-switch class="salsa" id="salsa{{ $salsa->id }}{{ $platillo->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}" data-value="{{ $platillo->nombre }}">
                                     </x-adminlte-input-switch>
                                 </div>

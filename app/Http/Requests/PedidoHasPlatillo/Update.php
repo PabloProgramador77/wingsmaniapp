@@ -32,8 +32,8 @@ class Update extends FormRequest
         return [
             
             'id' => 'required|integer',
-            'salsas' => 'array',
-            'salsas.*' => 'string|min:2',
+            'salsas' => 'array|nullable',
+            'salsas.*' => 'string|nullable',
             'preparaciones' => 'array|nullable',
             'preparaciones.*' => 'string|nullable'
         ];

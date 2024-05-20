@@ -40,11 +40,6 @@
                             @endif
                         </td>
                         <td>
-                            @if( count( $platillo->salsas ) > 0 )
-
-                                <a href="{{ url('platillo/preparar') }}/{{ $platillo->id }}" class="btn btn-info" ><i class="fas fa-utensils"></i></a>
-                            
-                            @endif
                             <x-adminlte-button class="eliminar" id="eliminar" title="Borrar platillo" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt" data-value="{{ $platillo->nombre }}"></x-adminlte-button>
                         </td>
                     </tr>

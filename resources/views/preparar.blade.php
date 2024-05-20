@@ -17,7 +17,7 @@
                 
             </div>
 
-            <div class="form-group row">
+            <div class="container row">
 
                 @if( $salsas->count() > 0 )
 
@@ -25,7 +25,7 @@
 
                     @foreach($salsas as $salsa)
 
-                            <div class="col-md-4 col-lg-3">
+                            <div class="col-md-4 col-lg-3 col-sm-6">
                                 <x-adminlte-input-switch id="salsa{{ $salsa->id }}" name="salsa" label="{{ $salsa->nombre }}" data-on-text="Con {{ $salsa->nombre }}" data-off-text="Sin {{ $salsa->nombre }}" data-id="{{ $salsa->nombre }}">
                                 </x-adminlte-input-switch>
                             </div>
@@ -61,6 +61,16 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pedido/preparar.js') }}" type="text/javascript"></script>
+
+    @if ( count( $platillo->salsas ) > 0 )
+        
+        <script src="{{ asset('js/pedido/preparar.js') }}" type="text/javascript"></script>
+
+    @else
+        
+        <script src="{{ asset('js/pedido/preparacion.js') }}" type="text/javascript"></script>
+
+    @endif
+    
 
 @stop
