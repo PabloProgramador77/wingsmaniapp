@@ -9,7 +9,7 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-md-3">
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
@@ -33,7 +33,7 @@
                                         <td>{{ $cliente->name }}</td>
                                         <td>{{ $cliente->email }}</td>
                                         <td>
-                                            <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt" data-value="{{ $cliente->name }}"></x-adminlte-button>
+                                            <x-adminlte-button class="eliminar" id="eliminar"  theme="danger" data-id="{{ $cliente->id }}" icon="fas fa-trash-alt" data-value="{{ $cliente->name }}"></x-adminlte-button>
                                         </td>
                                     </tr>
                                 @endcan

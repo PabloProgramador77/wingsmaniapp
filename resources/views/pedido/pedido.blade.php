@@ -6,31 +6,30 @@
 
             <div class="container-fluid row">
                 <h4 class="col-md-12 my-auto"><i class="fas fa-shopping-cart"></i> Pedido</h4>
-                @if ( $pedido->tipo == 'delivery' )
-                    <p class="col-md-12 m-1 p-1 bg-light fw-semibold text-center"><i class="fas fa-info-circle"></i> Para los pedidos a domicilio, se hace un cargo extra al final de su preparación en el restaurante. Por lo que el total mostrado no es el precio final.</p>    
+                @if ( $pedido->tipo == 'delivery' && $pedido->estatus == 'Pendiente' )
+                    <p class="col-md-12 m-1 p-1 bg-info fw-semibold text-center"><i class="fas fa-info-circle"></i> Para los pedidos a domicilio, se hace un cargo extra al final de su preparación en el restaurante. Por lo que el total mostrado no es el precio final, se descargará la comanda para cocina y puedes regresar al listado principal pulsando el botón "Pedidos"</p>    
                 @endif
                 
-                <p class="col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: <b>{{ strtoupper( $pedido->tipo ) }}</b></p>
-                <p class="col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha de Pedido: <b>{{ $pedido->created_at }}</b></p>
-                <p class="col-md-3 fs-5 fw-semibold p-2 m-1 bg-success rounded">Total: <b>$ {{ $pedido->total }}</b></p>
+                <p class="col-lg-3 col-md-2 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Tipo de Pedido: <b>{{ strtoupper( $pedido->tipo ) }}</b></p>
+                <p class="col-lg-3 col-md-3 fs-5 fw-semibold bg-secondary p-2 m-1 rounded">Fecha: <b>{{ $pedido->created_at }}</b></p>
                 
-                <div class="col-md-3 m-1">
+                <div class="col-lg-4 col-md-6 m-1">
                     
                     @can('confirmar-pedido')
                         @if( $pedido->estatus == 'Pendiente' )
-                            <a href="{{ url('/pedido/confirmar') }}/{{ $pedido->id }}" class="btn btn-primary mx-2 confirmar" title="Confirmar Pedido"><i class="fas fa-check"></i> Confirmar</a>
+                            <a href="{{ url('/pedido/confirmar') }}/{{ $pedido->id }}" class="btn btn-primary mx-2 confirmar" title="Confirmar Pedido"><i class="fas fa-check-double"></i> Confirmar</a>
                         @endif
                     @endcan
 
                     @if( auth()->user()->hasRole(['Cliente']) )
 
-                        <a href="{{ url('/pedidos/cliente') }}" class="btn btn-info rounded">
-                            <i class="fas fa-shopping-cart"></i> Mis Pedidos
+                        <a href="{{ url('/pedidos/cliente') }}" class="btn btn-warning rounded">
+                            <i class="fas fa-clipboard-list"></i> Mis Pedidos
                         </a>
 
                     @else
                         
-                        <a href="{{ url('/pedidos') }}" class="btn btn-info rounded">
+                        <a href="{{ url('/pedidos') }}" class="btn btn-warning rounded">
                             <i class="fas fa-shopping-cart"></i> Pedidos
                         </a>
 
@@ -76,6 +75,10 @@
                             @endforeach
                             
                         @endif
+                        <tr class="bg-success p-1">
+                            <td colspan="3">Total: </td>
+                            <td>$ {{ $pedido->total }}</td>
+                        </tr>
                         
                     </x-adminlte-datatable>
                 </div>

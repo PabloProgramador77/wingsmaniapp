@@ -5,10 +5,10 @@
         <div class="container-fluid row col-md-12 border-bottom p-2">
 
             <div class="col-md-7">
-                <h4 class="my-auto"><i class="fas fa-smile"></i> Perfil de Cliente</h4>
+                <h4 class="my-auto"><i class="fas fa-user-circle"></i> Perfil de Cliente</h4>
             </div>
             <div class="col-md-3">
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
@@ -27,7 +27,7 @@
 
             <div class="col-md-6 m-1 p-2">
                 <form novalidate>
-                    <p class="form-group bg-secondary text-center fw-semibold shadow">Puedes editar los datos como crear necesario.</p>
+                    <p class="form-group bg-secondary text-center fw-semibold shadow">Puedes editar los datos como creas necesario.</p>
                     <div class="form-group">
                         <x-adminlte-input name="nombreCliente" id="nombreCliente" placeholder="Nombre de cliente" value="{{ $cliente->name }}">
                             <x-slot name="prependSlot">
@@ -53,7 +53,7 @@
         <div class="container-fluid row col-md-12 p-2">
             
             <div class="col-lg-6 col-md-6 my-2 border rounded p-1">
-                <p class="border-secondary rounded bg-secondary fw-semibold p-1">Tus Domicilios</p>
+                <p class="border-secondary rounded bg-secondary fw-semibold p-1"><i class="fas fa-map-marker-alt"></i> Tus Domicilios</p>
                 @can('agregar-domicilio')
                     <div class="col-md-6">
                         <x-adminlte-button label=" Domicilio" theme="primary" data-toggle="modal" data-target="#modalNuevoDomicilio" icon="fas fa-plus-circle"></x-adminlte-button>
@@ -78,7 +78,7 @@
                                             <td>{{ $domicilio->direccion }}</td>
                                             <td>
                                                 @can('editar-domicilio')
-                                                    <x-adminlte-button class="editarDomicilio" id="editar" title="Editar domicilio" theme="info" data-toggle="modal" data-target="#modalEditarDomicilio" data-id="{{ $domicilio->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                    <x-adminlte-button class="editarDomicilio" id="editar" title="Editar domicilio" theme="info" data-toggle="modal" data-target="#modalEditarDomicilio" data-id="{{ $domicilio->id }}" icon="fas fa-edit"></x-adminlte-button>
                                                 @endcan
                                                 @can('borrar-domicilio')
                                                     <x-adminlte-button class="eliminarDomicilio" id="eliminar" title="Borrar domicilio" theme="danger" data-id="{{ $domicilio->id }}" icon="fas fa-trash-alt" data-value="{{ $domicilio->direccion }}"></x-adminlte-button>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="col-md-6 my-2 p-1 rounded border">
-                <p class="border-secondary rounded bg-secondary fw-semibold p-1">Tus Teléfonos</p>
+                <p class="border-secondary rounded bg-secondary fw-semibold p-1"><i class="fas fa-mobile"></i> Tus Teléfonos</p>
                 @can('agregar-telefono')
                     <div class="col-md-12">
                         <x-adminlte-button label=" Teléfono" theme="primary" data-toggle="modal" data-target="#modalNuevoTelefono" icon="fas fa-plus-circle"></x-adminlte-button>
@@ -125,7 +125,7 @@
                                         <td>{{ $telefono->nunmero }}</td>
                                         <td>
                                             @can('editar-telefono')
-                                                <x-adminlte-button class="editarTelefono" id="editar" title="Editar teléfono" theme="info" data-toggle="modal" data-target="#modalEditarTelefono" data-id="{{ $telefono->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                <x-adminlte-button class="editarTelefono" id="editar" title="Editar teléfono" theme="info" data-toggle="modal" data-target="#modalEditarTelefono" data-id="{{ $telefono->id }}" icon="fas fa-edit"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-telefono')
                                                 <x-adminlte-button class="eliminarTelefono" id="eliminar" title="Borrar teléfono" theme="danger" data-id="{{ $telefono->id }}" icon="fas fa-trash-alt" data-value="{{ $telefono->nunmero }}"></x-adminlte-button>

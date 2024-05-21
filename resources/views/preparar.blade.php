@@ -5,7 +5,7 @@
         <div class="container-fluid row col-md-12 border-bottom p-2">
 
             <div class="container-fluid row my-2">
-                <p class="p-1 bg-light fw-semibold col-lg-12 text-center m"><i class="fas fa-info-circle"></i> A continuación, elige las salsas e ingredientes de tu platillo y para continuar pulsa el botón "Listo, ya lo prepare".</p>
+                <p class="p-1 bg-info fw-semibold col-lg-12 text-center shadow"><i class="fas fa-info-circle"></i> <b>Intrucciones</b>: elige las salsas o ingredientes de tu platillo y para continuar pulsa el botón "Listo, ya lo prepare".</p>
                 <div class="col-lg-5">
                     <h4 class="my-auto"><i class="fas fa-drumstick-bite"></i> Preparación de Platillo</h4>
                 </div>
@@ -39,7 +39,7 @@
                     <p class="col-lg-12 text-secondary border shadow p-2 bg-warning m-2"><b>Elige como preparar tu platillo</b></p>
                     @foreach($preparaciones as $preparacion)
 
-                        <div class="col-md-4 col-lg-3">
+                        <div class="col-md-4 col-lg-3 col-sm-6">
                             <x-adminlte-input-switch id="preparacion{{ $preparacion->id }}" name="preparacion" label="{{ $preparacion->nombre }}" data-on-text="{{ $preparacion->nombre }}" data-off-text="Sin preparación" data-id="{{ $preparacion->nombre }}">
                             </x-adminlte-input-switch>
                         </div>
@@ -49,7 +49,7 @@
                 @endif
 
             </div>
-            <div class="container row">
+            <div class="container row my-2">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
                 </div>

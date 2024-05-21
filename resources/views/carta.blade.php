@@ -4,8 +4,9 @@
     @can('ver-menu')
         <div class="container-fluid col-md-12 bg-white p-2 rounded">
             <div class="container-fluid row">
+                <p class="p-1 bg-info text-center shadow col-lg-12 col-md-12 col-sm-12"><i class="fas fa-info-circle"></i> <b>Intrucciones</b>: Elije el platillo que más te guste y pulsa en donde dice "Ordenar"<i class="fas fa-info-circle"></i></p>
                 <div class="col-lg-6">
-                    <x-adminlte-small-box title="Menú" icon="fas fa-list" theme="danger" url="{{ url('/pedido/menu') }}" url-text="Regresar al menú"></x-adminlte-small-box>
+                    <x-adminlte-small-box title="Menú" icon="fas fa-backward" theme="danger" url="{{ url('/pedido/menu') }}" url-text="Regresar al menú"></x-adminlte-small-box>
                 </div>
                 
                 @if( session()->get('idPedido') )
@@ -19,7 +20,7 @@
                 @endif
             </div>
             
-            <p class="text-center rounded shadow bg-info p-1"><i class="fas fa-list"></i><b> Menú de {{ $categoria->nombre }}</b></p>
+            <p class="text-center rounded shadow bg-secondary p-1"><b> Menú de {{ $categoria->nombre }}</b></p>
             <div class="container-fluid row">
                 
                 @if ( count( $paquetes ) > 0 )
@@ -27,7 +28,7 @@
                     @foreach ($paquetes as $paquete)
 
                         <div class="col-lg-4 col-md-3">
-                            <x-adminlte-small-box title="$ {{ $paquete->precio }}" text="{{ $paquete->nombre }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
+                            <x-adminlte-small-box title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar"></x-adminlte-small-box>
                         </div>    
                     
                     @endforeach
@@ -37,7 +38,7 @@
                 @foreach($platillos as $platillo)
                     
                     <div class="col-lg-4 col-md-3">
-                        <x-adminlte-small-box title="${{ $platillo->precio }}" text="{{ $platillo->nombre }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" url-text="Ordenar platillo"></x-adminlte-small-box>
+                        <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" url-text="Ordenar"></x-adminlte-small-box>
                     </div>
 
                 @endforeach

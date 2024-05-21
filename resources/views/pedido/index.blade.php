@@ -9,11 +9,11 @@
                 <p class="fs-6 fw-semibold text-secondary"><i class="fas fa-user-shield"></i> Panel de Administrador</p>
             </div>
             <div class="col-md-3">
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
-            <p class="p-1 bg-light fw-semibold text-center my-2 col-lg-12"><i class="fas fa-info-circle"></i> En amarillo se marcan los pedidos nuevos que deben ser confirmados para su preparación en cocina.</p>
+            <p class="p-1 bg-info fw-semibold text-center my-2 col-lg-12"><i class="fas fa-info-circle"></i> En amarillo se marcan los pedidos nuevos que deben ser confirmados para su preparación en cocina. Para confirmarlos pulsa el botón con el icono <i class="fas fa-check"></i></p>
 
             @php
                 $heads = [
@@ -44,7 +44,7 @@
                                         <td>
                                             @if( $pedido->estatus == 'Cobrado' )
                                                 @can('cobrar-pedido')
-                                                    <x-adminlte-button class="pagar" id="pagar" title="Cerrar" theme="info" data-id="{{ $pedido->id }}" icon="fas fa-check-double"></x-adminlte-button>
+                                                    <x-adminlte-button class="pagar" id="pagar" title="Cerrar" theme="warning" data-id="{{ $pedido->id }}" icon="fas fa-lock"></x-adminlte-button>
                                                 @endcan
                                             @endif
 

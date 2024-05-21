@@ -3,7 +3,7 @@
     <div class="container-fluid col-md-12 p-2 bg-white">
 
         <div class="container-fluid row col-md-12 border-bottom p-2">
-            <p class="p-1 bg-light fw-semibold col-lg-12 text-center m"><i class="fas fa-info-circle"></i> A continuación, elige las salsas e ingredientes de tu platillo y para continuar pulsa el botón "Listo, ya lo prepare".</p>
+            <p class="p-1 bg-info fw-semibold col-lg-12 text-center shadow"><i class="fas fa-info-circle"></i> <b>Instrucciones:</b> elige las salsas o ingredientes de tu platillo y para continuar pulsa el botón "Listo, ya lo prepare".</p>
             <div class="container-fluid row my-2">
                 <div class="col-lg-5">
                     <h4 class="my-auto"><i class="fas fa-drumstick-bite"></i> Preparando Paquete</h4>
@@ -76,7 +76,7 @@
 
             </div>
             
-            <div class="container row">
+            <div class="container row my-2">
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <x-adminlte-small-box theme="primary" url="#" url-text="Listo, ya lo prepare" id="continuar" class="continuar"></x-adminlte-small-box>
                 </div>

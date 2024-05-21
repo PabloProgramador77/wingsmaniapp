@@ -31,7 +31,7 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" id="agregarBebida" icon="fas fa-save"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="" id="agregarBebida" icon="fas fa-save"></x-adminlte-button>
         <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal" icon="fas fa-ban"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

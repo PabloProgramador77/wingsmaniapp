@@ -13,7 +13,7 @@
                     <x-adminlte-button id="nuevo" label="Platillo" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
                 @endcan
                 <a href="{{ url('/paquetes') }}" class="btn btn-info mx-1 rounded"><i class="fas fa-boxes"></i> Paquetes</a>
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
@@ -38,19 +38,19 @@
                                         <td>$ {{ $platillo->precio }} M.N.</td>
                                         <td>
                                             @can('editar-platillo')
-                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $platillo->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                <x-adminlte-button class="editar" id="editar"  theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $platillo->id }}" icon="fas fa-edit"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-platillo')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt" data-value="{{ $platillo->nombre }}"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar"  theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-trash-alt" data-value="{{ $platillo->nombre }}"></x-adminlte-button>
                                             @endcan
                                             @if( count($salsas) > 0 && $platillo->cantidadSalsas > 0)
                                                 @can('ver-salsas')
-                                                    <x-adminlte-button class="salsas" id="salsas" label="Salsa(s)" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
+                                                    <x-adminlte-button class="salsas" id="salsas" theme="secondary" data-id="{{ $platillo->id }}" icon="fas fa-pepper-hot" data-toggle="modal" data-target="#modalSalsa"></x-adminlte-button>
                                                 @endcan
                                             @endif
                                             @if( count($preparaciones) > 0 )
                                                 @can('ver-preparaciones')
-                                                    <x-adminlte-button class="preparaciones" id="preparaciones" label="Preparacion(es)" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
+                                                    <x-adminlte-button class="preparaciones" id="preparaciones" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
                                                 @endcan
                                             @endif
                                         </td>

@@ -16,7 +16,7 @@
                 <a href="{{ url('/cajas') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-cash-register"></i> Cajas
                 </a>
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i>
                 </a>
             </div>
@@ -43,10 +43,10 @@
                                         <td>
                                             @if( $movimiento->tipo !== 'Corte' )
                                                 @can('editar-movimiento')
-                                                    <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $movimiento->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                    <x-adminlte-button class="editar" id="editar"  theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $movimiento->id }}" icon="fas fa-edit"></x-adminlte-button>
                                                 @endcan
                                                 @can('borrar-movimiento')
-                                                    <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt" data-value="{{ $movimiento->concepto }}"></x-adminlte-button>
+                                                    <x-adminlte-button class="eliminar" id="eliminar"  theme="danger" data-id="{{ $movimiento->id }}" icon="fas fa-trash-alt" data-value="{{ $movimiento->concepto }}"></x-adminlte-button>
                                                 @endcan
                                             @else
                                                 Los cortes de caja no se permiten editarlos o borrarlos.

@@ -16,7 +16,7 @@
                 <a href="{{ url('/cajas') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-cash-register"></i> Cajas
                 </a>
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i>
                 </a>
             </div>
@@ -42,10 +42,10 @@
                                         <td>{{ $corte->created_at }}</td>
                                         <td>
                                             @can('borrar-corte')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $corte->id }}" icon="fas fa-trash-alt" data-value="{{ $corte->total }}"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar"  theme="danger" data-id="{{ $corte->id }}" icon="fas fa-trash-alt" data-value="{{ $corte->total }}"></x-adminlte-button>
                                             @endcan
                                             @can('ver-corte')
-                                                <a href="{{ url('/corte') }}/{{ $corte->id }}" class="btn btn-info"><i class="fas fa-list"></i> Detalles</a>
+                                                <a href="{{ url('/corte') }}/{{ $corte->id }}" class="btn btn-info"><i class="fas fa-list"></i></a>
                                             @endcan
                                         </td>
                                     </tr>

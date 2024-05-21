@@ -84,7 +84,7 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
             'path' => 'img/logo_min.png',
             'alt' => 'Auth Logo',
@@ -130,8 +130,8 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-info',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => true,
@@ -367,7 +367,23 @@ return [
             'icon' => 'fas fa-truck',
             'active' => ['envios'],
             'can' => 'ver-envios',
-        ]
+        ],
+        [
+            'text' => 'Mi Perfil',
+            'url' => '/profile/username',
+            'icon' => 'fas fa-user-circle',
+            'active' => ['profile'],
+        ],
+        [
+            'text' => 'Menú de Restaurante',
+            'url' => '',
+            'icon' => 'fas fa-clipboard-list',
+        ],
+        [
+            'text' => 'Videomanuales',
+            'url' => '',
+            'icon' => 'fab fa-youtube',
+        ],
     ],
 
     /*

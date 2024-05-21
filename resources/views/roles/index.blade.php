@@ -10,9 +10,9 @@
             </div>
             <div class="col-md-3">
                 @can('agregar-rol')
-                    <x-adminlte-button label="Agregar rol" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
+                    <x-adminlte-button label=" rol" theme="primary" data-toggle="modal" data-target="#modalNuevo" icon="fas fa-plus-circle"></x-adminlte-button>
                 @endcan
-                <a href="{{ url('/home') }}" class="btn btn-success mx-1 rounded">
+                <a href="{{ url('/home') }}" class="btn btn-warning mx-1 rounded">
                     <i class="fas fa-home"></i> Inicio
                 </a>
             </div>
@@ -37,14 +37,14 @@
                                         <td>{{ $role->guard_name }}</td>
                                         <td>
                                             @can('editar-rol')
-                                                <x-adminlte-button class="editar" id="editar" label="Editar" theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $role->id }}" icon="fas fa-pen"></x-adminlte-button>
+                                                <x-adminlte-button class="editar" id="editar"  theme="info" data-toggle="modal" data-target="#modalEditar" data-id="{{ $role->id }}" icon="fas fa-edit"></x-adminlte-button>
                                             @endcan
                                             @can('borrar-rol')
-                                                <x-adminlte-button class="eliminar" id="eliminar" label="Borrar" theme="danger" data-id="{{ $role->id }}" icon="fas fa-trash-alt" data-value="{{ $role->name }}"></x-adminlte-button>
+                                                <x-adminlte-button class="eliminar" id="eliminar"  theme="danger" data-id="{{ $role->id }}" icon="fas fa-trash-alt" data-value="{{ $role->name }}"></x-adminlte-button>
                                             @endcan
                                             @if( count($permisos) >0 )
                                                 @can('asignar-permisos')
-                                                    <x-adminlte-button class="permisos" id="permisos" label="Permisos" theme="secondary" data-id="{{ $role->id }}" icon="fas fa-user-circle" data-toggle="modal" data-target="#modalPermisos" ></x-adminlte-button>
+                                                    <x-adminlte-button class="permisos" id="permisos" theme="secondary" data-id="{{ $role->id }}" icon="fas fa-users-cog" data-toggle="modal" data-target="#modalPermisos" ></x-adminlte-button>
                                                 @endcan
                                             @endif
                                         </td>

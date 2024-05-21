@@ -28,7 +28,7 @@
     </div>
     <x-slot name="footerSlot">
         @can('asignar-permisos')
-            <x-adminlte-button theme="primary" label="Agregar" id="permitir"></x-adminlte-button>
+            <x-adminlte-button theme="primary" label="" id="permitir"></x-adminlte-button>
         @endcan
         <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" data-dismiss="modal"></x-adminlte-button>
     </x-slot>
