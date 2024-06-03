@@ -375,13 +375,8 @@ return [
             'active' => ['profile'],
         ],
         [
-            'text' => 'Menú de Restaurante',
-            'url' => '',
-            'icon' => 'fas fa-clipboard-list',
-        ],
-        [
             'text' => 'Videomanuales',
-            'url' => '',
+            'url' => '#',
             'icon' => 'fab fa-youtube',
         ],
     ],
