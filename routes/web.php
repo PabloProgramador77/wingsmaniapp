@@ -133,8 +133,10 @@ Route::post('/paquete/borrar', [App\Http\Controllers\PaqueteController::class, '
 Route::post('/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'store'])->name('agregar-platillos-paquete');
 Route::post('/paquetes/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('buscar-bebidas-paquete');
 Route::post('/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'store'])->name('agregar-bebidas-paquete');
-Route::get('/paquete/ordenar/{id}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'store'])->name('ordenar-paquete');
+Route::get('/paquete/ordenar/{id}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'create'])->name('ordenar-paquete');
 Route::post('/paquete/preparar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'update'])->name('preparar-paquete');
 Route::post('/paquete/eliminar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'destroy'])->name('eliminar-paquete');
 Route::post('/paquete/restar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'restar'])->name('restar-paquete');
 Route::post('/paquete/sumar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'sumar'])->name('sumar-paquete');
+Route::get('/paquete/platillo/preparar/{id}/{idPlatillo}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'store'])->name('preparar-platillo-paquete');
+Route::get('/paquete/bebida/preparar/{idPaquete}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'show'])->name('preparar-bebida-paquete');

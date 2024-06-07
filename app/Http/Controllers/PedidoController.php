@@ -59,7 +59,19 @@ class PedidoController extends Controller
 
             $categorias = Categoria::all();
 
-            return view('menu', compact('categorias'));
+            if( session()->get('idPedidoPaquete') ){
+
+                session()->forget('idPedidoPaquete');
+
+                return view('menu', compact('categorias'));
+
+            }else{
+
+                return view('menu', compact('categorias'));
+
+            }
+
+            
 
         }else{
 
@@ -144,27 +156,11 @@ class PedidoController extends Controller
                     $this->notification();
                     $this->comanda( $pedido );
 
-                    $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
-                    $client = new Client( $basic );
+                    session()->forget('idPedido');
 
-                    $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
-
-                    foreach( $response as $msg){
-
-                        if( $msg->getStatus() == 0 ){
-
-                            session()->forget('idPedido');
-    
-                            $datos['exito'] = true;
-                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                            $datos['url'] = '/pedidos/cliente';
-                            
-                            break;
-    
-                        }
-
-                    }
-                    
+                    $datos['exito'] = true;
+                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                    $datos['url'] = '/pedidos/cliente';
 
                 }else{
 
@@ -190,27 +186,12 @@ class PedidoController extends Controller
                             $this->notification();
                             $this->comanda( $pedido );
 
-                            $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
-                            $client = new Client( $basic );
+                            session()->forget('idPedido');
 
-                            $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
-
-                            foreach( $response as $msg){
-
-                                if( $msg->getStatus() == 0 ){
-
-                                    session()->forget('idPedido');
-    
-                                    $datos['exito'] = true;
-                                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                                    $datos['url'] = '/pedidos/cliente';
-    
-                                    break;
-                                }
-
-                            }
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                            $datos['url'] = '/pedidos/cliente';
                             
-
                         }
 
                     }else{
@@ -253,24 +234,9 @@ class PedidoController extends Controller
                 $this->notification();
                 $this->comanda( $pedido );
 
-                $basic = new Basic( '4b5fc09b', 'tgsEFtPDLg5LWx6q' );
-                $client = new Client( $basic );
+                session()->forget('idPedido');
 
-                $response = $client->sms()->send( new SMS( '+524761126020', '+524761126020', 'Hay un nuevo pedido. Confirmalo a la brevedad.' ) ); 
-
-                foreach( $response as $msg){
-
-                    if( $msg->getStatus() == 0 ){
-
-                        session()->forget('idPedido');
-    
-                        $datos['exito'] = true;
-    
-                        break;
-
-                    }
-
-                }
+                $datos['exito'] = true;
 
             }
 

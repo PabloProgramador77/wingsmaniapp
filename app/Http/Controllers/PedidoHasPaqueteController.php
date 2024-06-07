@@ -27,64 +27,62 @@ class PedidoHasPaqueteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( $id )
     {
-        //
+        try {
+            
+            if( session()->get('idPedidoPaquete') ){
+    
+                $paquete = Paquete::find( $id );
+                $pedidoHasPaquete = PedidoHasPaquete::find( session()->get('idPedidoPaquete') );
+
+                return view('promo', compact( 'paquete', 'pedidoHasPaquete' ));
+
+            }else{
+
+                $pedidoHasPaquete = PedidoHasPaquete::create([
+
+                    'idPedido' => session()->get('idPedido'),
+                    'idPaquete' => $id,
+                    'cantidad' => 1,
+    
+                ]);
+    
+                $pedido = Pedido::find( session()->get('idPedido') );
+    
+                $paquete = Paquete::find( $id );
+    
+                $totalPedido = $this->total();
+
+                session()->put('idPedidoPaquete', $pedidoHasPaquete->id);
+    
+                return view('promo', compact( 'paquete', 'pedidoHasPaquete' ));
+
+            }
+            
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store($id)
+    public function store( $id, $idPlatillo )
     {
         try {
             
-            $pedidoHasPaquete = PedidoHasPaquete::create([
-
-                'idPedido' => session()->get('idPedido'),
-                'idPaquete' => $id,
-                'cantidad' => 1
-
-            ]);
+            $pedidoHasPaquete = PedidoHasPaquete::find( $id );
 
             if( $pedidoHasPaquete->id ){
 
-                $pedido = Pedido::find( session()->get('idPedido') );
+                $platillo = Platillo::find( $idPlatillo );
+                $paquete = Paquete::find( $pedidoHasPaquete->idPaquete );
 
-                $paquete = Paquete::find( $id );
-
-                $totalPedido = $this->total();
-
-                $salsas = Salsa::select('salsas.id', 'salsas.nombre')
-                        ->join( 'platillo_has_salsas', 'salsas.id', '=', 'platillo_has_salsas.idSalsa' )
-                        ->join( 'paquete_has_platillos', 'platillo_has_salsas.idPlatillo', '=', 'paquete_has_platillos.idPlatillo' )
-                        ->where( 'paquete_has_platillos.idPaquete', '=', $id )
-                        ->get();
-
-                $preparaciones = Preparacion::select('preparaciones.id', 'preparaciones.nombre')
-                        ->join( 'platillo_has_preparaciones', 'preparaciones.id', '=', 'platillo_has_preparaciones.idPreparacion' )
-                        ->join( 'paquete_has_platillos', 'platillo_has_preparaciones.idPlatillo', '=', 'paquete_has_platillos.idPlatillo' )
-                        ->where( 'paquete_has_platillos.idPaquete', '=', $id )
-                        ->get();
-
-                $bebidas = Platillo::select('platillos.id', 'platillos.nombre')
-                        ->join( 'paquete_has_bebidas', 'platillos.id', '=', 'paquete_has_bebidas.idBebida' )
-                        ->where( 'paquete_has_bebidas.idPaquete', '=', $id )
-                        ->get();
-
-                if( count( $salsas ) > 0 || count( $preparaciones ) > 0 || count( $bebidas ) > 0 ){
-
-                    return view('paquete', compact( 'paquete', 'pedidoHasPaquete' ));
-
-                }else{
-
-                    return redirect('/categoria/platillos/'.$paquete->categoria->id);
-
-                }
-
-            }else{
-
-                return redirect('/categoria/platillos/'.$paquete->categoria->id);
+                return view('paquete', compact('platillo', 'paquete', 'pedidoHasPaquete'));
 
             }
 
@@ -98,9 +96,23 @@ class PedidoHasPaqueteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PedidoHasPaquete $pedidoHasPaquete)
+    public function show( $idPaquete )
     {
-        //
+        try {
+            
+            $paquete = Paquete::find( $idPaquete );
+
+            if( $paquete->id ){
+
+                return view('bebida', compact('paquete'));
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**
@@ -118,10 +130,13 @@ class PedidoHasPaqueteController extends Controller
     {
         try {
 
+            $preparacion = PedidoHasPaquete::select('pedido_has_paquetes.preparacion')
+                            ->where('id', '=', $request->id)->first();
+
             $pedidoHasPaquete = PedidoHasPaquete::where('id', '=', $request->id )
                                 ->update([
 
-                                    'preparacion' => $request->preparaciones
+                                    'preparacion' => $preparacion->preparacion.' '.$request->preparaciones
 
             ]);
 

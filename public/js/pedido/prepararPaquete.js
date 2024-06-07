@@ -91,7 +91,7 @@ jQuery(document).ready(function(){
                         url: '/paquete/preparar',
                         data:{
     
-                            'id' : $("#id").val(),
+                            'id' : $("#idPedidoPaquete").val(),
                             'preparaciones' : preparaciones,
     
                         },
@@ -113,7 +113,7 @@ jQuery(document).ready(function(){
     
                                 if( resultado.isConfirmed ){
     
-                                    window.location.href = '/pedido/menu';
+                                    window.location.href = '/paquete/ordenar/'+ $("#id").val();
     
                                 }
     
@@ -132,7 +132,7 @@ jQuery(document).ready(function(){
     
                                 if( resultado.isConfirmed ){
     
-                                    window.location.href = '/pedido/menu';
+                                    window.location.href = '/paquete/ordenar/' + $("#id").val();
     
                                 }
     
@@ -164,7 +164,7 @@ jQuery(document).ready(function(){
     
                         if( resultado.isConfirmed ){
     
-                            window.location.href = '/pedido/menu';
+                            window.location.href = '/paquete/ordenar/'+ $("#id").val();
     
                         }
     
