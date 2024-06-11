@@ -241,4 +241,21 @@ class UserController extends Controller
 
         return response()->json($datos);
     }
+
+    /**
+     * Descarga del menú en PDF
+     */
+    public function menu(){
+        try {
+            
+            if( file_exists( public_path('menu_wingsmania.pdf') ) ){
+
+                return response()->download( public_path('menu_wingsmania.pdf') );
+                
+            }
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

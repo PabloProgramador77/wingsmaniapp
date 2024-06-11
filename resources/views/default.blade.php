@@ -22,7 +22,7 @@
                 
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
-                <x-adminlte-small-box title="Menú de Restaurante" text="Todos los platillos del restaurante" theme="info" url-text="Ver menú" icon="fas fa-clipboard-list" url="#" data-toggle="modal" data-target="#modalPreeliminar"></x-adminlte-small-box>
+                <x-adminlte-small-box title="Menú de Restaurante" text="Todos los platillos del restaurante" theme="info" url-text="Ver menú" icon="fas fa-clipboard-list" url="{{ url('/menu/descargar') }}" ></x-adminlte-small-box>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <x-adminlte-small-box title="Mi Perfil" text="Datos de cliente" theme="primary" url-text="Ver mi perfil" icon="fas fa-user-circle" url="/profile/username"></x-adminlte-small-box>

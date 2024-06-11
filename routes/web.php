@@ -140,3 +140,5 @@ Route::post('/paquete/restar', [App\Http\Controllers\PedidoHasPaqueteController:
 Route::post('/paquete/sumar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'sumar'])->name('sumar-paquete');
 Route::get('/paquete/platillo/preparar/{id}/{idPlatillo}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'store'])->name('preparar-platillo-paquete');
 Route::get('/paquete/bebida/preparar/{idPaquete}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'show'])->name('preparar-bebida-paquete');
+
+Route::get('/menu/descargar', [App\Http\Controllers\UserController::class, 'menu'])->name('descargar-menu');

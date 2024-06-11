@@ -374,11 +374,6 @@ return [
             'icon' => 'fas fa-user-circle',
             'active' => ['profile'],
         ],
-        [
-            'text' => 'Videomanuales',
-            'url' => '#',
-            'icon' => 'fab fa-youtube',
-        ],
     ],
 
     /*

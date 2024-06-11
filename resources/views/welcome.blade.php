@@ -47,7 +47,7 @@
                         <h1 class="display-5 fw-bold p-2 text-white text-center">Wings Mania</h1>
                         <p class="fw-bold fs-3 p-2">Ordena tu comida favorita a domicilio fácil, rápido y seguro en línea.</p>
                         <div class="d-grid d-md-flex justify-content-md-start">
-                            <a href="#myCarousel" role="button" class="btn btn-danger p-2 m-2 fw-bold">Ver Menú</a>
+                            <a href="{{ url('/menu/descargar') }}" role="button" class="btn btn-danger p-2 m-2 fw-bold">Ver Menú</a>
                             <a href="{{ route('register') }}" role="button" class="btn btn-secondary p-2 m-2 fw-bold">Registrarme</a>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
         <!--Footer-->
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-body-secondary">© 2024 Wings Mania Versión 1.0.3</p>
+                <p class="col-md-4 mb-0 text-body-secondary">© 2024 Wings Mania Versión 1.0.4</p>
 
                 <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <img src="{{ asset('img/logo_min.png') }}" class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
