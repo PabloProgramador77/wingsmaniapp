@@ -21,7 +21,7 @@
                 @endcan
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" icon="fab fa-youtube" url="#"></x-adminlte-small-box>
+                <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" url="#" icon="fab fa-youtube" data-toggle="modal" data-target="#modalVideos"></x-adminlte-small-box>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="Menú de Restaurante" text="Todos los platillos del restaurante" theme="info" url-text="Ver menú" icon="fas fa-clipboard-list" data-toggle="modal" data-target="#modalPreeliminar"></x-adminlte-small-box>
@@ -31,5 +31,6 @@
     </div>
 
     @include('preeliminar')
+    @include('videos')
 
 @stop

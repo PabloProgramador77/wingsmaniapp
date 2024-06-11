@@ -33,7 +33,7 @@
                 @endcan
             </div>
             <div class="col-lg-8 col-md-6 col-sm-12">
-                <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" icon="fab fa-youtube" url="#"></x-adminlte-small-box>
+                <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" icon="fab fa-youtube" url="#" data-toggle="modal" data-target="#modalVideos"></x-adminlte-small-box>
             </div>
 
             @can('ver-notificaciones')
@@ -82,6 +82,7 @@
         </div>
 
         @include('preeliminar')
+        @include('videos')
         
     </div>
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
