@@ -38,6 +38,18 @@
                 </div>
                 <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
             </div>
+            <div class="container-fluid row">
+                <p class="col-lg-3 col-md-4 col-sm-6 fw-semibold bg-light p-2 m-1 rounded"><b>Cliente:</b> {{ $pedido->cliente->name }}</p>
+
+                @foreach( $pedido->cliente->telefonos as $telefono)
+                    <p class="col-lg-4 col-md-4 col-sm-6 fw-semibold bg-light p-2 m-1 rounder"><b>Telefono(s):</b> {{ $telefono->nunmero }} </p>
+                @endforeach
+                
+                @if( $pedido->tipo == 'delivery' )
+                    <p class="col-lg-4 col-md-4 col-sm-6 fw-semibold bg-light p-2 m-1 rounded"><b>Dirección:</b> {{ $pedido->domicilio->direccion }}</p>
+                @endif
+                
+            </div>
 
             @php
                 $heads = [
