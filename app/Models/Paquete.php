@@ -18,6 +18,7 @@ class Paquete extends Model
         'descripcion',
         'cantidadBebidas',
         'cantidadSalsas',
+        'platillosEditables',
         'idCategoria',
         'diaActivacion',
 

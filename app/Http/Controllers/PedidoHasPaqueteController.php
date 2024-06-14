@@ -55,6 +55,7 @@ class PedidoHasPaqueteController extends Controller
                 $totalPedido = $this->total();
 
                 session()->put('idPedidoPaquete', $pedidoHasPaquete->id);
+                session()->put('conteoPlatillo', $paquete->platillosEditables);
     
                 return view('promo', compact( 'paquete', 'pedidoHasPaquete' ));
 
@@ -130,17 +131,41 @@ class PedidoHasPaqueteController extends Controller
     {
         try {
 
-            $preparacion = PedidoHasPaquete::select('pedido_has_paquetes.preparacion')
+            if( session()->get('conteoPlatillo') ){
+
+                $conteo = session()->get('conteoPlatillo');
+
+                $preparacion = PedidoHasPaquete::select('pedido_has_paquetes.preparacion')
                             ->where('id', '=', $request->id)->first();
 
-            $pedidoHasPaquete = PedidoHasPaquete::where('id', '=', $request->id )
-                                ->update([
+                $pedidoHasPaquete = PedidoHasPaquete::where('id', '=', $request->id )
+                                    ->update([
 
-                                    'preparacion' => $preparacion->preparacion.' '.$request->preparaciones
+                                        'preparacion' => $preparacion->preparacion.' '.$request->preparaciones
 
-            ]);
+                ]);
 
-            $datos['exito'] = true;
+                $conteo--;
+                
+                session()->put('conteoPlatillo', $conteo);
+
+                $datos['exito'] = true;
+
+            }else{
+
+                $preparacion = PedidoHasPaquete::select('pedido_has_paquetes.preparacion')
+                            ->where('id', '=', $request->id)->first();
+
+                $pedidoHasPaquete = PedidoHasPaquete::where('id', '=', $request->id )
+                                    ->update([
+
+                                        'preparacion' => $preparacion->preparacion.' '.$request->preparaciones
+
+                ]);
+
+                $datos['exito'] = true;
+                
+            }
 
         } catch (\Throwable $th) {
             

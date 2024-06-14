@@ -49,6 +49,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pedido/prepararPaquete.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/prepararPaqueteBebidas.js') }}" type="text/javascript"></script>
     
 @stop

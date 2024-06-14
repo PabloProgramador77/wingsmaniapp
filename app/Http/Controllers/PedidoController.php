@@ -38,7 +38,10 @@ class PedidoController extends Controller
     {
         if( auth()->user()->id && !auth()->User()->hasRole('Cliente') ){
 
-            $pedidos = Pedido::where('estatus', '!=', 'Corte')->orderBy('created_at', 'desc')->get();
+            $pedidos = Pedido::where('estatus', '!=', 'Corte')
+                        ->where('estatus', '!=', 'Ordenando')
+                        ->orderBy('created_at', 'desc')->get();
+
             $envios = Envio::all();
 
             return view('pedido.index', compact('pedidos', 'envios'));
@@ -90,7 +93,7 @@ class PedidoController extends Controller
             $pedido = Pedido::create([
 
                 'total' => 0,
-                'estatus' => 'Pendiente',
+                'estatus' => 'Ordenando',
                 'tipo' => $request->tipo,
                 'idCliente' => auth()->user()->id
 
@@ -148,6 +151,8 @@ class PedidoController extends Controller
         try {
             
             $pedido = Pedido::find( $request->id );
+            $pedido->estatus = 'Pendiente';
+            $pedido->save();
 
             if( $pedido->id ){
 

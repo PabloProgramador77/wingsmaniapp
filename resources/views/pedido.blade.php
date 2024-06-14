@@ -82,6 +82,6 @@
     </div>
     <x-slot name="footerSlot">
         <x-adminlte-button theme="primary" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
-        <x-adminlte-button theme="danger" label="Cancelar" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
+        <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

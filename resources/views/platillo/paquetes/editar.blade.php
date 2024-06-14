@@ -43,6 +43,13 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-input name="editablesEditar" id="editablesEditar" placeholder="Cantidad de platillos preparables">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text text-info">
+                            <i class="fas fa-utensils">*</i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input>
                 <x-adminlte-select2 name="diaEditar" id="diaEditar" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

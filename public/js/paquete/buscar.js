@@ -33,6 +33,7 @@ jQuery(document).ready(function(){
 
                 $("#salsasEditar").val( respuesta.salsas );
                 $("#bebidasEditar").val( respuesta.bebidas );
+                $("#editablesEditar").val( respuesta.editables );
 
                 $("#diaEditar").prepend('<option value="'+respuesta.dia+'">'+respuesta.dia+'</option>');
                 $("#diaEditar").val(respuesta.dia);

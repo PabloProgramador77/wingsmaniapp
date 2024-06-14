@@ -37,6 +37,7 @@ class Create extends FormRequest
             'descripcion' => 'string|nullable',
             'salsas' => 'integer|nullable',
             'bebidas' => 'integer|nullable',
+            'editables' => 'required|integer',
             'dia' => 'string|nullable',
 
         ];

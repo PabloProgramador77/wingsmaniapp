@@ -45,9 +45,15 @@
 
                 @endif
 
-                <div class="col-lg-6 col-md-6 col-sm-12">
-                    <x-adminlte-small-box title="Continuar" url="{{ url('/pedido/menu') }}"  id="continuar" class="continuar" icon="fas fa-forward" text="Pulsa aquí para continuar con tu pedido" url-text="Continuar con pedido" theme="success" disabled="true"></x-adminlte-small-box>
-                </div>
+                @if( session()->get('conteoPlatillo') > 0 )
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <x-adminlte-small-box title="Continuar"  id="continuar" class="continuar" icon="fas fa-forward" text="Debes preparar los platillos del paquete para continuar" theme="danger"></x-adminlte-small-box>
+                    </div>
+                @else
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <x-adminlte-small-box title="Continuar" url="{{ url('/pedido/menu') }}"  id="continuar" class="continuar" icon="fas fa-forward" text="Pulsa aquí para continuar con tu pedido" url-text="Continuar con pedido" theme="success" disabled="true"></x-adminlte-small-box>
+                    </div>
+                @endif
             </div>
             
             
