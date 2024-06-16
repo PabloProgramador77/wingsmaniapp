@@ -48,7 +48,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/pedido/cancelado/' + id;
+                                window.location.href = respuesta.url;
 
                             }
 
@@ -67,7 +67,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/pedido/menu';
+                                window.location.href = respuesta.url;
 
                             }
 

@@ -273,6 +273,16 @@ class PedidoController extends Controller
                 session()->forget('idPedido');
 
                 $datos['exito'] = true;
+                
+                if( auth()->user()->hasRole('Cliente') ){
+
+                    $datos['url'] = '/home';
+
+                }else{
+
+                    $datos['url'] = '/pedido/cancelado/'.$request->id; 
+
+                }
 
             }
 

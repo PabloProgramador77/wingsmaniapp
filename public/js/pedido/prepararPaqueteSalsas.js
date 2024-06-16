@@ -26,20 +26,6 @@ jQuery(document).ready(function(){
 
         });
 
-        $("input[name=preparacion]:checked").each(function(){
-
-            if( preparaciones.includes( $(this).attr('data-value') ) === true ){
-
-                preparaciones += ', ' + $(this).attr('data-id');
-
-            }else{
-
-                preparaciones += ', ' + $(this).attr('data-value') + ', ' + $(this).attr('data-id');
-
-            }
-
-        });
-
         if( salsas.length <= 0 ){
 
             Swal.fire({

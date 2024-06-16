@@ -33,6 +33,9 @@
                     
                 @endforeach 
 
+                <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('js/pedido/prepararPaqueteSalsas.js') }}" type="text/javascript"></script>
+
             @endif
 
             @if( count( $platillo->preparaciones ) > 0 )
@@ -48,6 +51,9 @@
                     
                 @endforeach
 
+                <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('js/pedido/prepararPaquetePreparaciones.js') }}" type="text/javascript"></script>
+
             @endif
 
             </div>
@@ -62,8 +68,8 @@
 
     </div>
 
-    <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+    
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/pedido/prepararPaqueteSalsas.js') }}" type="text/javascript"></script>
+    
     
 @stop
