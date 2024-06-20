@@ -1,7 +1,7 @@
 <x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
         <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-2 fw-semibold">{{ strtoupper( $pedido->tipo ) }}</p>
-        <p class="rounded bg-success text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>
+        <p class="rounded bg-info text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>
         @if ( $pedido->tipo == 'delivery' )
             <p class="rounded bg-light text-center fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> A los pedidos a domicilio se les agrega al final un costo de envio, por lo que el total mostrado no es el precio final.</p>
         @endif
@@ -81,7 +81,9 @@
         <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+        @if( count( $platillosPedido ) > 0 )
+            <x-adminlte-button theme="success" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+        @endif
         <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

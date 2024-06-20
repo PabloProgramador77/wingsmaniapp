@@ -42,7 +42,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Ahora los platillos de tu pedido.',
+                            title: 'Ahora elige los platillos de tu pedido.',
                             allowOutsideClick: false,
                             showConfirmButton: true
 

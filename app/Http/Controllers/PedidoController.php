@@ -61,16 +61,26 @@ class PedidoController extends Controller
         if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
 
             $categorias = Categoria::all();
+            $pedido = Pedido::find( session()->get('idPedido') );
+            $platillosPedido = Platillo::select('pedido_has_platillos.id', 'pedido_has_platillos.cantidad', 'pedido_has_platillos.preparacion', 'platillos.nombre')
+                                ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
+                                ->where('pedido_has_platillos.idPedido', '=', session()->get('idPedido'))
+                                ->get();
+
+            $paquetesPedido = Paquete::select('pedido_has_paquetes.id', 'pedido_has_paquetes.cantidad', 'pedido_has_paquetes.preparacion', 'paquetes.nombre')
+                            ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
+                            ->where('pedido_has_paquetes.idPedido', '=', session()->get('idPedido'))
+                            ->get();
 
             if( session()->get('idPedidoPaquete') ){
 
                 session()->forget('idPedidoPaquete');
 
-                return view('menu', compact('categorias'));
+                return view('menu', compact('categorias', 'pedido', 'platillosPedido', 'paquetesPedido'));
 
             }else{
 
-                return view('menu', compact('categorias'));
+                return view('menu', compact('categorias', 'pedido', 'platillosPedido', 'paquetesPedido'));
 
             }
 
