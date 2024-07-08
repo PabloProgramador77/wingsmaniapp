@@ -81,7 +81,7 @@
         <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
     </div>
     <x-slot name="footerSlot">
-        @if( count( $platillosPedido ) > 0 )
+        @if( session()->get('idPedido') && count( $platillosPedido ) > 0 )
             <x-adminlte-button theme="success" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
         @endif
         <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
