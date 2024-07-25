@@ -11,15 +11,9 @@ class Create extends FormRequest
      */
     public function authorize(): bool
     {
-        if( auth()->user()->id && auth()->user()->hasRole('Cliente') ){
 
-            return true;
-
-        }else{
-
-            return false;
-
-        }
+        return true;
+        
     }
 
     /**

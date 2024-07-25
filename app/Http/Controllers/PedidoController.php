@@ -6,9 +6,12 @@ use App\Models\Pedido;
 use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Domicilio;
+use App\Models\Telefono;
 use App\Models\Platillo;
 use App\Models\Envio;
 use App\Models\Paquete;
+use App\Models\ClienteHasDomicilio;
+use App\Models\ClienteHasTelefono;
 use Illuminate\Http\Request;
 use App\Http\Requests\Pedido\Create;
 use App\Http\Requests\Pedido\Delete;
@@ -28,6 +31,7 @@ use \Mpdf\Mpdf as PDF;
 use Vonage\Client;
 use Vonage\SMS\Message\SMS;
 use Vonage\Client\Credentials\Basic;
+use Illuminate\Support\Facades\Hash;
 
 class PedidoController extends Controller
 {
@@ -100,14 +104,31 @@ class PedidoController extends Controller
     {
         try {
             
-            $pedido = Pedido::create([
+            if( auth()->check() ){
 
-                'total' => 0,
-                'estatus' => 'Ordenando',
-                'tipo' => $request->tipo,
-                'idCliente' => auth()->user()->id
+                $pedido = Pedido::create([
 
-            ]);
+                    'total' => 0,
+                    'estatus' => 'Ordenando',
+                    'tipo' => $request->tipo,
+                    'idCliente' => auth()->user()->id,
+    
+                ]);
+
+            }else{
+
+                auth()->attempt(['email' => 'invitado@gmail.com', 'password' => 'invitado123']);
+
+                $pedido = Pedido::create([
+
+                    'total' => 0,
+                    'estatus' => 'Ordenando',
+                    'tipo' => $request->tipo,
+                    'idCliente' => auth()->user()->id,
+    
+                ]);
+
+            }
 
             if( $pedido->id ){
 
@@ -184,7 +205,7 @@ class PedidoController extends Controller
                         if( count( auth()->user()->domicilios ) > 1 ){
 
                             $datos['exito'] = true;
-                            $datos['mensaje'] = 'Elige el domicilio para entregar tu pedido.';
+                            $datos['mensaje'] = 'Tienes más de 1 domicilio registrado. Elige el domicilio para entregar tu pedido.';
                             $datos['url'] = '/pedido/domicilios';
 
                         }else{
@@ -860,6 +881,82 @@ class PedidoController extends Controller
             echo $th->getMessage();
 
         }
+    }
+
+    /**
+     * Pedido de Cliente sin registro
+     */
+    public function pedir( Request $request ){
+        try {
+
+            $user = User::create([
+
+                'name' => $request->nombre,
+                'email' => $request->nombre.'.wingsmania@gmail.com',
+                'password' => Hash::make( $request->nombre.'123' ),
+
+            ]);
+
+            if( $user->id ){
+
+                $user->assignRole('Cliente');
+
+                $domicilio = Domicilio::create([
+
+                    'direccion' => $request->domicilio,
+
+                ]);
+
+                $userDomicilio = ClienteHasDomicilio::create([
+
+                    'idCliente' => $user->id,
+                    'idDomicilio' => $domicilio->id,
+
+                ]);
+
+                $telefono = Telefono::create([
+
+                    'nunmero' => $request->telefono,
+
+                ]);
+
+                $userTelefono = ClienteHasTelefono::create([
+
+                    'idCliente' => $user->id,
+                    'idTelefono' => $telefono->id,
+
+                ]);
+
+            }
+            
+            $pedido = Pedido::find( $request->id );
+            $pedido->estatus = 'Pendiente';
+            $pedido->idCliente = $user->id;
+            $pedido->idDomicilio = $domicilio->id;
+            $pedido->save();
+
+            if( $pedido->id ){
+
+                $this->notification();
+                $this->comanda( $pedido );
+
+                session()->forget('idPedido');
+                auth()->logout();
+
+                $datos['exito'] = true;
+                $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                $datos['url'] = '/';
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json($datos);
     }
 
 }

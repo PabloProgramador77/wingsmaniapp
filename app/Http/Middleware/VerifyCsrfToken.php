@@ -62,6 +62,7 @@ class VerifyCsrfToken extends Middleware
         '/pedido/restar',
         '/pedido/cancelar',
         '/pedido/ordenar',
+        '/pedido/pedir',
         '/pedido/entregar',
         '/pedido/notification/confirmado',
         '/pedido/cobrar',

@@ -87,6 +87,7 @@ Route::post('/pedido/sumar', [App\Http\Controllers\PedidoHasPlatilloController::
 Route::post('/pedido/restar', [App\Http\Controllers\PedidoHasPlatilloController::class, 'restar'])->name('restar-pedido');
 Route::post('/pedido/cancelar', [App\Http\Controllers\PedidoController::class, 'destroy'])->name('cancelar-pedido');
 Route::post('/pedido/ordenar', [App\Http\Controllers\PedidoController::class, 'edit'])->name('ordenar-pedido');
+Route::post('/pedido/pedir', [App\Http\Controllers\PedidoController::class, 'pedir'])->name('pedir-pedido');
 Route::post('/pedido/entregar', [App\Http\Controllers\PedidoController::class, 'update'])->name('entregar-pedido');
 Route::get('/pedido/confirmar/{id}', [App\Http\Controllers\PedidoController::class, 'impresion'])->name('confirmar-pedido');
 Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');

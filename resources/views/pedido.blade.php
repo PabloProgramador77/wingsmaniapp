@@ -81,8 +81,14 @@
         <input type="hidden" name="idPedido" id="idPedido" value="{{ $pedido->id }}">
     </div>
     <x-slot name="footerSlot">
-        @if( session()->get('idPedido') && count( $platillosPedido ) > 0 )
-            <x-adminlte-button theme="success" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+        @if( count( $paquetesPedido ) > 0 || count( $platillosPedido ) > 0 )
+            
+            @if( auth()->user()->name === 'Invitado' )
+                <x-adminlte-button theme="success" label="Enviar al restaurante" icon="fas fa-papel-plane" data-toggle="modal" data-target="#modalCliente" icon="fas fa-paper-plane" id="pedir"></x-adminlte-button>
+            @else
+                <x-adminlte-button theme="success" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+            @endif
+            
         @endif
         <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
     </x-slot>

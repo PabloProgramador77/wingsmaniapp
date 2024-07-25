@@ -27,7 +27,7 @@
                         <a class="nav-link disabled" aria-disabled="true"><b>Dirección: </b>Calle Alamo 110, Barrio de San Antonio, San Francisco del Rincón, Gto.</a>
                         @if( Route::has('login') )
                             @auth
-                                <a class="btn btn-warning p-2 mx-5" href="{{ route('home') }}">Continuar</a>
+                                <a class="btn btn-warning p-2 mx-5" href="{{ route('home') }}">Ordenar</a>
                             @else
                                 <a class="btn btn-warning p-2 mx-5" href="{{ route('login') }}">Entrar</a>
                             @endauth
@@ -47,8 +47,17 @@
                         <h1 class="display-5 fw-bold p-2 text-white text-center">Wings Mania</h1>
                         <p class="fw-bold fs-3 p-2">Ordena tu comida favorita a domicilio fácil, rápido y seguro en línea.</p>
                         <div class="d-grid d-md-flex justify-content-md-start">
-                            <a href="{{ url('/menu/descargar') }}" role="button" class="btn btn-danger p-2 m-2 fw-bold">Ver Menú</a>
-                            <a href="{{ route('register') }}" role="button" class="btn btn-secondary p-2 m-2 fw-bold">Registrarme</a>
+                            <a href="{{ url('/menu/descargar') }}" role="button" class="btn btn-danger p-2 m-2 fw-bold shadow">Ver Menú</a>
+                            <a href="{{ route('register') }}" role="button" class="btn btn-secondary p-2 m-2 fw-bold shadow">Registrarme</a>
+                            @if( Route::has('login') )
+                                @auth
+                                @else
+                                    <div class="d-grid d-md-flex justify-content-md-start">
+                                        <a id="pedido" role="button" class="btn btn-dark text-warning p-2 m-2 fw-bold shadow">Ordenar Ahora</a>
+                                    </div>
+                                @endauth
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -269,7 +278,7 @@
         <!--Footer-->
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-body-secondary">© 2024 Wings Mania Versión 1.0.6</p>
+                <p class="col-md-4 mb-0 text-body-secondary">© 2024 Wings Mania Versión 1.1.6</p>
 
                 <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <img src="{{ asset('img/logo_min.png') }}" class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -285,5 +294,8 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/pedido/pedido.js') }}" type="text/javascript"></script>
     </body>
 </html>

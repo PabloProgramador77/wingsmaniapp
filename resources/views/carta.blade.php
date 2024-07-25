@@ -50,18 +50,33 @@
     @endcan
 
     @include('pedido')
+    
+    <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
 
     @if( session()->get('idPedido') )
-        <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+
+        @if( auth()->user()->name === 'Invitado' )
+            
+            @include('cliente')
+
+            <script src="{{ asset('js/pedido/pedir.js') }}" type="text/javascript"></script>
+
+        @else
+
+            <script src="{{ asset('js/pedido/ordenar.js') }}" type="text/javascript"></script>
+            
+        @endif
+        
         <script src="{{ asset('js/pedido/borrar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/sumar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/restar.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/cancelar.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/pedido/ordenar.js') }}" type="text/javascript"></script>
+        
         <script src="{{ asset('js/pedido/borrarPaquete.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/restarPaquete.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/sumarPaquete.js') }}" type="text/javascript"></script>
+    
     @endif
 
 @stop
