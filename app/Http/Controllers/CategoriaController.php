@@ -38,7 +38,7 @@ class CategoriaController extends Controller
      */
     public function create($id)
     {
-        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+        if( auth()->user()->id && session()->get('idPedido') ){
 
             $hoy = Carbon::now()->locale('es')->translatedFormat('l');
 

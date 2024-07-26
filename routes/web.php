@@ -98,6 +98,7 @@ Route::post('/pedido/domicilio', [App\Http\Controllers\PedidoController::class, 
 Route::get('/pedido/ticket/{id}', [App\Http\Controllers\PedidoController::class, 'descargarTicket'])->name('ticket-pedido');
 Route::get('/pedido/entrega/{id}', [App\Http\Controllers\PedidoController::class, 'descargarEntrega'])->name('entrega-pedido');
 Route::get('/pedido/cancelado/{id}', [App\Http\Controllers\PedidoController::class, 'descargarCancelacion'])->name('pedido-cancelado');
+Route::post('/pedido/editar', [App\Http\Controllers\PedidoController::class, 'editar'])->name('editar-pedido');
 
 Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
 Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');

@@ -11,7 +11,7 @@ class Update extends FormRequest
      */
     public function authorize(): bool
     {
-        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+        if( auth()->user()->id && session()->get('idPedido') ){
 
             return true;
 

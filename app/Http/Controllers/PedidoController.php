@@ -62,7 +62,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        if( auth()->user()->id && auth()->user()->hasRole('Cliente') && session()->get('idPedido') ){
+        if( auth()->user()->id && session()->get('idPedido') ){
 
             $categorias = Categoria::all();
             $pedido = Pedido::find( session()->get('idPedido') );
@@ -195,46 +195,75 @@ class PedidoController extends Controller
                     session()->forget('idPedido');
 
                     $datos['exito'] = true;
-                    $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                    $datos['url'] = '/pedidos/cliente';
 
-                }else{
+                    if( session()->get('editarPedido') ){
 
-                    if( count( auth()->user()->domicilios ) > 0 ){
+                        session()->forget('editarPedido');
 
-                        if( count( auth()->user()->domicilios ) > 1 ){
-
-                            $datos['exito'] = true;
-                            $datos['mensaje'] = 'Tienes más de 1 domicilio registrado. Elige el domicilio para entregar tu pedido.';
-                            $datos['url'] = '/pedido/domicilios';
-
-                        }else{
-
-                            $domicilios = $pedido->cliente->domicilios;
-
-                            foreach( $domicilios as $domicilio ){
-
-                                $pedido->idDomicilio = $domicilio->id;
-                                $pedido->save();
-
-                            }
-
-                            $this->notification();
-                            $this->comanda( $pedido );
-
-                            session()->forget('idPedido');
-
-                            $datos['exito'] = true;
-                            $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
-                            $datos['url'] = '/pedidos/cliente';
-                            
-                        }
+                        $datos['mensaje'] = 'Pedido Editado';
+                        $datos['url'] = '/pedidos';
 
                     }else{
 
+                        $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                        $datos['url'] = '/pedidos/cliente';
+
+                    }
+                    
+
+                }else{
+
+                    if( session()->get('editarPedido') ){
+
+                        $this->notification();
+                        $this->comanda( $pedido );
+
                         $datos['exito'] = true;
-                        $datos['mensaje'] = 'Registra un domicilio para entregar tu pedido.';
-                        $datos['url'] = '/pedido/domicilios';
+                        $datos['mensaje'] = 'Pedido Editado';
+                        $datos['url'] = '/pedidos';
+
+                        session()->forget('editarPedido');
+                        session()->forget('idPedido');
+
+                    }else{
+
+                        if( count( auth()->user()->domicilios ) > 0 ){
+
+                            if( count( auth()->user()->domicilios ) > 1 ){
+    
+                                $datos['exito'] = true;
+                                $datos['mensaje'] = 'Tienes más de 1 domicilio registrado. Elige el domicilio para entregar tu pedido.';
+                                $datos['url'] = '/pedido/domicilios';
+    
+                            }else{
+    
+                                $domicilios = $pedido->cliente->domicilios;
+    
+                                foreach( $domicilios as $domicilio ){
+    
+                                    $pedido->idDomicilio = $domicilio->id;
+                                    $pedido->save();
+    
+                                }
+    
+                                $this->notification();
+                                $this->comanda( $pedido );
+    
+                                session()->forget('idPedido');
+    
+                                $datos['exito'] = true;
+                                $datos['mensaje'] = 'Pedido Enviado a Restaurante.';
+                                $datos['url'] = '/pedidos/cliente';
+                                
+                            }
+    
+                        }else{
+    
+                            $datos['exito'] = true;
+                            $datos['mensaje'] = 'Registra un domicilio para entregar tu pedido.';
+                            $datos['url'] = '/pedido/domicilios';
+    
+                        }
 
                     }                 
 
@@ -307,7 +336,17 @@ class PedidoController extends Controller
                 
                 if( auth()->user()->hasRole('Cliente') ){
 
-                    $datos['url'] = '/home';
+                    if( auth()->user()->name == 'Invitado' ){
+
+                        auth()->logout();
+                        
+                        $datos['url'] = '/';
+
+                    }else{
+
+                        $datos['url'] = '/home';
+
+                    }
 
                 }else{
 
@@ -957,6 +996,33 @@ class PedidoController extends Controller
         }
 
         return response()->json($datos);
+    }
+
+    /**
+     * Iniciar edición de pedido
+     */
+    public function editar( Request $request ){
+        try {
+            
+            $pedido = Pedido::find( $request->pedido );
+
+            if( $pedido->id ){
+
+                session()->put('idPedido', $pedido->id);
+                session()->put('editarPedido', true);
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
 }

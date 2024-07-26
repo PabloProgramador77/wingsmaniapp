@@ -21,6 +21,10 @@
                         @endif
                     @endcan
 
+                    @if( !$pedido->estatus == 'Cobrado' || $pedido->estatus == 'Pagado' )
+                        <x-adminlte-button theme="secondary" label="Editar" id="editarPedido" icon="fas fa-edit" data-id="{{ $pedido->id }}" data-value="{{ $pedido->cliente->name }}" class="mx-2"></x-adminlte-button>
+                    @endif
+
                     @if( auth()->user()->hasRole(['Cliente']) )
 
                         <a href="{{ url('/pedidos/cliente') }}" class="btn btn-warning rounded">
@@ -102,5 +106,6 @@
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/editar.js') }}" type="text/javascript"></script>
     
 @stop
