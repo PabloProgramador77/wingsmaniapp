@@ -21,7 +21,7 @@
                         @endif
                     @endcan
 
-                    @if( !$pedido->estatus == 'Cobrado' || $pedido->estatus == 'Pagado' )
+                    @if( $pedido->estatus !== 'Cobrado' )
                         <x-adminlte-button theme="secondary" label="Editar" id="editarPedido" icon="fas fa-edit" data-id="{{ $pedido->id }}" data-value="{{ $pedido->cliente->name }}" class="mx-2"></x-adminlte-button>
                     @endif
 
