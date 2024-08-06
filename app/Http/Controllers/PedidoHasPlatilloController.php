@@ -26,9 +26,57 @@ class PedidoHasPlatilloController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( Request $request )
     {
-        //
+        try {
+
+            $preparacionPlatillo = '';
+
+            if( is_array( $request->salsas ) && count( $request->salsas ) > 0 ){
+
+                foreach($request->salsas as $salsa){
+
+                    $preparacionPlatillo .= $salsa.', ';
+
+                }
+
+            }
+
+            if( is_array( $request->preparaciones ) && count( $request->preparaciones ) > 0 ){
+
+                foreach($request->preparaciones as $preparacion){
+
+                    $preparacionPlatillo .= $preparacion.', ';
+
+                }
+
+            }
+            
+            $pedidoHasPlatillo = PedidoHasPlatillo::create([
+
+                'idPedido' => session()->get('idPedido'),
+                'idPlatillo' => $request->id,
+                'cantidad' => 1,
+                'preparacion' => $preparacionPlatillo,
+
+            ]);
+
+            if( $pedidoHasPlatillo->id ){
+
+                $this->total();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

@@ -2,7 +2,7 @@
 @section('contenido')
 
     @can('ver-menu')
-        <div class="container-fluid col-md-12 bg-white p-1 rounded">
+        <div class="container-fluid row bg-white p-1 rounded">
 
             @if( session()->get('idPedido') )
                     

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PlatilloHasPreparacion;
+use App\Models\Platillo;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlatilloHasPreparacion\Create;
 
@@ -57,9 +58,28 @@ class PlatilloHasPreparacionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PlatilloHasPreparacion $platilloHasPreparacion)
+    public function show(Request $request)
     {
-        //
+        try {
+            
+            $platillo = Platillo::find( $request->id );
+
+            if( $platillo && $platillo->id ){
+
+                $datos['exito'] = true;
+                $datos['salsas'] = $platillo->salsas;
+                $datos['preparaciones'] = $platillo->preparaciones;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

@@ -42,7 +42,7 @@ class CategoriaController extends Controller
 
             $hoy = Carbon::now()->locale('es')->translatedFormat('l');
 
-            $platillos = Platillo::select('id', 'nombre', 'precio')
+            $platillos = Platillo::select('id', 'nombre', 'precio', 'cantidadSalsas')
                         ->where('idCategoria', '=', $id)
                         ->orderBy('nombre', 'asc')
                         ->get();
