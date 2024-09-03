@@ -27,9 +27,21 @@
 
                     @foreach ($paquetes as $paquete)
 
-                        <div class="col-lg-4 col-md-3">
-                            <x-adminlte-small-box title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar"></x-adminlte-small-box>
-                        </div>    
+                        @if( count( $paquete->platillos ) > 0 )
+                        
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <x-adminlte-small-box class="prepararPaquete" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPreparacionesPaquete"></x-adminlte-small-box>
+                            </div>
+
+                        @else
+
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <x-adminlte-small-box title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar"></x-adminlte-small-box>
+                            </div>
+
+                        @endif
+
+                            
                     
                     @endforeach
 
@@ -39,13 +51,13 @@
 
                     @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 )
                     
-                        <div class="col-lg-4 col-md-3 col-sm-6 overflow-auto">
-                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalPreparaciones" class="prepararPlatillo"></x-adminlte-small-box>
+                        <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
+                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo"></x-adminlte-small-box>
                         </div>
 
                     @else
 
-                        <div class="col-lg-4 col-md-3 col-sm-6 overflow-auto">
+                        <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
                             <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}"></x-adminlte-small-box>
                         </div>
                         
@@ -60,7 +72,9 @@
     @endcan
 
     @include('pedido')
+    @include('salsas')
     @include('preparaciones')
+    @include('preparacionesPaquete')
     
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -90,6 +104,7 @@
     
     @endif
 
-    <script src="{{ asset('js/pedido/buscarPreparaciones.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/buscarSalsas.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/pedido/buscarPreparacionesPaquete.js') }}" type="text/javascript"></script>
 
 @stop

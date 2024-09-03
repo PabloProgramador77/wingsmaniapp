@@ -67,7 +67,6 @@ class PlatilloHasPreparacionController extends Controller
             if( $platillo && $platillo->id ){
 
                 $datos['exito'] = true;
-                $datos['salsas'] = $platillo->salsas;
                 $datos['preparaciones'] = $platillo->preparaciones;
 
             }

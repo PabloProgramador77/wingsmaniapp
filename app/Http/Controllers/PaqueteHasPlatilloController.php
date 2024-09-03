@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaqueteHasPlatillo;
+use App\Models\Paquete;
 use Illuminate\Http\Request;
 use App\Http\Requests\PaqueteHasPlatillo\Create;
 
@@ -92,9 +93,44 @@ class PaqueteHasPlatilloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PaqueteHasPlatillo $paqueteHasPlatillo)
+    public function show( Request $request)
     {
-        //
+        try {
+            
+            $paquete = Paquete::find( $request->id );
+
+            if( $paquete->id ){
+
+                $datos['exito'] = true;
+                $datos['platillos'] = $paquete->platillos;
+                $datos['bebidas'] = $paquete->bebidas;
+
+                foreach( $datos['platillos'] as $platillo ){
+
+                    if( count( $platillo->salsas ) > 0 ){
+
+                        $platillo->salsas = $platillo->salsas;
+
+                    }
+
+                    if( count( $platillo->preparaciones ) > 0 ){
+
+                        $platillo->preparaciones = $platillo->preparaciones;
+                        
+                    }
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PlatilloHasSalsa;
+use App\Models\Platillo;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlatilloHasSalsa\Store;
 
@@ -57,9 +58,27 @@ class PlatilloHasSalsaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PlatilloHasSalsa $platilloHasSalsa)
+    public function show(Request $request)
     {
-        //
+        try {
+            
+            $platillo = Platillo::find( $request->id );
+
+            if( $platillo && $platillo->id ){
+
+                $datos['exito'] = true;
+                $datos['salsas'] = $platillo->salsas;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

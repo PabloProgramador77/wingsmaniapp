@@ -6,7 +6,7 @@
 
             @if( session()->get('idPedido') )
                     
-                <div class="col-lg-6">
+                <div class="col-lg-12 col-md-12 col-sm-12">
                     @can('ver-pedido')
                         <x-adminlte-small-box title="Mi Pedido" icon="fas fa-shopping-cart" theme="primary" url="#" url-text="Ver mi pedido" data-toggle="modal" data-target="#modalPedido"></x-adminlte-small-box>
                     @endcan
@@ -14,12 +14,12 @@
 
             @endif
             
-            <p class="fs-2 fw-bold text-center bg-info p-1 my-4 rounded shadow"><i class="fas fa-info-circle"></i> Intrucciones: Elige el menú que más te guste y pulsa donde dice "Ver platillos" <i class="fas fa-info-circle"></i></p>
+            <p class="fs-2 text-center bg-info p-1 my-4 rounded shadow col-lg-12"><i class="fas fa-info-circle"></i> Intrucciones: Elige el menú que más te guste y pulsa donde dice "Ver platillos" <i class="fas fa-info-circle"></i></p>
             <div class="container-fluid row">
                 
                 @foreach($categorias as $categoria)
                     
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <x-adminlte-small-box title="{{ $categoria->nombre }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/categoria/platillos') }}/{{ $categoria->id }}" url-text="Ver platillos"></x-adminlte-small-box>
                     </div>
 
@@ -61,6 +61,7 @@
         <script src="{{ asset('js/pedido/borrarPaquete.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/restarPaquete.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/pedido/sumarPaquete.js') }}" type="text/javascript"></script>
+    
     @endif
 
 @stop

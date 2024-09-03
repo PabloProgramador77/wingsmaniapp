@@ -6,6 +6,7 @@
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.BootstrapSwitch', true)
+@section('plugins.Bootstrap', true)
 @section('content_header')
     @yield('contenido')
 @stop

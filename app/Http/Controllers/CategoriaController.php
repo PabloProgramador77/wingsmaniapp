@@ -47,12 +47,12 @@ class CategoriaController extends Controller
                         ->orderBy('nombre', 'asc')
                         ->get();
 
-            $paquetes = Paquete::select('id', 'nombre', 'precio')
+            $paquetes = Paquete::select('id', 'nombre', 'precio', 'cantidadBebidas', 'cantidadSalsas', 'platillosEditables')
                         ->where('idCategoria', '=', $id)
                         ->where('diaActivacion', '=', NULL)
                         ->get();
 
-            $paquetesHoy = Paquete::select('id', 'nombre', 'precio')
+            $paquetesHoy = Paquete::select('id', 'nombre', 'precio', 'cantidadBebidas', 'cantidadSalsas', 'platillosEditables')
                         ->where('idCategoria', '=', $id)
                         ->where('diaActivacion', '=', $hoy)
                         ->get();

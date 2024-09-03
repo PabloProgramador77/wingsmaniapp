@@ -1,7 +1,8 @@
 <x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
-        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-2 fw-semibold">{{ strtoupper( $pedido->tipo ) }}</p>
-        <p class="rounded bg-info text-center p-2 mx-2 col-lg-3" id="totalPedido"><b>Total:</b> $ {{ $pedido->total }} MXN</p>
+        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6 fw-semibol"><b>Cliente:</b> {{ $pedido->cliente->name }}</p>
+        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6 fw-semibold"><b>Tipo de Pedido:</b> {{ strtoupper( $pedido->tipo ) }}</p>
+        <p class="rounded bg-info text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6" id="totalPedido"><b>Total de Pedido:</b> $ {{ $pedido->total }} MXN</p>
         @if ( $pedido->tipo == 'delivery' )
             <p class="rounded bg-light text-center fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> A los pedidos a domicilio se les agrega al final un costo de envio, por lo que el total mostrado no es el precio final.</p>
         @endif
@@ -14,7 +15,7 @@
         ];
     @endphp
     
-    <div class="container-fluid col-md-12 my-3">
+    <div class="container-fluid col-lg-12 col-md-12 col-sm-12 my-3">
         <x-adminlte-datatable id="platillos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
             
             @if( count( $platillosPedido ) > 0 )
@@ -23,9 +24,9 @@
 
                     <tr>
                         <td>
-                            <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $platillo->id }}" icon="fas fa-plus-circle" class="mx-2 sumar"></x-adminlte-button>
+                            <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $platillo->id }}" icon="fas fa-plus-circle" class="mx-1 sumar"></x-adminlte-button>
                             <b class="cantidadPlatillo" id="cantidadPlatillo" data-id="{{ $platillo->id }}">{{ $platillo->cantidad }}</b>
-                            <x-adminlte-button type="button" name="restar" id="restar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-minus-circle" class="mx-2 restar"></x-adminlte-button>
+                            <x-adminlte-button type="button" name="restar" id="restar" theme="danger" data-id="{{ $platillo->id }}" icon="fas fa-minus-circle" class="mx-1 restar"></x-adminlte-button>
                         </td>
                         <td>{{ $platillo->nombre }}</td>
                         <td>
@@ -54,9 +55,9 @@
                     
                     <tr>
                         <td>
-                            <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $paquete->id }}" icon="fas fa-plus-circle" class="mx-2 sumarPaquete"></x-adminlte-button>
+                            <x-adminlte-button type="button" name="sumar" id="sumar" theme="primary" data-id="{{ $paquete->id }}" icon="fas fa-plus-circle" class="mx-1 sumarPaquete"></x-adminlte-button>
                             <b class="cantidadPlatillo" id="cantidadPaquete" data-id="{{ $paquete->id }}">{{ $paquete->cantidad }}</b>
-                            <x-adminlte-button type="button" name="restar" id="restar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-minus-circle" class="mx-2 restarPaquete"></x-adminlte-button>
+                            <x-adminlte-button type="button" name="restar" id="restar" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-minus-circle" class="mx-1 restarPaquete"></x-adminlte-button>
                         </td>
                         <td>{{ $paquete->nombre }}</td>
                         <td>
@@ -69,6 +70,7 @@
                             @endif
                         </td>
                         <td>
+                            <x-adminlte-button class="m-1 preparar" id="preparar" title="Preparar Platillo" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-dumpster-fire" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                             <x-adminlte-button class="borrar" id="borrar" title="Borrar paquete" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                         </td>
                     </tr>
@@ -84,9 +86,9 @@
         @if( count( $paquetesPedido ) > 0 || count( $platillosPedido ) > 0 )
             
             @if( auth()->user()->name === 'Invitado' )
-                <x-adminlte-button theme="success" label="Enviar al restaurante" icon="fas fa-papel-plane" data-toggle="modal" data-target="#modalCliente" icon="fas fa-paper-plane" id="pedir"></x-adminlte-button>
+                <x-adminlte-button theme="success" label="Enviar Pedido" icon="fas fa-papel-plane" data-toggle="modal" data-target="#modalCliente" icon="fas fa-paper-plane" id="pedir"></x-adminlte-button>
             @else
-                <x-adminlte-button theme="success" label="Enviar al restaurante" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+                <x-adminlte-button theme="success" label="Enviar Pedido" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
             @endif
             
         @endif

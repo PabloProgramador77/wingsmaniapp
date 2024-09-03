@@ -18,4 +18,10 @@ class PaqueteHasPlatillo extends Model
 
     ];
 
+    public function platillo(){
+
+        return $this->belongsToMany( Platillo::class, 'paquete_has_platillos', 'idPaquete', 'idPlatillo' );
+        
+    }
+
 }

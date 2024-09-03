@@ -94,13 +94,15 @@ Route::get('/pedido/confirmar/{id}', [App\Http\Controllers\PedidoController::cla
 Route::post('/pedido/notification/confirmado', [App\Http\Controllers\NotificationController::class, 'update'])->name('notificacion-leida');
 Route::post('/pedido/cobrar', [App\Http\Controllers\PedidoController::class, 'cobrar'])->name('cobrar-pedido');
 Route::post('/pedido/pagar', [App\Http\Controllers\PedidoController::class, 'pagar'])->name('pagar-pedido');
-Route::post('/pedido/imprimir', [App\Http\Controllers\PedicoController::class, 'impresion'])->name('imprimir-pedido');
+Route::post('/pedido/imprimir', [App\Http\Controllers\PedidoController::class, 'impresion'])->name('imprimir-pedido');
 Route::post('/pedido/domicilio', [App\Http\Controllers\PedidoController::class, 'domicilio'])->name('domicilio-pedido');
 Route::get('/pedido/ticket/{id}', [App\Http\Controllers\PedidoController::class, 'descargarTicket'])->name('ticket-pedido');
 Route::get('/pedido/entrega/{id}', [App\Http\Controllers\PedidoController::class, 'descargarEntrega'])->name('entrega-pedido');
 Route::get('/pedido/cancelado/{id}', [App\Http\Controllers\PedidoController::class, 'descargarCancelacion'])->name('pedido-cancelado');
 Route::post('/pedido/editar', [App\Http\Controllers\PedidoController::class, 'editar'])->name('editar-pedido');
+Route::post('/pedido/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'show'])->name('salsas-platillo-pedido');
 Route::post('/pedido/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'show'])->name('preparaciones-platillo-pedido');
+Route::post('/pedido/paquete/preparaciones', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'show'])->name('preparaciones-paquete-pedido');
 
 Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
 Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');

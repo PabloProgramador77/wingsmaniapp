@@ -1,6 +1,6 @@
 <x-adminlte-modal id="modalPreparaciones" title="Preparación de Platillo" size="xl" theme="warning" icon="fas fa-dumpster-fire" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
-        <p class="bg-secondary p-1 shadow">Elige la(s) salsa(s) y/o ingrediente(s) de tu platillo y para continuar pulsa el botón "<i class="fas fa-blender"></i> Preparar"</p>
+        <p class="bg-light">Elige el/los ingrediente(s) de tu platillo y presiona el botón "<i class="fas fa-plus-circle"></i> Agregar"</p>
         <form novalidate>
             <div class="form-group">
                 <x-adminlte-input name="nombrePlatilloPrep" id="nombrePlatilloPrep" placeholder="Nombre de platillo" readonly="true">
@@ -11,18 +11,14 @@
                     </x-slot>
                 </x-adminlte-input>
             </div>
-            <div class="container-fluid row p-1 border rounded" id="contenedorSalsasPlatillo">
-
-            </div>
             <div class="container-fluid row p-1 border rounded" id="contenedorPreparacionesPlatillo">
 
             </div>
-            <input type="hidden" name="idPlatillo" id="idPlatillo">
-            <input type="hidden" name="limiteSalsas" id="limiteSalsas">
+            <input type="hidden" name="idPlatilloPrep" id="idPlatilloPrep">
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Preparar" icon="fas fa-blender" id="prepararPlatillo"></x-adminlte-button>
-        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelar" data-dismiss="modal"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="ingredientesPlatillo"></x-adminlte-button>
+        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarIngredientes" data-dismiss="modal"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>
