@@ -27,46 +27,102 @@ class PedidoHasPaqueteController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create( $id )
+    public function create( Request $request )
     {
         try {
-            
-            if( session()->get('idPedidoPaquete') ){
-    
-                $paquete = Paquete::find( $id );
-                $pedidoHasPaquete = PedidoHasPaquete::find( session()->get('idPedidoPaquete') );
 
-                return view('promo', compact( 'paquete', 'pedidoHasPaquete' ));
+            $ingredientes = '';
+            $conteo = 0;
+
+            $paquete = Paquete::find( $request->paquete );
+
+            if( $request->salsas && count( $request->salsas ) > 0 ){
+
+                foreach( $request->salsas as $salsa){
+
+                    $ingredientes .= $salsa.', ';
+
+                }
+
+            }
+
+            if( $request->preparaciones && count( $request->preparaciones ) > 0 ){
+            
+                foreach( $request->preparaciones as $preparacion){
+
+                    $ingredientes .= $preparacion.', ';
+
+                }
+
+            }
+
+            if( $request->bebidas && count( $request->bebidas ) > 0 ){
+
+                foreach( $request->bebidas as $bebida){
+
+                    $ingredientes .= $bebida.', ';
+
+                }
+
+            }
+
+            if( session()->get('idPedidoPaquete') ){
+
+                PedidoHasPaquete::where('id', '=', session()->get('idPedidoPaquete'))
+                                    ->update([
+
+                                        'idPedido' => session()->get('idPedido'),
+                                        'idPaquete' => $request->paquete,
+                                        'cantidad' => 1,
+                                        'preparacion' => $ingredientes,
+    
+                ]);
+
+                $conteo = session()->get('conteoPlatillo');
+                $conteo ++;
+                session()->put('conteoPlatillo', $conteo);
 
             }else{
 
                 $pedidoHasPaquete = PedidoHasPaquete::create([
 
                     'idPedido' => session()->get('idPedido'),
-                    'idPaquete' => $id,
+                    'idPaquete' => $request->paquete,
                     'cantidad' => 1,
+                    'preparacion' => $ingredientes,
     
                 ]);
     
-                $pedido = Pedido::find( session()->get('idPedido') );
-    
-                $paquete = Paquete::find( $id );
-    
                 $totalPedido = $this->total();
+                $conteo ++;
 
                 session()->put('idPedidoPaquete', $pedidoHasPaquete->id);
-                session()->put('conteoPlatillo', $paquete->platillosEditables);
-    
-                return view('promo', compact( 'paquete', 'pedidoHasPaquete' ));
+                session()->put('conteoPlatillo', $conteo);
+
+            }
+
+            if( session()->get('conteoPlatillo') === $paquete->platillosEditables ){
+
+                session()->forget('conteoPlatillo');
+                session()->forget('idPedidoPaquete');
+
+                $datos['exito'] = true;
+                $datos['url'] = '/pedido/menu';
+
+            }else{
+
+                $datos['exito'] = true;
 
             }
             
-
         } catch (\Throwable $th) {
             
-            echo $th->getMessage();
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
 
         }
+
+        return response()->json( $datos );
     }
 
     /**

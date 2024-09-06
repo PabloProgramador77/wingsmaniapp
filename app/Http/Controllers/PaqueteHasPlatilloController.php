@@ -105,22 +105,6 @@ class PaqueteHasPlatilloController extends Controller
                 $datos['platillos'] = $paquete->platillos;
                 $datos['bebidas'] = $paquete->bebidas;
 
-                foreach( $datos['platillos'] as $platillo ){
-
-                    if( count( $platillo->salsas ) > 0 ){
-
-                        $platillo->salsas = $platillo->salsas;
-
-                    }
-
-                    if( count( $platillo->preparaciones ) > 0 ){
-
-                        $platillo->preparaciones = $platillo->preparaciones;
-                        
-                    }
-
-                }
-
             }
 
         } catch (\Throwable $th) {

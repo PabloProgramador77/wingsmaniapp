@@ -70,7 +70,6 @@
                             @endif
                         </td>
                         <td>
-                            <x-adminlte-button class="m-1 preparar" id="preparar" title="Preparar Platillo" theme="warning" data-id="{{ $paquete->id }}" icon="fas fa-dumpster-fire" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                             <x-adminlte-button class="borrar" id="borrar" title="Borrar paquete" theme="danger" data-id="{{ $paquete->id }}" icon="fas fa-trash-alt" data-value="{{ $paquete->nombre }}"></x-adminlte-button>
                         </td>
                     </tr>

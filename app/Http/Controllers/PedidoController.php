@@ -331,6 +331,8 @@ class PedidoController extends Controller
                 $pedido->delete();
 
                 session()->forget('idPedido');
+                session()->forget('conteoPlatillo');
+                session()->forget('idPedidoPaquete');
 
                 $datos['exito'] = true;
                 

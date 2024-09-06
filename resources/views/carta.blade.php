@@ -30,7 +30,7 @@
                         @if( count( $paquete->platillos ) > 0 )
                         
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <x-adminlte-small-box class="prepararPaquete" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPreparacionesPaquete"></x-adminlte-small-box>
+                                <x-adminlte-small-box class="prepararPaquete" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPlatillosPaquete"></x-adminlte-small-box>
                             </div>
 
                         @else
@@ -74,7 +74,10 @@
     @include('pedido')
     @include('salsas')
     @include('preparaciones')
+    @include('indexPaquete')
+    @include('salsasPaquete')
     @include('preparacionesPaquete')
+    @include('bebidasPaquete')
     
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>

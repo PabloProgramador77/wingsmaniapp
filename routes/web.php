@@ -102,7 +102,8 @@ Route::get('/pedido/cancelado/{id}', [App\Http\Controllers\PedidoController::cla
 Route::post('/pedido/editar', [App\Http\Controllers\PedidoController::class, 'editar'])->name('editar-pedido');
 Route::post('/pedido/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'show'])->name('salsas-platillo-pedido');
 Route::post('/pedido/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'show'])->name('preparaciones-platillo-pedido');
-Route::post('/pedido/paquete/preparaciones', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'show'])->name('preparaciones-paquete-pedido');
+Route::post('/pedido/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'show'])->name('platillos-paquete-pedido');
+Route::post('/pedido/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('platillo-paquete-bebidas');
 
 Route::get('/cajas', [App\Http\Controllers\CajaController::class, 'index'])->name('cajas');
 Route::post('/caja/agregar', [App\Http\Controllers\CajaController::class, 'store'])->name('agregar-caja');
@@ -139,7 +140,7 @@ Route::post('/paquete/borrar', [App\Http\Controllers\PaqueteController::class, '
 Route::post('/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'store'])->name('agregar-platillos-paquete');
 Route::post('/paquetes/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('buscar-bebidas-paquete');
 Route::post('/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'store'])->name('agregar-bebidas-paquete');
-Route::get('/paquete/ordenar/{id}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'create'])->name('ordenar-paquete');
+Route::post('/pedido/paquete/ordenar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'create'])->name('ordenar-paquete');
 Route::post('/paquete/preparar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'update'])->name('preparar-paquete');
 Route::post('/paquete/eliminar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'destroy'])->name('eliminar-paquete');
 Route::post('/paquete/restar', [App\Http\Controllers\PedidoHasPaqueteController::class, 'restar'])->name('restar-paquete');

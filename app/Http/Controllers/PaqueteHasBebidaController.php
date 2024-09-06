@@ -87,11 +87,9 @@ class PaqueteHasBebidaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Read $request)
+    public function show( Request $request)
     {
         try {
-            
-            $paquete = Paquete::find( $request->id );
 
             $bebidas = Platillo::select('platillos.id', 'platillos.nombre')
                     ->join('paquete_has_bebidas', 'platillos.id', '=', 'paquete_has_bebidas.idBebida')
@@ -99,9 +97,7 @@ class PaqueteHasBebidaController extends Controller
                     ->get();
 
             $datos['exito'] = true;
-            $datos['id'] = $paquete->id;
-            $datos['nombre'] = $paquete->nombre;
-            $datos['platillos'] = $bebidas;
+            $datos['bebidas'] = $bebidas;
 
         } catch (\Throwable $th) {
             
