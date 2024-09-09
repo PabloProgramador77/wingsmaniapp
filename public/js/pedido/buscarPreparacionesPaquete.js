@@ -46,8 +46,8 @@ jQuery(document).ready( function(){
 
                     respuesta.platillos.forEach( function( platillo ){
 
-                        html += '<div class="col-lg-3 col-md-6 col-sm-12 my-1">';
-                        html += '<button type="button" class="btn btn-outline-secondary p-1 fs-5 fw-semibold d-flex justify-content-center align-items-center salsasPaquete" style="width: 100%; height: 100px;" data-value="'+platillo.nombre+'" data-toggle="modal" data-target="#modalSalsasPaquete" data-id="'+platillo.id+'">'+platillo.nombre+'</button>';
+                        html += '<div class="col-lg-4 col-md-6 col-sm-12 my-1">';
+                        html += '<button type="button" class="btn border p-1 fs-3 fw-bold d-flex justify-content-center align-items-center salsasPaquete text-dark shadow" style="width: 100%; height: 100px; background-image: url(\'/img/alitas02.jpg\'); background-size: contain; background-position: right; background-repeat: no-repeat;" data-value="'+platillo.nombre+'" data-toggle="modal" data-target="#modalSalsasPaquete" data-id="'+platillo.id+'">'+platillo.nombre+'</button>';
                         html += '</div>';
                 
                     });
@@ -59,8 +59,8 @@ jQuery(document).ready( function(){
 
                 if( respuesta.bebidas && Array.isArray( respuesta.bebidas ) && respuesta.bebidas.length > 0 ){
 
-                    html += '<div class="col-lg-3 col-md-6 col-sm-12 my-1">';
-                    html += '<button type="button" class="btn btn-outline-secondary p-1 fs-5 fw-semibold d-flex justify-content-center align-items-center bebidasPaquete" style="width: 100%; height: 100px;" data-id="'+paquete+'" data-value="'+id+'" data-toggle="modal" data-target="#modalBebidasPaquete">Bebidas</button>';
+                    html += '<div class="col-lg-4 col-md-6 col-sm-12 my-1">';
+                    html += '<button type="button" class="btn border p-1 fs-4 fw-bold d-flex justify-content-center align-items-center bebidasPaquete text-dark shadow" style="width: 100%; height: 100px; background-image: url(\'/img/bebida (2).jpg\'); background-size: contain; background-position: right; background-repeat: no-repeat;" data-id="'+paquete+'" data-value="'+id+'" data-toggle="modal" data-target="#modalBebidasPaquete" >Bebidas</button>';
                     html += '</div>';
 
                     $("#contenedorPlatillosPaquete").empty();

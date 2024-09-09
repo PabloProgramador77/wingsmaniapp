@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPreparacionesPaquete" title="Preparación de Platillo" size="xl" theme="warning" icon="fas fa-dumpster-fire" static-backdrop scrollable>
+<x-adminlte-modal id="modalPreparacionesPaquete" title="Preparación de Platillo" size="xl" theme="primary" icon="fas fa-dumpster-fire" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
         <p class="bg-light fw-semibold fs-6 text-center">Elige el/lo(s) de tu platillo y presiona el botón "<i class="fas fa-plus-circle"></i> Agregar"</p>
         <form novalidate>

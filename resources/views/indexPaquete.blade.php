@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalPlatillosPaquete" title="Preparación de Paquete" size="xl" theme="warning" icon="fas fa-dumpster-fire" static-backdrop scrollable>
+<x-adminlte-modal id="modalPlatillosPaquete" title="Preparación de Paquete" size="xl" theme="primary" icon="fas fa-dumpster-fire" static-backdrop scrollable>
     <div class="container-fluid">
         <form novalidate>
             <x-adminlte-input name="nombrePaquetePrep" id="nombrePaquetePrep" readonly="true">

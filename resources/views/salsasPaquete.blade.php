@@ -1,4 +1,4 @@
-<x-adminlte-modal id="modalSalsasPaquete" title="Preparación de Platillo" size="xl" theme="warning" icon="fas fa-dumpster-fire" static-backdrop scrollable>
+<x-adminlte-modal id="modalSalsasPaquete" title="Preparación de Platillo" size="xl" theme="primary" icon="fas fa-dumpster-fire" static-backdrop scrollable>
     <div class="container-fluid">
         <p class="bg-light fw-semibold fs-6 text-center" data-toggle="tooltip" title="Elige la(s) salsa(s) del platillo."><i class="fas fa-info-circle"></i> Instrucciones</p>
         <form novalidate>
