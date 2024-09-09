@@ -1,8 +1,8 @@
 <x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
-        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6 fw-semibol"><b>Cliente:</b> {{ $pedido->cliente->name }}</p>
-        <p class="rounded bg-secondary text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6 fw-semibold"><b>Tipo de Pedido:</b> {{ strtoupper( $pedido->tipo ) }}</p>
-        <p class="rounded bg-info text-center p-2 mx-2 col-lg-3 col-md-5 col-sm-6" id="totalPedido"><b>Total de Pedido:</b> $ {{ $pedido->total }} MXN</p>
+        <p class="rounded border text-center p-1 col-lg-4 col-md-6 col-sm-12 fw-semibol"><b>Cliente:</b> {{ $pedido->cliente->name }}</p>
+        <p class="rounded border text-center p-1 col-lg-4 col-md-6 col-sm-12 fw-semibold"><b>Tipo de Pedido:</b> {{ strtoupper( $pedido->tipo ) }}</p>
+        <p class="rounded bg-info text-center p-1 col-lg-4 col-md-6 col-sm-12" id="totalPedido"><b>Total de Pedido:</b> $ {{ $pedido->total }} MXN</p>
         @if ( $pedido->tipo == 'delivery' )
             <p class="rounded bg-light text-center fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> A los pedidos a domicilio se les agrega al final un costo de envio, por lo que el total mostrado no es el precio final.</p>
         @endif

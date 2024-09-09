@@ -5,7 +5,7 @@
         <p class="fs-3 fw-bold text-center bg-secondary p-2 my-4 rounded shadow"><i class="fas fa-store"></i> <b>Inicio de Restaurante</b></p>
         <div class="container-fluid row">
             
-            <div class="col-lg-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 @can('ver-pedidos')
 
                     @if( auth()->user()->unreadNotifications()->count() > 0 )
@@ -20,10 +20,10 @@
                     
                 @endcan
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" url="#" icon="fab fa-youtube" data-toggle="modal" data-target="#modalVideos"></x-adminlte-small-box>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="Menú de Restaurante" text="Todos los platillos del restaurante" theme="info" url-text="Ver menú" icon="fas fa-clipboard-list" data-toggle="modal" data-target="#modalPreeliminar"></x-adminlte-small-box>
             </div>
         </div>

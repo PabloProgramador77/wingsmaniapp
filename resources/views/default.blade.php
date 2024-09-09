@@ -6,7 +6,7 @@
         <p class="fs-2 fw-bold text-center bg-info p-2 my-4 rounded shadow"><i class="fas fa-smile"></i> Resumen de Cliente</p>
         <div class="container-fluid row">
             
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 @if( auth()->user()->hasRole(['Cliente']) && auth()->user()->telefonos->count() > 0 && auth()->user()->domicilios->count() > 0 )
                     
                     <x-adminlte-small-box title="Ordenar" text="Crear nuevo pedido" theme="warning" url="#" id="pedido" icon="fas fa-shopping-cart" url-text="Ordenar aquí"></x-adminlte-small-box>
@@ -21,18 +21,18 @@
                 @endif
                 
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="Menú de Restaurante" text="Todos los platillos del restaurante" theme="info" url-text="Ver menú" icon="fas fa-clipboard-list" url="{{ url('/menu/descargar') }}" ></x-adminlte-small-box>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="Mi Perfil" text="Datos de cliente" theme="primary" url-text="Ver mi perfil" icon="fas fa-user-circle" url="/profile/username"></x-adminlte-small-box>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 @can('ver-pedido')
                     <x-adminlte-small-box title="Mis Pedidos" text="Historial de pedidos" theme="success" url="{{ url('/pedidos/cliente') }}" url-text="Ver pedidos" icon="fas fa-list-alt"></x-adminlte-small-box>
                 @endcan
             </div>
-            <div class="col-lg-8 col-md-6 col-sm-12">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <x-adminlte-small-box title="WingsVideos" text="Mira como ordenar tu comida favorita" theme="purple" url-text="Ver videos" icon="fab fa-youtube" url="#" data-toggle="modal" data-target="#modalVideos"></x-adminlte-small-box>
             </div>
 
@@ -47,7 +47,7 @@
                         ];
                     @endphp
                     
-                    <div class="container-fluid col-md-12 my-3">
+                    <div class="container-fluid col-lg-12 my-3">
                         <x-adminlte-datatable id="pedidos" :heads="$heads" theme="light" striped hoverable bordered compressed beautify>
                             
                         @if( auth()->user()->unreadNotifications()->count() > 0 )
