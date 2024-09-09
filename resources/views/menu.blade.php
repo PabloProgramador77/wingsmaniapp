@@ -14,13 +14,13 @@
 
             @endif
             
-            <p class="fs-2 text-center bg-info p-1 my-4 rounded shadow col-lg-12"><i class="fas fa-info-circle"></i> Intrucciones: Elige el menú que más te guste y pulsa donde dice "Ver platillos" <i class="fas fa-info-circle"></i></p>
+            <p class="fs-6 fw-semibold text-center bg-warning my-2 rounded p-1 col-lg-10"><i class="fas fa-info-circle"></i> <u>Intrucciones:</u> elige el menú que más te guste y presiona donde dice "Ver platillos"</p>
             <div class="container-fluid row">
                 
                 @foreach($categorias as $categoria)
                     
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <x-adminlte-small-box title="{{ $categoria->nombre }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/categoria/platillos') }}/{{ $categoria->id }}" url-text="Ver platillos"></x-adminlte-small-box>
+                        <x-adminlte-small-box class="shadow" title="{{ $categoria->nombre }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/categoria/platillos') }}/{{ $categoria->id }}" url-text="Ver platillos" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                     </div>
 
                 @endforeach

@@ -1,6 +1,6 @@
 <x-adminlte-modal id="modalPreparaciones" title="Preparación de Platillo" size="xl" theme="warning" icon="fas fa-dumpster-fire" static-backdrop scrollable>
     <div class="container-fluid border-bottom">
-        <p class="bg-light">Elige el/los ingrediente(s) de tu platillo y presiona el botón "<i class="fas fa-plus-circle"></i> Agregar"</p>
+        <p class="bg-warning">Elige el/los ingrediente(s) y presiona "<i class="fas fa-plus-circle"></i> Agregar"</p>
         <form novalidate>
             <div class="form-group">
                 <x-adminlte-input name="nombrePlatilloPrep" id="nombrePlatilloPrep" placeholder="Nombre de platillo" readonly="true">

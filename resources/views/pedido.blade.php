@@ -1,11 +1,12 @@
 <x-adminlte-modal id="modalPedido" title="Mi Pedido" size="xl" theme="primary" icon="fas fa-shopping-cart" static-backdrop scrollable>
     <div class="container-fluid row border-bottom">
+        @if ( $pedido->tipo == 'delivery' )
+            <p class="rounded bg-warning text-center fs-6 fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> Los pedidos a domicilio tienen un costo de envio, por lo que el total mostrado no es el total final.</p>
+        @endif
         <p class="rounded border text-center p-1 col-lg-4 col-md-6 col-sm-12 fw-semibol"><b>Cliente:</b> {{ $pedido->cliente->name }}</p>
         <p class="rounded border text-center p-1 col-lg-4 col-md-6 col-sm-12 fw-semibold"><b>Tipo de Pedido:</b> {{ strtoupper( $pedido->tipo ) }}</p>
         <p class="rounded bg-info text-center p-1 col-lg-4 col-md-6 col-sm-12" id="totalPedido"><b>Total de Pedido:</b> $ {{ $pedido->total }} MXN</p>
-        @if ( $pedido->tipo == 'delivery' )
-            <p class="rounded bg-light text-center fw-semibold col-lg-12 rounded "><i class="fas fa-info-circle"></i> A los pedidos a domicilio se les agrega al final un costo de envio, por lo que el total mostrado no es el precio final.</p>
-        @endif
+       
     </div>
     @php
         $heads = [
@@ -85,12 +86,12 @@
         @if( count( $paquetesPedido ) > 0 || count( $platillosPedido ) > 0 )
             
             @if( auth()->user()->name === 'Invitado' )
-                <x-adminlte-button theme="success" label="Enviar Pedido" icon="fas fa-papel-plane" data-toggle="modal" data-target="#modalCliente" icon="fas fa-paper-plane" id="pedir"></x-adminlte-button>
+                <x-adminlte-button class="shadow" theme="success" label="Enviar Pedido" icon="fas fa-papel-plane" data-toggle="modal" data-target="#modalCliente" icon="fas fa-paper-plane" id="pedir"></x-adminlte-button>
             @else
-                <x-adminlte-button theme="success" label="Enviar Pedido" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
+                <x-adminlte-button class="shadow" theme="success" label="Enviar Pedido" id="ordenar" icon="fas fa-paper-plane"></x-adminlte-button>
             @endif
             
         @endif
-        <x-adminlte-button theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
+        <x-adminlte-button class="shadow" theme="danger" label="Cancelar Pedido" id="cancelar" class="cancelar" icon="fas fa-ban" data-id="{{ $pedido->id }}" data-value="{{ $pedido->tipo }}"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

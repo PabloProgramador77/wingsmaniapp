@@ -4,7 +4,7 @@
     @can('ver-menu')
         <div class="container-fluid row bg-white p-2 rounded">
             <div class="container-fluid row">
-                <p class="p-1 bg-info text-center shadow col-lg-12 col-md-12 col-sm-12"><i class="fas fa-info-circle"></i> <b>Intrucciones</b>: Elije el platillo que más te guste y pulsa en donde dice "Ordenar"<i class="fas fa-info-circle"></i></p>
+                <p class="p-1 bg-warning text-center col-lg-12 col-md-12 col-sm-12 fs-6 fw-semibold"><i class="fas fa-info-circle"></i> <u>Intrucciones</u>: Elije el platillo que más te guste y pulsa en donde dice "Ordenar"<i class="fas fa-info-circle"></i></p>
                 <div class="col-lg-6">
                     <x-adminlte-small-box title="Menú" icon="fas fa-backward" theme="danger" url="{{ url('/pedido/menu') }}" url-text="Regresar al menú"></x-adminlte-small-box>
                 </div>
@@ -30,13 +30,13 @@
                         @if( count( $paquete->platillos ) > 0 )
                         
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <x-adminlte-small-box class="prepararPaquete" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPlatillosPaquete"></x-adminlte-small-box>
+                                <x-adminlte-small-box class="prepararPaquete shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPlatillosPaquete" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                             </div>
 
                         @else
 
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <x-adminlte-small-box title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="warning" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar"></x-adminlte-small-box>
+                                <x-adminlte-small-box class="shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                             </div>
 
                         @endif
@@ -52,13 +52,13 @@
                     @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 )
                     
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo"></x-adminlte-small-box>
+                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
 
                     @else
 
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="warning" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}"></x-adminlte-small-box>
+                            <x-adminlte-small-box class="shadow text-dark" title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
                         
                     @endif

@@ -42,7 +42,7 @@ jQuery(document).ready( function(){
 
                 if( respuesta.platillos && Array.isArray( respuesta.platillos ) && respuesta.platillos.length > 0 ){
 
-                    html = '<p class="bg-info p-1 text-center fw-semibold fs-6 col-lg-12"><i class="fas fa-info-circle"></i> Elige el platillo a preparar del paquete</p>';
+                    html = '<p class="bg-warning p-1 text-center fw-semibold fs-6 col-lg-12"><i class="fas fa-info-circle"></i> Elige el platillo a preparar del paquete</p>';
 
                     respuesta.platillos.forEach( function( platillo ){
 
