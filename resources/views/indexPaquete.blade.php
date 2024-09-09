@@ -13,7 +13,7 @@
             <input type="hidden" name="limiteBebidasPaquete" id="limiteBebidasPaquete">
             <input type="hidden" name="limiteEditablesPaquete" id="limiteEditablesPaquete">
 
-            <div id="contenedorPlatillosPaquete" class="container-fluid row p1" >
+            <div id="contenedorPlatillosPaquete" class="container-fluid row" >
                 
             </div>
         </form>

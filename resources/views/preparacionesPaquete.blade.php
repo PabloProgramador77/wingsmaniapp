@@ -16,7 +16,7 @@
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="preparacionesPlatilloPaquete" class="shadow"></x-adminlte-button>
-        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarPreparacionesPaquete" data-dismiss="modal" class="shadow"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="preparacionesPlatilloPaquete" class="shadow" ></x-adminlte-button>
+        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarPreparacionesPaquete" data-dismiss="modal" class="shadow" data-toggle="modal" data-target="#modalSalsasPaquete"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

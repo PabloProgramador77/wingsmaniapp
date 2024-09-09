@@ -36,7 +36,7 @@ jQuery(document).ready( function(){
 
                 if( respuesta.salsas && respuesta.salsas.length > 0 ){
 
-                    var html = '<p class="p-1 bg-info d-block col-lg-12">Salsa(s). <b>Máximo '+limiteSalsas+'</b></p>';
+                    var html = '<p class="p-1 bg-info d-block col-lg-12 rounded">Salsa(s). <b>Máximo '+limiteSalsas+'</b></p>';
 
                     respuesta.salsas.forEach( function( salsa){
 
@@ -88,10 +88,13 @@ jQuery(document).ready( function(){
 
                 }else{
 
-                    html = '<p class="text-center bg-info fw-semibol fs-5">Sin salsas para elegir. Pulsa el botón "Agregar" para continuar</p>';
+                    html = '<p class="text-center bg-danger fw-semibold fs-6 shadow rounded">Sin salsas para elegir. Presiona el botón "Continuar" por favor.</p>';
 
                     $("#contenedorSalsasPlatillo").empty();
                     $("#contenedorSalsasPlatillo").append( html );
+
+                    $("#salsasPlatillo").text('Continuar');
+                    $("#cancelarSalsas").attr('disabled', true);
                     
                 }
 
@@ -191,10 +194,13 @@ jQuery(document).ready( function(){
 
                 }else{
 
-                    html = '<p class="text-center bg-info fw-semibol fs-5">Sin ingredientes para elegir. Pulsa el botón "Agregar" para continuar</p>';
+                    html = '<p class="text-center bg-danger fw-semibold fs-6 shadow rounded">Sin ingredientes para elegir. Presiona el botón "Continuar" para terminar.</p>';
 
                     $("#contenedorPreparacionesPlatillo").empty();
                     $("#contenedorPreparacionesPlatillo").append( html );
+
+                    $("#ingredientesPlatillo").text('Continuar');
+                    $("#cancelarIngredientes").attr('disabled', true);
 
                 }
 
@@ -273,7 +279,7 @@ jQuery(document).ready( function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Platillo Preparado',
+                            title: 'Platillo agregado',
                             allowOutsideClick: false,
                             showConfirmButton: true
 

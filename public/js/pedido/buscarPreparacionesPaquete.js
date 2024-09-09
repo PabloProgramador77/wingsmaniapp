@@ -4,6 +4,7 @@ jQuery(document).ready( function(){
     var salsas = [];
     var preparaciones = [];
     var bebidas = [];
+    var html;
 
     $('.prepararPaquete').on('click', function(e){
 
@@ -20,6 +21,8 @@ jQuery(document).ready( function(){
         $("#limiteSalsasPaquete").val( limiteSalsas );
         $("#limiteBebidasPaquete").val( limiteBebidas );
         $("#limiteEditablesPaquete").val( limiteEditables );
+
+        $("#contenedorPlatillosPaquete").empty();
 
         $.ajax({
 
@@ -88,21 +91,13 @@ jQuery(document).ready( function(){
 
         e.preventDefault();
 
-        document.getElementById('modalPlatillosPaquete').style.display = 'none';
-        document.getElementById('modalPlatillosPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalSalsasPaquete').style.display = 'none';
-        document.getElementById('modalSalsasPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalSalsasPaquete').style.display = 'block';
-        document.getElementById('modalSalsasPaquete').classList.add('show');
-
         var id = $(this).attr('data-id');
         var platillo = $(this).attr('data-value');
 
         $("#idPlatilloPaqueteSalsa").val( id );
+        $("#nombrePlatilloPaquete").val( platillo );
+
+        $("#contenedorSalsasPaquete").empty();
 
         $.ajax({
 
@@ -206,10 +201,7 @@ jQuery(document).ready( function(){
 
         document.getElementById('modalSalsasPaquete').style.display = 'none';
         document.getElementById('modalSalsasPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalPlatillosPaquete').style.display = 'block';
-        document.getElementById('modalPlatillosPaquete').classList.add('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove());
 
     });
     
@@ -217,17 +209,12 @@ jQuery(document).ready( function(){
 
         e.preventDefault();
 
-        document.getElementById('modalPlatillosPaquete').style.display = 'none';
-        document.getElementById('modalPlatillosPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalBebidasPaquete').style.display = 'block';
-        document.getElementById('modalBebidasPaquete').classList.add('show');
-
         var paquete = $(this).attr('data-id');
         var id = $(this).attr('data-value');
 
         $("#nombrePlatilloBebidas").val( paquete );
+
+        $("#contenedorBebidasPaquete").empty();
 
         $.ajax({
 
@@ -317,16 +304,11 @@ jQuery(document).ready( function(){
 
         e.preventDefault();
 
-        document.getElementById('modalSalsasPaquete').style.display = 'none';
-        document.getElementById('modalSalsasPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalPreparacionesPaquete').style.display = 'block';
-        document.getElementById('modalPreparacionesPaquete').classList.add('show');
-
         var id = $("#idPlatilloPaqueteSalsa").val();
         $("#idPlatilloPaquetePreparaciones").val( id );
         $("#nombrePlatilloPaquetePrep").val( $("#nombrePaquetePlatilloSalsa").val() );
+
+        $("#contenedorPreparacionesPaquete").empty();
 
         $.ajax({
 
@@ -404,10 +386,7 @@ jQuery(document).ready( function(){
 
         document.getElementById('modalPreparacionesPaquete').style.display = 'none';
         document.getElementById('modalPreparacionesPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-
-        document.getElementById('modalSalsasPaquete').style.display = 'block';
-        document.getElementById('modalSalsasPaquete').classList.add('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove());
 
     });
 
@@ -417,7 +396,7 @@ jQuery(document).ready( function(){
 
         document.getElementById('modalPlatillosPaquete').style.display = 'none';
         document.getElementById('modalPlatillosPaquete').classList.remove('show');
-        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove());
 
     });
 
@@ -449,7 +428,7 @@ jQuery(document).ready( function(){
                     url: '/pedido/paquete/ordenar',
                     data:{
 
-                        'platillo': $("#idPlatilloPaquetePreparaciones").val(),
+                        'platillo': $("#nombrePlatilloPaquete").val(),
                         'paquete' : $("#idPaquete").val(),
                         'salsas' : salsas,
                         'preparaciones' : preparaciones,
@@ -491,18 +470,24 @@ jQuery(document).ready( function(){
                                 allowOutsideClick: false,
                                 showConfirmButton: true,
     
+                            }).then( (resultado)=>{
+
+                                if( resultado.isConfirmed ){
+
+                                    document.getElementById('modalSalsasPaquete').style.display = 'none';
+                                    document.getElementById('modalSalsasPaquete').classList.remove('show');
+                                    
+                                    document.getElementById('modalPreparacionesPaquete').style.display = 'none';
+                                    document.getElementById('modalPreparacionesPaquete').classList.remove('show');
+
+                                    document.getElementById('modalBebidasPaquete').style.display = 'none';
+                                    document.getElementById('modalBebidasPaquete').classList.remove('show');
+
+                                    document.querySelectorAll('.modal-backdrop').forEach( el => el.remove() );
+
+                                }
+
                             });
-    
-                            document.getElementById('modalSalsasPaquete').style.display = 'none';
-                            document.getElementById('modalSalsasPaquete').classList.remove('show');
-                            document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-    
-                            document.getElementById('modalPreparacionesPaquete').style.display = 'none';
-                            document.getElementById('modalPreparacionesPaquete').classList.remove('show');
-                            document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
-    
-                            document.getElementById('modalPlatillosPaquete').style.display = 'block';
-                            document.getElementById('modalPlatillosPaquete').classList.add('show');
 
                         }
 
@@ -560,6 +545,17 @@ jQuery(document).ready( function(){
             }
 
         });
+
+    });
+
+    $("#cancelarBebidasPaquete").on('click', function( e ){
+
+        e.preventDefault();
+
+        document.getElementById('modalBebidasPaquete').style.display = 'none';
+        document.getElementById('modalBebidasPaquete').classList.remove('show');
+
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove());
 
     });
 

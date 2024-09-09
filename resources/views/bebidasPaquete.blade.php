@@ -18,6 +18,6 @@
     </div>
     <x-slot name="footerSlot">
         <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="bebidasPlatilloPaquete" class="shadow"></x-adminlte-button>
-        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarBebidasPaquete" data-dismiss="modal" class="shadow"></x-adminlte-button>
+        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarBebidasPaquete" data-dismiss="modal" class="shadow" data-toggle="modal" data-target="#modalPlatillosPaquete"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

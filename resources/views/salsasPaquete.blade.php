@@ -9,15 +9,16 @@
                     </div>
                 </x-slot>
             </x-adminlte-input>
-            <div class="container-fluid row mx-1 p-1 border rounded" id="contenedorSalsasPaquete">
+            <div class="container-fluid row mx-1 border rounded" id="contenedorSalsasPaquete">
 
             </div>
             <input type="hidden" name="idPlatilloPaqueteSalsa" id="idPlatilloPaqueteSalsa">
             <input type="hidden" name="limiteSalsasPaquete" id="limiteSalsasPaquete">
+            <input type="hidden" name="nombrePlatilloPaquete" id="nombrePlatilloPaquete">
         </form>
     </div>
     <x-slot name="footerSlot">
-        <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="salsasPlatilloPaquete" class="shadow"></x-adminlte-button>
-        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarSalsasPaquete" data-dismiss="modal" class="shadow"></x-adminlte-button>
+        <x-adminlte-button theme="primary" label="Agregar" icon="fas fa-plus-circle" id="salsasPlatilloPaquete" class="shadow" data-toggle="modal" data-target="#modalPreparacionesPaquete"></x-adminlte-button>
+        <x-adminlte-button theme="danger" icon="fas fa-times-circle" id="cancelarSalsasPaquete" data-dismiss="modal" class="shadow" data-toggle="modal" data-target="#modalPlatillosPaquete"></x-adminlte-button>
     </x-slot>
 </x-adminlte-modal>

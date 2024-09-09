@@ -35,6 +35,7 @@ class PedidoHasPaqueteController extends Controller
             $conteo = 0;
 
             $paquete = Paquete::find( $request->paquete );
+            $ingredientes .= $request->platillo.', ';
 
             if( $request->salsas && count( $request->salsas ) > 0 ){
 
@@ -67,6 +68,10 @@ class PedidoHasPaqueteController extends Controller
             }
 
             if( session()->get('idPedidoPaquete') ){
+
+                $pedidoHasPaquete = PedidoHasPaquete::find( session()->get('idPedidoPaquete') );
+
+                $ingredientes .= $pedidoHasPaquete->preparacion;
 
                 PedidoHasPaquete::where('id', '=', session()->get('idPedidoPaquete'))
                                     ->update([
