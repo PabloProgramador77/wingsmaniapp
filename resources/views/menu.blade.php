@@ -18,9 +18,13 @@
             <div class="container-fluid row">
                 
                 @foreach($categorias as $categoria)
-                    
+
+                    @php 
+                        $portada = $categoria->portada ?: 'logo_min.jpg';
+                    @endphp
+
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <x-adminlte-small-box class="shadow" title="{{ $categoria->nombre }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/categoria/platillos') }}/{{ $categoria->id }}" url-text="Ver platillos" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                        <x-adminlte-small-box class="shadow" title="{{ $categoria->nombre }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/categoria/platillos') }}/{{ $categoria->id }}" url-text="Ver platillos" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                     </div>
 
                 @endforeach

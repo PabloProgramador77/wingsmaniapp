@@ -7,6 +7,7 @@
 @section('plugins.Sweetalert2', true)
 @section('plugins.BootstrapSwitch', true)
 @section('plugins.Bootstrap', true)
+@section('plugins.BsCustomFileInput',true)
 @section('content_header')
     @yield('contenido')
 @stop

@@ -31,7 +31,8 @@ class Store extends FormRequest
     {
         return [
             
-            'nombre' => 'required|string|min:2'
+            'nombre' => 'required|string',
+            'portada' => 'image|mimes:jpeg, png, jpg|nullable',
             
         ];
     }

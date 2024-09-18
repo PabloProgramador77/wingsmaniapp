@@ -12,7 +12,13 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                
+                <x-adminlte-input-file name="portadaEditar" id="portadaEditar" placeholder="Elige un imagen de portada">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input-file>
             </div>
             <input type="hidden" name="id" id="id">
         </form>

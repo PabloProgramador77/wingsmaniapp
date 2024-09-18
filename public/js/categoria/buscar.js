@@ -25,6 +25,7 @@ jQuery(document).ready(function(){
 
                 $("#nombreEditar").val( respuesta.nombre );
                 $("#id").val( respuesta.id );
+                $("#portadaEditar").val( respuesta.portada );
 
                 $("#actualizar").attr('disabled', false);
 

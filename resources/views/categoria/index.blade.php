@@ -69,5 +69,6 @@
     <script src="{{ asset('js/categoria/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/categoria/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/categoria/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/categoria/image.js') }}" type="text/javascript"></script>
 
 @stop

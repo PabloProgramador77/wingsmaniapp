@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropUnique(['email']);
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->string('portada')->nullable()->after('nombre');
         });
     }
 
@@ -21,10 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            if( Schema::hasColumn('users', 'email') ){
-                $table->string('email')->unique()->change();
-            }
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->dropColumn('portada');
         });
     }
 };

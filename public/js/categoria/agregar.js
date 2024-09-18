@@ -7,6 +7,15 @@ jQuery(document).ready(function(){
 
         let procesamiento;
 
+        const formData = new FormData();
+        formData.append('nombre', $("#nombre").val());
+
+        if( $("#portada")[0].files.length > 0 ){
+
+            formData.append( 'portada', $("#portada")[0].files[0] );
+
+        }
+
         Swal.fire({
 
             title: 'Registrando Categoría',
@@ -27,11 +36,9 @@ jQuery(document).ready(function(){
 
                     type: 'POST',
                     url: '/categoria/agregar',
-                    data:{
-
-                        'nombre' : $("#nombre").val(),
-
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     dataType: 'json',
                     encode: true
 

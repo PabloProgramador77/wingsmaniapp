@@ -91,11 +91,14 @@ class CategoriaController extends Controller
             
             $categoria = Categoria::create([
 
-                'nombre' => $request->nombre
+                'nombre' => $request->nombre,
+                'portada' => $request->file('portada')->getClientOriginalName(),
 
             ]);
 
             if( $categoria->id ){
+
+                $this->subirPortada( $request );
 
                 $datos['exito'] = true;
 
@@ -125,6 +128,7 @@ class CategoriaController extends Controller
                 $datos['exito'] = true;
                 $datos['id'] = $categoria->id;
                 $datos['nombre'] = $categoria->nombre;
+                $datos['portada'] = $categoria->portada;
 
             }
 
@@ -156,9 +160,12 @@ class CategoriaController extends Controller
             $categoria = Categoria::where('id', '=', $request->id)
                 ->update([
 
-                    'nombre' => $request->nombre
+                    'nombre' => $request->nombre,
+                    'portada' => $request->file('portada')->getClientOriginalName(),
 
                 ]);
+
+            $this->subirPortada( $request );
 
             $datos['exito'] = true;
 
@@ -197,5 +204,50 @@ class CategoriaController extends Controller
         }
 
         return response()->json($datos);
+    }
+
+    /**
+     * Subida de imagen de portada
+     */
+    public function subirPortada( Request $request ){
+        try {
+            
+            if( file_exists( public_path('img/portadas/') ) ){
+
+                $request->file('portada')->move( public_path('img/portadas'), $request->file('portada')->getClientOriginalName() );
+
+                if( file_exists( public_path('img/portadas/').$request->file('portada')->getClientOriginalName() ) ){
+
+                    return true;
+
+                }else{
+
+                    return false;
+
+                }
+
+            }else{
+
+                mkdir( public_path('img/portadas') );
+
+                $request->file('portada')->move( public_path('img/portadas'), $request->file('portada')->getClientOriginalName() );
+
+                if( file_exists( public_path('img/portadas/').$request->file('portada')->getClientOriginalName() ) ){
+
+                    return true;
+
+                }else{
+
+                    return false;
+                    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 }

@@ -7,6 +7,16 @@ jQuery(document).ready(function(){
 
         let procesamiento;
 
+        const formData = new FormData();
+        formData.append('nombre', $("#nombreEditar").val());
+        formData.append('id', $("#id").val());
+
+        if( $("#portadaEditar")[0].files.length > 0 ){
+
+            formData.append( 'portada', $("#portadaEditar")[0].files[0] );
+
+        }
+
         Swal.fire({
 
             title: 'Actualizando Categoría',
@@ -27,12 +37,9 @@ jQuery(document).ready(function(){
 
                     type: 'POST',
                     url: '/categoria/actualizar',
-                    data:{
-
-                        'nombre' : $("#nombreEditar").val(),
-                        'id' : $("#id").val()
-
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     dataType: 'json',
                     encode: true
 

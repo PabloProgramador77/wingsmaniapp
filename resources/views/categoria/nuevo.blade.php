@@ -3,13 +3,20 @@
         <p class="text-secondary">Los campos con etiqueta * son obligatorios.</p>
         <form novalidate>
             <div class="form-group">
-                <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de ¨categoría">
+                <x-adminlte-input name="nombre" id="nombre" placeholder="Nombre de categoría">
                     <x-slot name="prependSlot">
-                        <div class="input-group-text tex-info">
+                        <div class="input-group-text">
                             <i class="fas fa-tags">*</i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-input-file name="portada" id="portada" placeholder="Elige un imagen de portada">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input-file>
             </div>
             <input type="hidden" name="token" token="token" value="{{ csrf_token(); }}">
         </form>
