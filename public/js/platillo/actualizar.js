@@ -7,6 +7,20 @@ jQuery(document).ready(function(){
 
         let procesamiento;
 
+        const formData = new FormData();
+        formData.append( 'nombre', $("#nombreEditar").val() );
+        formData.append( 'precio', $("#precioEditar").val() );
+        formData.append( 'categoria', $("#categoriaEditar").val() );
+        formData.append( 'descripcion', $("#descripcionEditar").val() );
+        formData.append( 'salsas', $("#salsasEditar").val() );
+        formData.append( 'id', $("#id").val() );
+
+        if( $("#portadaEditar")[0].files.length > 0 ){
+
+            formData.append( 'portada', $("#portadaEditar")[0].files[0] );
+
+        }
+
         Swal.fire({
 
             title: 'Actualizando Platillo',
@@ -27,16 +41,9 @@ jQuery(document).ready(function(){
 
                     type: 'POST',
                     url: '/platillo/actualizar',
-                    data:{
-
-                        'nombre' : $("#nombreEditar").val(),
-                        'precio' : $("#precioEditar").val(),
-                        'categoria' : $("#categoriaEditar").val(),
-                        'descripcion' : $("#descripcionEditar").val(),
-                        'salsas' : $("#salsasEditar").val(),
-                        'id' : $("#id").val()
-
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     dataType: 'json',
                     encode: true
 

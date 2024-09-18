@@ -36,6 +36,7 @@ class Update extends FormRequest
             'categoria' => 'required|integer',
             'id' => 'required|integer',
             'salsas' => 'required|integer|nullable',
+            'portada' => 'image|mimes:jpeg, jpg, png|nullable',
 
         ];
     }

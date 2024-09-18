@@ -49,16 +49,20 @@
 
                 @foreach($platillos as $platillo)
 
+                    @php
+                        $portada = $platillo->portada ?: 'logo_min.jpg';
+                    @endphp
+
                     @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 )
                     
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
 
                     @else
 
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box class="shadow text-dark" title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" style="background-image: url('/img/alitas02.jpg'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                            <x-adminlte-small-box class="shadow text-dark" title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
                         
                     @endif

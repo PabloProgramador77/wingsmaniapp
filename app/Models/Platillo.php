@@ -18,6 +18,7 @@ class Platillo extends Model
         'descripcion',
         'cantidadSalsas',
         'idCategoria',
+        'portada',
 
     ];
 

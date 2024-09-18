@@ -7,6 +7,19 @@ jQuery(document).ready(function(){
 
         let procesamiento;
 
+        const formData = new FormData();
+        formData.append( 'nombre', $("#nombre").val() );
+        formData.append( 'precio', $("#precio").val() );
+        formData.append( 'categoria', $("#categoria").val() );
+        formData.append( 'descripcion', $("#descripcion").val() );
+        formData.append( 'salsas', $("#salsas").val() );
+
+        if( $("#portada")[0].files.length > 0 ){
+
+            formData.append( 'portada', $("#portada")[0].files[0] );
+
+        }
+
         Swal.fire({
 
             title: 'Registrando Platillo',
@@ -27,15 +40,9 @@ jQuery(document).ready(function(){
 
                     type: 'POST',
                     url: '/platillo/agregar',
-                    data:{
-
-                        'nombre' : $("#nombre").val(),
-                        'precio' : $("#precio").val(),
-                        'categoria' : $("#categoria").val(),
-                        'descripcion' : $("#descripcion").val(),
-                        'salsas' : $("#salsas").val()
-
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     dataType: 'json',
                     encode: true
 

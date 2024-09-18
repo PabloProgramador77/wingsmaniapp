@@ -31,10 +31,11 @@ class Create extends FormRequest
     {
         return [
             
-            'nombre' => 'required|string|min:2',
+            'nombre' => 'required|string|',
             'precio' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'categoria' => 'required|integer',
             'salsas' => 'integer|nullable',
+            'portada' => 'image|mimes:jpeg,jpg,png|nullable',
 
         ];
     }

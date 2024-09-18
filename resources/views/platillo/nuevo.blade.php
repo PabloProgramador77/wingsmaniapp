@@ -42,6 +42,13 @@
                         </div>
                     </x-slot>
                 </x-adminlte-textarea>
+                <x-adminlte-input-file name="portada" id="portada" placeholder="Elige un imagen de portada">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </x-slot>
+                </x-adminlte-input-file>
             </div>
             <input type="hidden" name="token" token="token" value="{{ csrf_token(); }}">
         </form>

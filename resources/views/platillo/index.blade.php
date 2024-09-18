@@ -82,6 +82,7 @@
     <script src="{{ asset('js/platillo/buscar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/platillo/actualizar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/platillo/borrar.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/platillo/image.js') }}" type="text/javascript"></script>
     @if( count($categorias) > 0 )
         <script src="{{ asset('js/platillo/agregar.js') }}" type="text/javascript"></script>
     @else

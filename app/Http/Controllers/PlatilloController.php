@@ -74,11 +74,14 @@ class PlatilloController extends Controller
                 'precio' => $request->precio,
                 'idCategoria' => $request->categoria,
                 'descripcion' => $request->descripcion,
-                'cantidadSalsas' => $request->salsas
+                'cantidadSalsas' => $request->salsas,
+                'portada' => $request->file('portada')->getClientOriginalName(),
 
             ]);
 
             if( $platillo->id ){
+
+                $this->subirPortada( $request );
 
                 $datos['exito'] = true;
                 
@@ -113,6 +116,7 @@ class PlatilloController extends Controller
                 $datos['descripcion'] = $platillo->descripcion;
                 $datos['cantidadSalsas'] = $platillo->cantidadSalsas;
                 $datos['salsas'] = $platillo->salsas;
+                $datos['portada'] = $platillo->portada;
                 $datos['id'] = $platillo->id;
 
             }
@@ -149,9 +153,12 @@ class PlatilloController extends Controller
                     'precio' => $request->precio,
                     'idCategoria' => $request->categoria,
                     'descripcion' => $request->descripcion,
-                    'cantidadSalsas' => $request->salsas
+                    'cantidadSalsas' => $request->salsas,
+                    'portada' => $request->file('portada')->getClientOriginalName(),
 
                 ]);
+
+            $this->subirPortada( $request );
 
             $datos['exito'] = true;
 
@@ -190,5 +197,50 @@ class PlatilloController extends Controller
         }
 
         return response()->json($datos);
+    }
+
+    /**
+     * Subida de portada
+     */
+    public function subirPortada( Request $request ){
+        try {
+            
+            if( file_exists( public_path('img/portadas/') ) ){
+
+                $request->file('portada')->move( public_path('img/portadas'), $request->file('portada')->getClientOriginalName() );
+
+                if( file_exists( public_path('img/portadas/').$request->file('portada')->getClientOriginalName() ) ){
+
+                    return true;
+
+                }else{
+
+                    return false;
+
+                }
+
+            }else{
+
+                mkdir( public_path('img/portadas') );
+
+                $request->file('portada')->move( public_path('img/portadas'), $request->file('portada')->getClientOriginalName() );
+
+                if( file_exists( public_path('img/portadas/').$request->file('portada')->getClientOriginalName() ) ){
+
+                    return true;
+
+                }else{
+
+                    return false;
+                    
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 }
