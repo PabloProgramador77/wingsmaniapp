@@ -7,6 +7,22 @@ jQuery(document).ready(function(){
 
         let procesamiento;
 
+        const formData = new FormData();
+        formData.append( 'nombre', $("#nombre").val() );
+        formData.append( 'precio', $("#precio").val() );
+        formData.append( 'categoria', $("#categoria").val() );
+        formData.append( 'descripcion', $("#descripcion").val() );
+        formData.append( 'salsas', $("#salsas").val() );
+        formData.append( 'bebidas', $("#cantidadBebidas").val() );
+        formData.append( 'editables', $("#editables").val() );
+        formData.append( 'dia', $("#dia").val() );
+
+        if( $("#portada")[0].files.length > 0 ){
+
+            formData.append( 'portada', $("#portada")[0].files[0] );
+
+        }
+
         Swal.fire({
 
             title: 'Registrando paquete',
@@ -27,18 +43,9 @@ jQuery(document).ready(function(){
 
                     type: 'POST',
                     url: '/paquete/agregar',
-                    data:{
-
-                        'nombre' : $("#nombre").val(),
-                        'precio' : $("#precio").val(),
-                        'categoria' : $("#categoria").val(),
-                        'descripcion' : $("#descripcion").val(),
-                        'salsas' : $("#salsas").val(),
-                        'bebidas' : $("#cantidadBebidas").val(),
-                        'editables' : $("#editables").val(),
-                        'dia' : $("#dia").val(),
-
-                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
                     dataType: 'json',
                     encode: true
 

@@ -33,7 +33,7 @@ class Update extends FormRequest
             
             'id' => 'required|integer',
             'nombre' => 'required|string|min:2',
-            'portada' => 'image|mimes:jpeg, png, jpg|nullable',
+            'portada' => 'image|mimes:jpeg,png,jpg|nullable',
             
         ];
     }

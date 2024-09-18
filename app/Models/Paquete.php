@@ -21,6 +21,7 @@ class Paquete extends Model
         'platillosEditables',
         'idCategoria',
         'diaActivacion',
+        'portada',
 
     ];
 

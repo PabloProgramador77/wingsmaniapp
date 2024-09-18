@@ -42,6 +42,8 @@ jQuery(document).ready(function(){
                 $("#descripcionEditar").val(respuesta.descripcion); 
                 $("#id").val( respuesta.id );
 
+                $("#portadaEditar").val( respuesta.portada );
+
                 $("#actualizar").attr('disabled', false);
 
             }else{

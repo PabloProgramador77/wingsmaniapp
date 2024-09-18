@@ -32,7 +32,7 @@ class Store extends FormRequest
         return [
             
             'nombre' => 'required|string',
-            'portada' => 'image|mimes:jpeg, png, jpg|nullable',
+            'portada' => 'image|mimes:jpeg,png,jpg|nullable',
             
         ];
     }

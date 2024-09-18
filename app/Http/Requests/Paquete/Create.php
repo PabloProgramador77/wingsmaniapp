@@ -39,6 +39,7 @@ class Create extends FormRequest
             'bebidas' => 'integer|nullable',
             'editables' => 'required|integer',
             'dia' => 'string|nullable',
+            'portada' => 'image|mimes:jpeg,png,jpg|nullable',
 
         ];
     }

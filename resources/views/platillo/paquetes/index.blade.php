@@ -85,5 +85,6 @@
     <script src="{{ asset('js/paquete/borrar.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/paquete/platillos.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/paquete/agregarBebida.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/paquete/image.js') }}" type="text/javascript"></script>
 
 @stop

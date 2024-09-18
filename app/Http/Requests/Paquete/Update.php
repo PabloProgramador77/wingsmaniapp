@@ -40,6 +40,7 @@ class Update extends FormRequest
             'editables' => 'required|integer',
             'descripcion' => 'string|nullable',
             'dia' => 'string|nullable',
+            'portada' => 'image|mimes:jpeg,png,jpg|nullable',
             
         ];
     }

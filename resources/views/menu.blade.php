@@ -20,7 +20,8 @@
                 @foreach($categorias as $categoria)
 
                     @php 
-                        $portada = $categoria->portada ?: 'logo_min.jpg';
+                        $portada = '';
+                        $portada = $categoria->portada ? $categoria->portada : 'logo_min.jpg';
                     @endphp
 
                     <div class="col-lg-4 col-md-6 col-sm-12">
