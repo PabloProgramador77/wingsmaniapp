@@ -19,7 +19,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select2 name="categoriaEditar" id="categoriaEditar" >
+                <x-adminlte-select name="categoriaEditar" id="categoriaEditar" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-tags">*</i>
@@ -28,7 +28,7 @@
                     @foreach($categorias as $categoria)
                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                     @endforeach
-                </x-adminlte-select2>
+                </x-adminlte-select>
                 <x-adminlte-input name="salsasEditar" id="salsasEditar" placeholder="Limite de salsas">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">

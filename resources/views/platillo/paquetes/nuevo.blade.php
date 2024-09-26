@@ -17,7 +17,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select2 name="categoria" id="categoria" >
+                <x-adminlte-select name="categoria" id="categoria" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
                             <i class="fas fa-tags">*</i>
@@ -26,7 +26,7 @@
                     @foreach($categorias as $categoria)
                         <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                     @endforeach
-                </x-adminlte-select2>
+                </x-adminlte-select>
                 <x-adminlte-input name="salsas" id="salsas" placeholder="Limite de salsas">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
@@ -48,7 +48,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select2 name="dia" id="dia" >
+                <x-adminlte-select name="dia" id="dia" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
                             <i class="fas fa-calendar-alt">*</i>
@@ -62,7 +62,7 @@
                     <option value="viernes">Viernes</option>
                     <option value="sábado">Sábado</option>
                     <option value="domingo">Domingo</option>
-                </x-adminlte-select2>
+                </x-adminlte-select>
                 <x-adminlte-textarea name="descripcion" id="descripcion" placeholder="Descripción del paquete (OPCIONAL)">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">

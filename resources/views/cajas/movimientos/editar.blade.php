@@ -5,7 +5,7 @@
 
         <form novalidate>
             <div class="form-group">
-                <x-adminlte-select2 name="tipoEditar" id="tipoEditar">
+                <x-adminlte-select name="tipoEditar" id="tipoEditar">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">
                             <i class="fas fa-tags">*</i>
@@ -13,7 +13,7 @@
                     </x-slot>
                     <option value="Retiro">Retiro</option>
                     <option value="Deposito">Deposito</option>
-                </x-adminlte-select2>
+                </x-adminlte-select>
                 <x-adminlte-input name="conceptoEditar" id="conceptoEditar" placeholder="Concepto de movimiento">
                     <x-slot name="prependSlot">
                         <div class="input-group-text text-info">

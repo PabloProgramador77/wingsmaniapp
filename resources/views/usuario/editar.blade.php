@@ -19,7 +19,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select2 name="rolEditar" id="rolEditar" >
+                <x-adminlte-select name="rolEditar" id="rolEditar" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-user-tag">*</i>
@@ -30,7 +30,7 @@
                             <option value="{{ $rol->name }}">{{ $rol->name }}</option>
                         @endif
                     @endforeach
-                </x-adminlte-select2>
+                </x-adminlte-select>
             </div>
             <input type="hidden" name="id" id="id">
         </form>

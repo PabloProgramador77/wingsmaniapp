@@ -17,7 +17,7 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select2 name="rol" id="rol" >
+                <x-adminlte-select name="rol" id="rol" >
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
                             <i class="fas fa-user-tag">*</i>
@@ -28,7 +28,7 @@
                             <option value="{{ $rol->name }}">{{ $rol->name }}</option>
                         @endif
                     @endforeach
-                </x-adminlte-select2>
+                </x-adminlte-select>
                 <x-adminlte-input type="password" name="password" id="password" placeholder="Contraseña de acceso">
                     <x-slot name="prependSlot">
                         <div class="input-group-text tex-info">
