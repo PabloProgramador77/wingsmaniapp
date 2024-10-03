@@ -1,8 +1,6 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#actualizar").attr('disabled', true);
-
     $(".editar").on('click', function(e){
 
         e.preventDefault();

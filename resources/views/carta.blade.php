@@ -27,21 +27,16 @@
 
                     @foreach ($paquetes as $paquete)
 
-                        @php
-                            $portada = '';
-                            $portada = $paquete->portada ? $paquete->portada : 'logo_min.jpg';
-                        @endphp
-
                         @if( count( $paquete->platillos ) > 0 )
                         
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <x-adminlte-small-box class="prepararPaquete shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPlatillosPaquete" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                                <x-adminlte-small-box class="prepararPaquete shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="#" url-text="Ordenar" data-id="{{ $paquete->id }}" data-value="{{ $paquete->nombre }}, {{ $paquete->cantidadBebidas }}, {{ $paquete->cantidadSalsas }}, {{ $paquete->platillosEditables }}" data-toggle="modal" data-target="#modalPlatillosPaquete" style="background-image: url('/img/portadas/{{ $paquete->portada }}'); background-size: 33%; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                             </div>
 
                         @else
 
                             <div class="col-lg-4 col-md-6 col-sm-12">
-                                <x-adminlte-small-box class="shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                                <x-adminlte-small-box class="shadow" title="{{ $paquete->nombre }}" text="$ {{ $paquete->precio }}" icon="fas fa-drumstick-bite" theme="light" url="{{ url('/paquete/ordenar') }}/{{ $paquete->id }}" url-text="Ordenar" style="background-image: url('/img/portadas/{{ $paquete->portada }}'); background-size: 33%; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                             </div>
 
                         @endif
@@ -54,21 +49,16 @@
 
                 @foreach($platillos as $platillo)
 
-                    @php
-                        $portada = '';
-                        $portada = $platillo->portada ? $platillo->portada : 'logo_min.jpg';
-                    @endphp
-
                     @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 )
                     
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                            <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/portadas/{{ $platillo->portada }}'); background-size: 33%; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
 
                     @else
 
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
-                            <x-adminlte-small-box class="shadow text-dark" title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" style="background-image: url('/img/portadas/{{ $portada }}'); background-size: contain; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
+                            <x-adminlte-small-box class="shadow text-dark" title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="{{ url('/platillo/ordenar') }}/{{ $platillo->id }}" style="background-image: url('/img/portadas/{{ $platillo->portada }}'); background-size: 33%; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
                         </div>
                         
                     @endif

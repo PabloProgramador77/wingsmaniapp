@@ -1,7 +1,6 @@
 jQuery.noConflict();
 jQuery(document).ready(function(){
 
-    $("#actualizar").attr('disabled', true);
     $("#agregar").attr('disabled', true);
 
     $(".editar").on('click', function(e){
