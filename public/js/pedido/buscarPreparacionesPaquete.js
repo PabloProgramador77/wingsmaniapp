@@ -237,11 +237,10 @@ jQuery(document).ready( function(){
 
                     respuesta.bebidas.forEach( function( bebida ){
 
-                        html += '<div class="col-lg-4 col-md-6 col-sm-12">';
-                        html += '<div class="form-check form-switch my-1">';
-                        html += '<input type="checkbox" class="form-check-input" role="switch" id="bebida'+bebida.id+'" name="bebida" value="'+bebida.nombre+'" />';
-                        html += '<label class="form-check-label" for="bebida'+bebida.id+'">'+bebida.nombre+'</label>';
-                        html += '</div>';
+                        html += '<div class="col-lg-3 col-md-6 col-sm-12 my-2">';
+                        html += '<input type="button" class="btn btn-warning rounded shadow w-100 fw-bold p-2" id="'+bebida.id+'" name="bebida" data-id="'+bebida.id+'" data-value="'+bebida.nombre+'" value="'+bebida.nombre+'">';
+                        html += '<span id="badge'+bebida.id+'" class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger p-1">0<span class="visually-hidden"></span></span>';
+                        html += '</input>';
                         html += '</div>';
 
                     });
@@ -249,15 +248,25 @@ jQuery(document).ready( function(){
                     $("#contenedorBebidasPaquete").empty();
                     $("#contenedorBebidasPaquete").append( html );
 
-                    $("input[name=bebida]").change(function() {
+                    $("input[name=bebida]").on('click', function( e ) {
 
-                        bebidas = $("input[name=bebida]:checked").map(function() {
+                        e.preventDefault();
 
-                            return $(this).val();
+                        var bebidaId = $(this).attr('data-id');
+                        var badge = $("#badge" + bebidaId);
+                        var count = parseInt( badge.text() || 0);
+                        var countTotal = 0;
 
-                        }).get();
+                        $(".badge").each( function(){
 
-                        if( bebidas.length > $("#limiteBebidasPaquete").val() ){
+                            countTotal += parseInt( $(this).text() || 0);
+
+                        });
+
+                        count++;
+                        badge.text( count );
+
+                        if( countTotal +1 > $("#limiteBebidasPaquete").val() ){
 
                             Swal.fire({
 
@@ -268,18 +277,36 @@ jQuery(document).ready( function(){
 
                             });
 
-                            $(this).prop('checked', false);
-
-                            $("input[name=bebida]").each(function() {
+                            count = 0;
+                            countTotal = 0; // Decrementar el contador si se excede el límite
                             
-                                if (!$(this).is(':checked')) {
-                                    
-                                    bebidas = bebidas.filter(bebida => bebida !== $(this).val());
-                                }
-    
-                            });
+                            $(".badge").text( count );
+
+                            // Remover bebida del array si se excede el límite
+                            bebidas = [];
+
+                        }else{
+
+                            var bebidaValue = $(this).attr('data-value');
+                            var bebidaIndex = bebidas.findIndex(b => b.startsWith(bebidaValue + 'X'));
+
+                            if( bebidaIndex !== -1 ){
+
+                                var match = bebidas[bebidaIndex].match(/X(\d+)/);
+                                var bebidaCount = match ? parseInt(match[1]) : 0;
+
+                                bebidaCount += 1;
+                                bebidas[bebidaIndex] = bebidaValue + 'X' + bebidaCount;
+
+                            }else{
+
+                                bebidas.push(bebidaValue + 'X1');
+
+                            }
 
                         }
+
+                        console.log( bebidas );
 
                     });
 
