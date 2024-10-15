@@ -632,6 +632,7 @@ class PedidoController extends Controller
             ]);
 
             $platillosTicket = collect();
+            $patron = '/X[1-9]/';
 
             $platillos = Platillo::select('platillos.nombre', 'pedido_has_platillos.cantidad', 'platillos.precio')
                         ->join('pedido_has_platillos', 'platillos.id', '=', 'pedido_has_platillos.idPlatillo')
@@ -640,7 +641,7 @@ class PedidoController extends Controller
 
             $platillosTicket = $platillosTicket->merge( $platillos );
 
-            $paquetes = Paquete::select('paquetes.nombre', 'paquetes.precio', 'pedido_has_paquetes.cantidad')
+            $paquetes = Paquete::select('paquetes.nombre', 'paquetes.precio', 'pedido_has_paquetes.cantidad', 'pedido_has_paquetes.preparacion')
                         ->join('pedido_has_paquetes', 'paquetes.id', '=', 'pedido_has_paquetes.idPaquete')
                         ->where('pedido_has_paquetes.idPedido', '=', $pedido->id)
                         ->get();
@@ -657,7 +658,21 @@ class PedidoController extends Controller
 
             foreach( $platillosTicket as $platillo ){
 
-                $ticket->writeHTML('<p style="font-size: 11px; text-align: center; width: 100%;">'.$platillo->cantidad.' - '.$platillo->nombre.' $'.($platillo->precio * $platillo->cantidad).'</p>');
+                $preparaciones = explode(',', $platillo->preparacion);
+
+                foreach( $preparaciones as $preparacion ){
+
+                    $preparacion = trim( $preparacion );
+
+                    if( preg_match( $patron, $preparacion, $coincidencias) ){
+
+                        $platillo->nombre .=' '.$preparacion;
+
+                    }
+
+                }
+
+                $ticket->writeHTML('<p style="font-size: 11px; text-align: center; width: 100%;">'.$platillo->cantidad.' - '.$platillo->nombre.' $'.($platillo->precio * $platillo->cantidad).'</p>');      
 
                 $total += ( $platillo->precio * $platillo->cantidad );
 
