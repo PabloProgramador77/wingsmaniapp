@@ -21,7 +21,7 @@
             @php
                 $heads = [
 
-                    'Paquete / Promoción', 'Precio', 'Acciones'
+                    'Categoría', 'Paquete / Promoción', 'Precio', 'Acciones'
 
                 ];
             @endphp
@@ -34,6 +34,7 @@
                             @foreach($paquetes as $paquete)
                                 @can('ver-platillo')
                                     <tr>
+                                        <td>{{ $paquete->categoria->nombre }}</td>
                                         <td>{{ $paquete->nombre }}</td>
                                         <td>$ {{ $paquete->precio }}</td>
                                         <td>

@@ -22,7 +22,7 @@ class PlatilloController extends Controller
     {
         if( auth()->user()->id ){
 
-            $platillos = Platillo::all();
+            $platillos = Platillo::orderBy('nombre', 'asc')->get();
             $categorias = Categoria::all();
             $salsas = Salsa::all();
             $preparaciones = Preparacion::all();
