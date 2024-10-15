@@ -157,7 +157,9 @@ class PedidoController extends Controller
             
             if( auth()->user()->id && auth()->user()->hasRole('Cliente') ){
 
-                $pedidos = Pedido::where('idCliente', '=', auth()->user()->id)->get();
+                $pedidos = Pedido::where('idCliente', '=', auth()->user()->id)
+                        ->where('pedidos.estatus', '!=', 'Ordenando')
+                        ->get();
 
                 return view('pedido.cliente', compact('pedidos'));
 
