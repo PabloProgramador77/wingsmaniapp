@@ -327,6 +327,12 @@ return [
             'can' => 'ver-preparaciones',
         ],
         [
+            'text' => 'Aderezos',
+            'url' => 'aderezos',
+            'icon' => 'fas fa-lemon',
+            'active' => ['aderezos'],
+        ],
+        [
             'text' => 'Pedidos',
             'url' => 'pedidos',
             'icon' => 'fas fa-shopping-cart',
