@@ -46,4 +46,10 @@ class Platillo extends Model
 
     }
 
+    public function aderezos(){
+        
+        return $this->belongsToMany( Aderezo::class, 'platillo_has_aderezos', 'idPlatillo', 'idAderezo');
+        
+    }
+
 }

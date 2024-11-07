@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/platillo/borrar',
         '/platillo/salsas',
         '/platillo/preparaciones',
+        '/platillo/aderezos',
         '/salsa/agregar',
         '/salsa/actualizar',
         '/salsa/buscar',

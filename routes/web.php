@@ -27,6 +27,7 @@ Route::post('/platillo/borrar', [App\Http\Controllers\PlatilloController::class,
 Route::post('/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'store'])->name('salsas-platillo');
 Route::post('/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'store'])->name('preparaciones-platillo');
 Route::get('/platillo/preparar/{id}', [App\Http\Controllers\PlatilloController::class, 'create'])->name('preparar-platillo');
+Route::post('/platillo/aderezos', [App\Http\Controllers\PlatilloHasAderezoController::class, 'store'])->name('aderezos-platillo');
 
 Route::get('/salsas', [App\Http\Controllers\SalsaController::class, 'index'])->name('salsas');
 Route::post('/salsa/agregar', [App\Http\Controllers\SalsaController::class, 'store'])->name('agregar-salsa');

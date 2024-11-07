@@ -12,6 +12,7 @@ use App\Http\Requests\Platillo\Create;
 use App\Http\Requests\Platillo\Read;
 use App\Http\Requests\Platillo\Update;
 use App\Http\Requests\Platillo\Delete;
+use App\Models\Aderezo;
 
 class PlatilloController extends Controller
 {
@@ -26,8 +27,9 @@ class PlatilloController extends Controller
             $categorias = Categoria::all();
             $salsas = Salsa::all();
             $preparaciones = Preparacion::all();
+            $aderezos = Aderezo::all();
 
-            return view('platillo.index', compact('platillos', 'categorias', 'salsas', 'preparaciones'));
+            return view('platillo.index', compact('platillos', 'categorias', 'salsas', 'preparaciones', 'aderezos'));
 
         }else{
 

@@ -54,6 +54,9 @@
                                                     <x-adminlte-button class="preparaciones" id="preparaciones" theme="success" data-id="{{ $platillo->id }}" icon="fas fa-utensils" data-toggle="modal" data-target="#modalPreparacion"></x-adminlte-button>
                                                 @endcan
                                             @endif
+                                            @if( count( $aderezos ) > 0 )
+                                                <x-adminlte-button class="aderezos shadow" id="aderezos" theme="warning" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}" icon="fas fa-lemon" data-toggle="modal" data-target="#modalAderezo"></x-adminlte-button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endcan
@@ -77,6 +80,7 @@
     @include('platillo.editar')
     @include('platillo.salsas')
     @include('platillo.preparaciones')
+    @include('platillo.aderezos')
 
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
@@ -96,6 +100,10 @@
 
     @if( count($preparaciones) > 0 )
         <script src="{{ asset('js/platillo/preparaciones.js') }}" type="text/javascript"></script>
+    @endif
+
+    @if( count( $aderezos ) > 0 )
+        <script src="{{ asset('js/platillo/aderezos.js')}}" type="text/javascript"></script>
     @endif
 
 @stop

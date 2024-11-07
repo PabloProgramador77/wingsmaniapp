@@ -17,4 +17,10 @@ class Aderezo extends Model
         'descripcion',
 
     ];
+
+    public function platillo(){
+
+        return $this->hasOne( Platillo::class, 'idAderezo', 'idPlatillo');
+        
+    }
 }
