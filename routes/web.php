@@ -149,3 +149,8 @@ Route::get('/paquete/platillo/preparar/{id}/{idPlatillo}', [App\Http\Controllers
 Route::get('/paquete/bebida/preparar/{idPaquete}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'show'])->name('preparar-bebida-paquete');
 
 Route::get('/menu/descargar', [App\Http\Controllers\UserController::class, 'menu'])->name('descargar-menu');
+
+Route::get('/aderezos', [App\Http\Controllers\AderezoController::class, 'index'])->name('aderezos');
+Route::post('/aderezo/agregar', [App\Http\Controllers\AderezoController::class, 'store'])->name('agregar-aderezo');
+Route::post('/aderezo/actualizar', [App\Http\Controllers\AderezoController::class, 'update'])->name('actualizar-aderezo');
+Route::post('/aderezo/borrar', [App\Http\Controllers\AderezoController::class, 'destroy'])->name('borrar-aderezo');

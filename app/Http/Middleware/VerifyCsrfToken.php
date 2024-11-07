@@ -104,6 +104,9 @@ class VerifyCsrfToken extends Middleware
         '/paquete/eliminar',
         '/paquete/restar',
         '/paquete/sumar',
+        '/aderezo/agregar',
+        '/aderezo/actualizar',
+        '/aderezo/borrar',
 
     ];
 }

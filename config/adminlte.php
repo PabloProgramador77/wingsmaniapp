@@ -334,6 +334,12 @@ return [
             'can' => 'ver-pedidos',
         ],
         [
+            'text' => 'Aderezos',
+            'url' => 'aderezos',
+            'icon' => 'fas fa-lemon',
+            'active' => ['aderezos'],
+        ],
+        [
             'text' => 'Clientes',
             'url' => 'clientes',
             'icon' => 'fas fa-users',
