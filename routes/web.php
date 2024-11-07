@@ -103,6 +103,7 @@ Route::get('/pedido/cancelado/{id}', [App\Http\Controllers\PedidoController::cla
 Route::post('/pedido/editar', [App\Http\Controllers\PedidoController::class, 'editar'])->name('editar-pedido');
 Route::post('/pedido/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'show'])->name('salsas-platillo-pedido');
 Route::post('/pedido/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'show'])->name('preparaciones-platillo-pedido');
+Route::post('/pedido/platillo/aderezos', [App\Http\Controllers\PlatilloHasAderezoController::class, 'show'])->name('aderezos-platillo-pedido');
 Route::post('/pedido/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'show'])->name('platillos-paquete-pedido');
 Route::post('/pedido/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('platillo-paquete-bebidas');
 

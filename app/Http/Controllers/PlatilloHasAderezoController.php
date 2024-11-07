@@ -6,6 +6,7 @@ use App\Models\PlatilloHasAderezo;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlatilloHasAderezos\Create;
 use App\Models\Aderezo;
+use App\Models\Platillo;
 
 class PlatilloHasAderezoController extends Controller
 {
@@ -86,9 +87,27 @@ class PlatilloHasAderezoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PlatilloHasAderezo $platilloHasAderezo)
+    public function show(Request $request)
     {
-        //
+        try {
+            
+            $platillo = Platillo::find( $request->id );
+
+            if( $platillo && $platillo->id ){
+
+                $datos['exito'] = true;
+                $datos['aderezos'] = $platillo->aderezos;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

@@ -73,6 +73,7 @@ class VerifyCsrfToken extends Middleware
         '/pedido/platillo/preparaciones',
         '/pedido/platillo/salsas',
         '/pedido/platillo/preparar',
+        '/pedido/platillo/aderezos',
         '/pedido/paquete/platillos',
         '/pedido/paquete/ordenar',
         '/pedido/paquete/bebidas',

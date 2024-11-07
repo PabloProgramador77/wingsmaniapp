@@ -49,7 +49,7 @@
 
                 @foreach($platillos as $platillo)
 
-                    @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 )
+                    @if( count( $platillo->salsas ) > 0 || count( $platillo->preparaciones ) > 0 || count( $platillo->aderezos ) > 0 )
                     
                         <div class="col-lg-4 col-md-6 col-sm-12 overflow-auto">
                             <x-adminlte-small-box title="{{ $platillo->nombre }}" text="$ {{ $platillo->precio }}" icon="fas fa-drumstick-bite" theme="light" url-text="Ordenar" url="#" data-id="{{ $platillo->id }}" data-value="{{ $platillo->nombre }}, {{ $platillo->cantidadSalsas }}" data-toggle="modal" data-target="#modalSalsas" class="prepararPlatillo shadow" style="background-image: url('/img/portadas/{{ $platillo->portada }}'); background-size: 33%; background-position: right; background-repeat: no-repeat;"></x-adminlte-small-box>
@@ -78,6 +78,7 @@
     @include('salsasPaquete')
     @include('preparacionesPaquete')
     @include('bebidasPaquete')
+    @include('aderezos')
     
     <script src="{{ asset('jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('sweetAlert.js') }}" type="text/javascript"></script>
