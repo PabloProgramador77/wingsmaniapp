@@ -27,6 +27,7 @@ Route::post('/platillo/borrar', [App\Http\Controllers\PlatilloController::class,
 Route::post('/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'store'])->name('salsas-platillo');
 Route::post('/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'store'])->name('preparaciones-platillo');
 Route::get('/platillo/preparar/{id}', [App\Http\Controllers\PlatilloController::class, 'create'])->name('preparar-platillo');
+Route::post('/platillo/aderezos', [App\Http\Controllers\PlatilloHasAderezoController::class, 'store'])->name('aderezos-platillo');
 
 Route::get('/salsas', [App\Http\Controllers\SalsaController::class, 'index'])->name('salsas');
 Route::post('/salsa/agregar', [App\Http\Controllers\SalsaController::class, 'store'])->name('agregar-salsa');
@@ -102,6 +103,7 @@ Route::get('/pedido/cancelado/{id}', [App\Http\Controllers\PedidoController::cla
 Route::post('/pedido/editar', [App\Http\Controllers\PedidoController::class, 'editar'])->name('editar-pedido');
 Route::post('/pedido/platillo/salsas', [App\Http\Controllers\PlatilloHasSalsaController::class, 'show'])->name('salsas-platillo-pedido');
 Route::post('/pedido/platillo/preparaciones', [App\Http\Controllers\PlatilloHasPreparacionController::class, 'show'])->name('preparaciones-platillo-pedido');
+Route::post('/pedido/platillo/aderezos', [App\Http\Controllers\PlatilloHasAderezoController::class, 'show'])->name('aderezos-platillo-pedido');
 Route::post('/pedido/paquete/platillos', [App\Http\Controllers\PaqueteHasPlatilloController::class, 'show'])->name('platillos-paquete-pedido');
 Route::post('/pedido/paquete/bebidas', [App\Http\Controllers\PaqueteHasBebidaController::class, 'show'])->name('platillo-paquete-bebidas');
 
@@ -149,3 +151,8 @@ Route::get('/paquete/platillo/preparar/{id}/{idPlatillo}', [App\Http\Controllers
 Route::get('/paquete/bebida/preparar/{idPaquete}', [App\Http\Controllers\PedidoHasPaqueteController::class, 'show'])->name('preparar-bebida-paquete');
 
 Route::get('/menu/descargar', [App\Http\Controllers\UserController::class, 'menu'])->name('descargar-menu');
+
+Route::get('/aderezos', [App\Http\Controllers\AderezoController::class, 'index'])->name('aderezos');
+Route::post('/aderezo/agregar', [App\Http\Controllers\AderezoController::class, 'store'])->name('agregar-aderezo');
+Route::post('/aderezo/actualizar', [App\Http\Controllers\AderezoController::class, 'update'])->name('actualizar-aderezo');
+Route::post('/aderezo/borrar', [App\Http\Controllers\AderezoController::class, 'destroy'])->name('borrar-aderezo');

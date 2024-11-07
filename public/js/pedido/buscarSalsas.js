@@ -3,6 +3,7 @@ jQuery(document).ready( function(){
 
     var salsas = [];
     var preparaciones = [];
+    var aderezos = [];
 
     $('.prepararPlatillo').on('click', function(e){
 
@@ -225,6 +226,102 @@ jQuery(document).ready( function(){
 
     });
 
+    $('#ingredientesPlatillo').on('click', function(e){
+
+        e.preventDefault();
+
+        document.getElementById('modalPreparaciones').style.display = 'none';
+        document.getElementById('modalPreparaciones').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
+
+        document.getElementById('modalAderezos').style.display = 'block';
+        document.getElementById('modalAderezos').classList.add('show');
+
+        console.log( $(this).data('value') );
+
+        var id = $("#idPlatilloPrep").val();
+        var platillo = $("#nombrePlatilloPrep").val();
+
+        $('#nombrePlatilloAderezo').val( platillo );
+        $("#idPlatilloAderezo").val( id );
+
+        $.ajax({
+
+            type: 'POST',
+            url: '/pedido/platillo/aderezos',
+            data:{
+
+                'id' : id,
+
+            },
+            dataType: 'json',
+            encode: true,
+
+        }).done( function( respuesta){
+
+            if( respuesta.exito ){
+
+                if( respuesta.aderezos && respuesta.aderezos.length > 0 ){
+
+                    var html = '<p class="p-1 bg-info d-block col-lg-12">Aderezo(s)</p>';
+
+                    respuesta.aderezos.forEach( function( aderezo ){
+
+                        html += '<div class="col-lg-4 col-md-6 col-sm-12">'
+                        html += '<div class="form-check form-switch my-1">';
+                        html += '<input type="checkbox" class="form-check-input" role="switch" id="aderezo'+aderezo.id+'" name="aderezo" value="'+aderezo.nombre+'">';
+                        html += '<label class="form-check-label" for="aderezo'+aderezo.id+'">'+aderezo.nombre+'</label>';
+                        html += '</div>';
+                        html += '</div>';
+
+                    });
+
+                    $("#contenedorAderezosPlatillo").empty();
+                    $("#contenedorAderezosPlatillo").append( html );
+
+                    $("input[name=aderezo]").change(function() {
+
+                        aderezos = $("input[name=aderezo]:checked").map(function() {
+
+                            return $(this).val();
+
+                        }).get();
+
+                    });
+
+                }else{
+
+                    html = '<p class="text-center bg-danger fw-semibold fs-6 shadow rounded">Sin aderezos para elegir. Presiona el botón "Continuar" para terminar.</p>';
+
+                    $("#contenedorAderezosPlatillo").empty();
+                    $("#contenedorAderezosPlatillo").append( html );
+
+                    $("#aderezosPlatillo").text('Continuar');
+                    $("#cancelarAderezos").attr('disabled', true);
+
+                }
+
+                $("#aderezosPlatillo").attr('disabled', false);
+
+            }else{
+
+                Swal.fire({
+
+                    icon: 'error',
+                    title: respuesta.mensaje,
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+
+                });
+
+                $("#aderezosPlatillo").attr('disabled', true);
+
+            }
+
+        });
+
+    });
+
     $("#cancelarIngredientes").on('click', function(e){
 
         e.preventDefault();
@@ -238,7 +335,20 @@ jQuery(document).ready( function(){
 
     });
 
-    $("#ingredientesPlatillo").on('click', function(e){
+    $("#cancelarAderezos").on('click', function(e){
+
+        e.preventDefault();
+
+        document.getElementById('modalAderezos').style.display = 'none';
+        document.getElementById('modalAderezos').classList.remove('show');
+        document.querySelectorAll('.modal-backdrop').forEach( el => el.remove);
+
+        document.getElementById('modalPreparaciones').style.display = 'block';
+        document.getElementById('modalPreparaciones').classList.add('show');
+
+    });
+
+    $("#aderezosPlatillo").on('click', function(e){
 
         e.preventDefault;
 
@@ -267,6 +377,7 @@ jQuery(document).ready( function(){
                         'id' : $("#idPlatilloPrep").val(),
                         'salsas' : salsas,
                         'preparaciones' : preparaciones,
+                        'aderezos' : aderezos,
 
                     },
                     dataType: 'json',

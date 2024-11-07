@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         '/platillo/borrar',
         '/platillo/salsas',
         '/platillo/preparaciones',
+        '/platillo/aderezos',
         '/salsa/agregar',
         '/salsa/actualizar',
         '/salsa/buscar',
@@ -72,6 +73,7 @@ class VerifyCsrfToken extends Middleware
         '/pedido/platillo/preparaciones',
         '/pedido/platillo/salsas',
         '/pedido/platillo/preparar',
+        '/pedido/platillo/aderezos',
         '/pedido/paquete/platillos',
         '/pedido/paquete/ordenar',
         '/pedido/paquete/bebidas',
@@ -104,6 +106,9 @@ class VerifyCsrfToken extends Middleware
         '/paquete/eliminar',
         '/paquete/restar',
         '/paquete/sumar',
+        '/aderezo/agregar',
+        '/aderezo/actualizar',
+        '/aderezo/borrar',
 
     ];
 }
